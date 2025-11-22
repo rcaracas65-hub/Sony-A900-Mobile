@@ -2,20 +2,20 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Visor pdf – Sony</title>
+  <title>Visor PDF – Sony</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Tailwind para estilos rápidos (opcional, igual que en index) -->
+  <!-- Tailwind para estilos rápidos -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
     canvas { max-width: 100%; height: auto; }
   </style>
 
-  <!-- pdf.js desde CDN -->
+  <!-- PDF.js desde CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
   <script>
-    // Configurar worker de pdf.js
+    // Configurar worker de PDF.js
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.worker.min.js";
   </script>
@@ -56,6 +56,9 @@
       </span>
     </div>
 
+    <!-- Mensaje de error -->
+    <div id="errorBox" class="hidden bg-red-100 text-red-800 text-xs px-3 py-2 rounded mb-2"></div>
+
     <!-- Contenedor de canvas -->
     <div class="bg-white rounded-xl shadow p-2 flex justify-center">
       <canvas id="pdfCanvas"></canvas>
@@ -65,6 +68,8 @@
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
+
+    // Archivo por defecto: SonyA900.pdf (sin espacios, extensión minúscula)
     const fileParam = urlParams.get("file") || "SonyA900.pdf";
     const pageParam = parseInt(urlParams.get("page") || "1", 10);
 
@@ -79,8 +84,14 @@
     const pageInfo = document.getElementById("pageInfo");
     const fileNameSpan = document.getElementById("fileName");
     const pageInput = document.getElementById("pageInput");
+    const errorBox = document.getElementById("errorBox");
 
-    fileNameSpan.textContent = fileParam;
+    fileNameSpan.textContent = pdfUrl;
+
+    function showError(msg) {
+      errorBox.textContent = msg;
+      errorBox.classList.remove("hidden");
+    }
 
     function renderPage(num) {
       if (!pdfDoc) return;
@@ -97,10 +108,12 @@
           canvasContext: ctx,
           viewport: viewport
         };
-        page.render(renderContext).promise.then(function () {
-          pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
-          pageInput.value = currentPage;
-        });
+        return page.render(renderContext).promise;
+      }).then(function () {
+        pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+        pageInput.value = currentPage;
+      }).catch(function (err) {
+        showError("Error al renderizar la página: " + err.message);
       });
     }
 
@@ -108,9 +121,12 @@
     pdfjsLib.getDocument(pdfUrl).promise.then(function (pdf) {
       pdfDoc = pdf;
       totalPages = pdf.numPages;
+      if (currentPage < 1 || currentPage > totalPages) {
+        currentPage = 1;
+      }
       renderPage(currentPage);
-    }).catch(err => {
-      alert("No se pudo cargar el pdf: " + err.message);
+    }).catch(function (err) {
+      showError("No se pudo cargar el PDF '" + pdfUrl + "': " + err.message);
     });
 
     // Controles
