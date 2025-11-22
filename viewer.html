@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Visor PDF – Sony</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind para estilos rápidos (opcional, igual que en index) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    canvas { max-width: 100%; height: auto; }
+  </style>
+
+  <!-- PDF.js desde CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
+  <script>
+    // Configurar worker de PDF.js
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.worker.min.js";
+  </script>
+</head>
+<body class="bg-slate-100 text-slate-900">
+
+  <div class="max-w-5xl mx-auto px-4 py-3 space-y-3">
+
+    <!-- Barra superior -->
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <a href="index.html" class="text-sm text-blue-700 hover:underline">
+        ← Volver al índice
+      </a>
+      <div class="flex flex-col items-end text-xs">
+        <span id="fileName" class="font-semibold"></span>
+        <span id="pageInfo" class="text-slate-500"></span>
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <div class="flex flex-wrap items-center gap-2 text-xs mb-2">
+      <button id="prevPage"
+              class="px-3 py-1 rounded bg-slate-200 hover:bg-slate-300">
+        ⬅ Página anterior
+      </button>
+      <button id="nextPage"
+              class="px-3 py-1 rounded bg-slate-200 hover:bg-slate-300">
+        Página siguiente ➡
+      </button>
+      <span class="ml-2">
+        Ir a página:
+        <input id="pageInput" type="number" min="1"
+               class="w-16 px-1 py-0.5 border border-slate-300 rounded text-xs" />
+        <button id="goPage"
+                class="px-2 py-1 rounded bg-slate-200 hover:bg-slate-300">
+          Ir
+        </button>
+      </span>
+    </div>
+
+    <!-- Contenedor de canvas -->
+    <div class="bg-white rounded-xl shadow p-2 flex justify-center">
+      <canvas id="pdfCanvas"></canvas>
+    </div>
+
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const fileParam = urlParams.get("file") || "SonyA900.PDF";
+    const pageParam = parseInt(urlParams.get("page") || "1", 10);
+
+    const pdfUrl = fileParam; // relativo al mismo repo
+    let pdfDoc = null;
+    let currentPage = isNaN(pageParam) ? 1 : pageParam;
+    let totalPages = 0;
+    const scale = 1.3;
+
+    const canvas = document.getElementById("pdfCanvas");
+    const ctx = canvas.getContext("2d");
+    const pageInfo = document.getElementById("pageInfo");
+    const fileNameSpan = document.getElementById("fileName");
+    const pageInput = document.getElementById("pageInput");
+
+    fileNameSpan.textContent = fileParam;
+
+    function renderPage(num) {
+      if (!pdfDoc) return;
+      if (num < 1) num = 1;
+      if (num > totalPages) num = totalPages;
+      currentPage = num;
+
+      pdfDoc.getPage(num).then(function (page) {
+        const viewport = page.getViewport({ scale: scale });
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        const renderContext = {
+          canvasContext: ctx,
+          viewport: viewport
+        };
+        page.render(renderContext).promise.then(function () {
+          pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+          pageInput.value = currentPage;
+        });
+      });
+    }
+
+    // Cargar documento
+    pdfjsLib.getDocument(pdfUrl).promise.then(function (pdf) {
+      pdfDoc = pdf;
+      totalPages = pdf.numPages;
+      renderPage(currentPage);
+    }).catch(err => {
+      alert("No se pudo cargar el PDF: " + err.message);
+    });
+
+    // Controles
+    document.getElementById("prevPage").addEventListener("click", () => {
+      if (currentPage > 1) renderPage(currentPage - 1);
+    });
+
+    document.getElementById("nextPage").addEventListener("click", () => {
+      if (currentPage < totalPages) renderPage(currentPage + 1);
+    });
+
+    document.getElementById("goPage").addEventListener("click", () => {
+      const val = parseInt(pageInput.value, 10);
+      if (!isNaN(val)) {
+        renderPage(val);
+      }
+    });
+  </script>
+</body>
+</html>
