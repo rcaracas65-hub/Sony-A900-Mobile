@@ -92,9 +92,19 @@
 
     <!-- Barra superior -->
     <div class="flex items-center justify-between gap-2 mb-2">
-      <a href="index.html" class="text-sm text-blue-500 hover:underline">
-        ← Volver al índice
-      </a>
+      <div class="flex items-center gap-2">
+        <button id="goBack"
+                type="button"
+                class="px-3 py-1 rounded-full text-xs btn-ctrl">
+          ← Volver
+        </button>
+        <button id="goHome"
+                type="button"
+                class="px-3 py-1 rounded-full text-xs btn-ctrl">
+          ⌂ Índice
+        </button>
+      </div>
+
       <div class="flex items-center gap-3 text-xs">
         <div class="flex flex-col items-end">
           <span id="fileName" class="font-semibold"></span>
@@ -156,9 +166,9 @@
   </div>
 
   <!-- Botón flotante índice -->
-  <a href="index.html" class="floating-index">
+  <button id="floatingIndexBtn" type="button" class="floating-index">
     ↑ Ir al índice
-  </a>
+  </button>
 
   <script>
     // -----------------------------
@@ -208,7 +218,6 @@
       if (saved === "dark" || saved === "light") {
         applyTheme(saved);
       } else {
-        // Detectar preferencia del sistema
         const prefersDark = window.matchMedia &&
           window.matchMedia("(prefers-color-scheme: dark)").matches;
         applyTheme(prefersDark ? "dark" : "light");
@@ -237,6 +246,49 @@
     }
 
     // -----------------------------
+    //  Navegación: Volver & Índice
+    // -----------------------------
+    const goBackBtn = document.getElementById("goBack");
+    const goHomeBtn = document.getElementById("goHome");
+    const floatingIndexBtn = document.getElementById("floatingIndexBtn");
+
+    function goHomeLogic() {
+      // Si el viewer se abrió en una pestaña nueva desde otra página
+      if (window.opener && !window.opener.closed) {
+        // Enfocamos la pestaña original y cerramos esta
+        try {
+          window.opener.focus();
+        } catch (e) {
+          // En algunos navegadores puede no estar permitido, ignoramos
+        }
+        window.close();
+      } else {
+        // Si no hay opener (se abrió en la misma pestaña), navegamos al índice
+        window.location.href = "index.html";
+      }
+    }
+
+    function goBackLogic() {
+      // Si hay historial previo en esta pestaña
+      if (window.history.length > 1) {
+        window.history.back();
+      } else if (window.opener && !window.opener.closed) {
+        // Si no hay historial pero hay opener, cerramos el viewer y volvemos a la original
+        try {
+          window.opener.focus();
+        } catch (e) {}
+        window.close();
+      } else {
+        // Último recurso: ir al índice
+        window.location.href = "index.html";
+      }
+    }
+
+    goBackBtn.addEventListener("click", goBackLogic);
+    goHomeBtn.addEventListener("click", goHomeLogic);
+    floatingIndexBtn.addEventListener("click", goHomeLogic);
+
+    // -----------------------------
     //  Render de página
     // -----------------------------
     function renderPage(num) {
@@ -248,7 +300,6 @@
       pdfDoc.getPage(num).then(function (page) {
         const viewport = page.getViewport({ scale });
 
-        // Ajuste sencillo de scroll: canvas más grande, el usuario puede hacer scroll si es muy alto
         canvas.width = viewport.width;
         canvas.height = viewport.height;
 
@@ -321,7 +372,6 @@
     });
 
     document.getElementById("zoomFit").addEventListener("click", () => {
-      // Ajustar ancho al contenedor visible
       const containerWidth = document.querySelector(".viewer-card").clientWidth;
       if (!pdfDoc) return;
       pdfDoc.getPage(currentPage).then(function(page) {
