@@ -7,69 +7,164 @@
 
   <!-- Tailwind para estilos rápidos -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    canvas { max-width: 100%; height: auto; }
+    :root {
+      --bg: #f1f5f9;
+      --fg: #0f172a;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --btn-bg: #e5e7eb;
+      --btn-bg-hover: #d4d4d8;
+    }
+
+    body[data-theme="dark"] {
+      --bg: #020617;
+      --fg: #e5e7eb;
+      --card-bg: #020617;
+      --border: #1f2937;
+      --accent: #60a5fa;
+      --accent-soft: #1e293b;
+      --btn-bg: #111827;
+      --btn-bg-hover: #1f2937;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
+    }
+
+    .viewer-card {
+      background-color: var(--card-bg);
+      border-radius: 0.75rem;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.2);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ctrl {
+      background-color: var(--btn-bg);
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-ctrl:hover {
+      background-color: var(--btn-bg-hover);
+    }
+
+    canvas {
+      max-width: 100%;
+      height: auto;
+      background: #000;
+    }
+
+    /* Botón flotante "Ir al índice" */
+    .floating-index {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 40;
+      background-color: var(--accent);
+      color: white;
+      padding: 0.6rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.5);
+      text-decoration: none;
+    }
+
+    .floating-index:hover {
+      opacity: 0.9;
+    }
   </style>
 
-  <!-- PDF.js VERSIÓN ESTABLE 2.16.105 -->
+  <!-- PDF.js 2.16.105 estable -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script>
-    // Configurar worker de PDF.js (misma versión)
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
   </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body>
 
   <div class="max-w-5xl mx-auto px-4 py-3 space-y-3">
 
     <!-- Barra superior -->
     <div class="flex items-center justify-between gap-2 mb-2">
-      <a href="index.html" class="text-sm text-blue-700 hover:underline">
+      <a href="index.html" class="text-sm text-blue-500 hover:underline">
         ← Volver al índice
       </a>
-      <div class="flex flex-col items-end text-xs">
-        <span id="fileName" class="font-semibold"></span>
-        <span id="pageInfo" class="text-slate-500"></span>
+      <div class="flex items-center gap-3 text-xs">
+        <div class="flex flex-col items-end">
+          <span id="fileName" class="font-semibold"></span>
+          <span id="pageInfo" class="text-slate-500"></span>
+        </div>
+        <!-- Toggle modo oscuro -->
+        <button id="themeToggle"
+                class="px-3 py-1 rounded-full border border-slate-400 text-xs btn-ctrl"
+                type="button">
+          🌙 Modo oscuro
+        </button>
       </div>
     </div>
 
     <!-- Controles -->
     <div class="flex flex-wrap items-center gap-2 text-xs mb-2">
       <button id="prevPage"
-              class="px-3 py-1 rounded bg-slate-200 hover:bg-slate-300">
+              class="px-3 py-1 rounded btn-ctrl"
+              type="button">
         ⬅ Página anterior
       </button>
       <button id="nextPage"
-              class="px-3 py-1 rounded bg-slate-200 hover:bg-slate-300">
+              class="px-3 py-1 rounded btn-ctrl"
+              type="button">
         Página siguiente ➡
       </button>
-      <span class="ml-2">
+
+      <span class="ml-2 flex items-center gap-1">
         Ir a página:
         <input id="pageInput" type="number" min="1"
-               class="w-16 px-1 py-0.5 border border-slate-300 rounded text-xs" />
+               class="w-16 px-1 py-0.5 border border-slate-300 rounded text-xs bg-white text-slate-800" />
         <button id="goPage"
-                class="px-2 py-1 rounded bg-slate-200 hover:bg-slate-300">
+                class="px-2 py-1 rounded btn-ctrl"
+                type="button">
           Ir
         </button>
+      </span>
+
+      <!-- Controles de zoom -->
+      <span class="ml-4 flex items-center gap-1">
+        Zoom:
+        <button id="zoomOut" class="px-2 py-1 rounded btn-ctrl" type="button">−</button>
+        <button id="zoomIn" class="px-2 py-1 rounded btn-ctrl" type="button">+</button>
+        <button id="zoomFit" class="px-2 py-1 rounded btn-ctrl" type="button">Ajustar ancho</button>
+        <span id="zoomLabel" class="ml-1 text-[11px] text-slate-500"></span>
       </span>
     </div>
 
     <!-- Mensaje de error -->
-    <div id="errorBox" class="hidden bg-red-100 text-red-800 text-xs px-3 py-2 rounded mb-2"></div>
+    <div id="errorBox"
+         class="hidden bg-red-100 text-red-800 text-xs px-3 py-2 rounded mb-2">
+    </div>
 
     <!-- Contenedor de canvas -->
-    <div class="bg-white rounded-xl shadow p-2 flex justify-center">
+    <div class="viewer-card p-2 flex justify-center">
       <canvas id="pdfCanvas"></canvas>
     </div>
 
   </div>
 
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
+  <!-- Botón flotante índice -->
+  <a href="index.html" class="floating-index">
+    ↑ Ir al índice
+  </a>
 
-    // Archivo por defecto: SonyA900.pdf (sin espacios, extensión minúscula)
+  <script>
+    // -----------------------------
+    //  Parámetros de la URL
+    // -----------------------------
+    const urlParams = new URLSearchParams(window.location.search);
     const fileParam = urlParams.get("file") || "SonyA900.pdf";
     const pageParam = parseInt(urlParams.get("page") || "1", 10);
 
@@ -77,7 +172,12 @@
     let pdfDoc = null;
     let currentPage = isNaN(pageParam) ? 1 : pageParam;
     let totalPages = 0;
-    const scale = 1.3;
+
+    // Zoom
+    let scale = 1.2;
+    const MIN_SCALE = 0.5;
+    const MAX_SCALE = 3.0;
+    const SCALE_STEP = 0.15;
 
     const canvas = document.getElementById("pdfCanvas");
     const ctx = canvas.getContext("2d");
@@ -85,14 +185,60 @@
     const fileNameSpan = document.getElementById("fileName");
     const pageInput = document.getElementById("pageInput");
     const errorBox = document.getElementById("errorBox");
+    const zoomLabel = document.getElementById("zoomLabel");
 
     fileNameSpan.textContent = pdfUrl;
 
+    // -----------------------------
+    //  Tema claro/oscuro
+    // -----------------------------
+    const themeToggle = document.getElementById("themeToggle");
+
+    function applyTheme(theme) {
+      document.body.setAttribute("data-theme", theme);
+      if (theme === "dark") {
+        themeToggle.textContent = "☀️ Modo claro";
+      } else {
+        themeToggle.textContent = "🌙 Modo oscuro";
+      }
+    }
+
+    function initTheme() {
+      const saved = localStorage.getItem("sonyViewerTheme");
+      if (saved === "dark" || saved === "light") {
+        applyTheme(saved);
+      } else {
+        // Detectar preferencia del sistema
+        const prefersDark = window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        applyTheme(prefersDark ? "dark" : "light");
+      }
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const current = document.body.getAttribute("data-theme") || "light";
+      const next = current === "light" ? "dark" : "light";
+      applyTheme(next);
+      localStorage.setItem("sonyViewerTheme", next);
+    });
+
+    initTheme();
+
+    // -----------------------------
+    //  Utilidades
+    // -----------------------------
     function showError(msg) {
       errorBox.textContent = msg;
       errorBox.classList.remove("hidden");
     }
 
+    function updateZoomLabel() {
+      zoomLabel.textContent = Math.round(scale * 100) + "%";
+    }
+
+    // -----------------------------
+    //  Render de página
+    // -----------------------------
     function renderPage(num) {
       if (!pdfDoc) return;
       if (num < 1) num = 1;
@@ -100,7 +246,9 @@
       currentPage = num;
 
       pdfDoc.getPage(num).then(function (page) {
-        const viewport = page.getViewport({ scale: scale });
+        const viewport = page.getViewport({ scale });
+
+        // Ajuste sencillo de scroll: canvas más grande, el usuario puede hacer scroll si es muy alto
         canvas.width = viewport.width;
         canvas.height = viewport.height;
 
@@ -112,12 +260,15 @@
       }).then(function () {
         pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
         pageInput.value = currentPage;
+        updateZoomLabel();
       }).catch(function (err) {
         showError("Error al renderizar la página: " + err.message);
       });
     }
 
-    // Cargar documento
+    // -----------------------------
+    //  Cargar documento
+    // -----------------------------
     pdfjsLib.getDocument(pdfUrl).promise.then(function (pdf) {
       pdfDoc = pdf;
       totalPages = pdf.numPages;
@@ -129,7 +280,9 @@
       showError("No se pudo cargar el PDF '" + pdfUrl + "': " + err.message);
     });
 
-    // Controles
+    // -----------------------------
+    //  Controles de página
+    // -----------------------------
     document.getElementById("prevPage").addEventListener("click", () => {
       if (currentPage > 1) renderPage(currentPage - 1);
     });
@@ -144,6 +297,52 @@
         renderPage(val);
       }
     });
+
+    // Navegación con teclado: flechas izquierda/derecha, PgUp/PgDn
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "PageDown") {
+        if (currentPage < totalPages) renderPage(currentPage + 1);
+      } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+        if (currentPage > 1) renderPage(currentPage - 1);
+      }
+    });
+
+    // -----------------------------
+    //  Controles de zoom
+    // -----------------------------
+    document.getElementById("zoomIn").addEventListener("click", () => {
+      scale = Math.min(MAX_SCALE, scale + SCALE_STEP);
+      renderPage(currentPage);
+    });
+
+    document.getElementById("zoomOut").addEventListener("click", () => {
+      scale = Math.max(MIN_SCALE, scale - SCALE_STEP);
+      renderPage(currentPage);
+    });
+
+    document.getElementById("zoomFit").addEventListener("click", () => {
+      // Ajustar ancho al contenedor visible
+      const containerWidth = document.querySelector(".viewer-card").clientWidth;
+      if (!pdfDoc) return;
+      pdfDoc.getPage(currentPage).then(function(page) {
+        const viewport = page.getViewport({ scale: 1.0 });
+        const factor = containerWidth / viewport.width;
+        scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, factor));
+        renderPage(currentPage);
+      });
+    });
+
+    // Zoom con Ctrl + rueda del ratón (en desktop)
+    document.addEventListener("wheel", (e) => {
+      if (!e.ctrlKey) return;
+      e.preventDefault();
+      if (e.deltaY < 0) {
+        scale = Math.min(MAX_SCALE, scale + SCALE_STEP);
+      } else {
+        scale = Math.max(MIN_SCALE, scale - SCALE_STEP);
+      }
+      renderPage(currentPage);
+    }, { passive: false });
   </script>
 </body>
 </html>
