@@ -12,12 +12,12 @@
     canvas { max-width: 100%; height: auto; }
   </style>
 
-  <!-- PDF.js desde CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
+  <!-- PDF.js VERSIÓN ESTABLE 2.16.105 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script>
-    // Configurar worker de PDF.js
+    // Configurar worker de PDF.js (misma versión)
     pdfjsLib.GlobalWorkerOptions.workerSrc =
-      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.worker.min.js";
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
   </script>
 </head>
 <body class="bg-slate-100 text-slate-900">
