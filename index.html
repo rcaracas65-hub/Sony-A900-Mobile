@@ -289,54 +289,174 @@
       </div>
     </section>
 
-    <!-- TABLA DE LENTES -->
-    <section id="tabla-lentes">
+    <!-- TABLA LENTES + PRESETS + PUNTO DULCE -->
+    <section class="mb-8" id="tabla-lentes">
       <h2 class="text-lg md:text-xl font-bold mb-3 mt-4">Lentes Minolta – Punto dulce y presets recomendados</h2>
       <p class="text-sm text-slate-600 mb-3">
-        Tabla de referencia rápida para tus lentes Minolta en la A900:
-        punto dulce (apertura recomendada) y preset sugerido como punto de partida.
+        Referencia rápida para combinar tus lentes con los presets de arriba. El punto dulce es
+        el rango de apertura donde el objetivo suele rendir mejor en nitidez general.
       </p>
 
-      <div class="overflow-x-auto">
-        <table class="min-w-full text-xs md:text-sm border border-slate-200">
-          <thead class="bg-slate-100">
+      <div class="overflow-x-auto bg-white rounded-xl shadow">
+        <table class="min-w-full text-sm text-left border-collapse">
+          <thead class="bg-slate-100 text-slate-700">
             <tr>
-              <th class="border border-slate-200 px-2 py-1 text-left">Lente</th>
-              <th class="border border-slate-200 px-2 py-1 text-left">Uso principal</th>
-              <th class="border border-slate-200 px-2 py-1 text-left">Punto dulce aprox.</th>
-              <th class="border border-slate-200 px-2 py-1 text-left">Preset recomendado</th>
+              <th class="px-3 py-2 border-b">Lente</th>
+              <th class="px-3 py-2 border-b">Punto dulce aprox.</th>
+              <th class="px-3 py-2 border-b">Preset sugerido</th>
+              <th class="px-3 py-2 border-b">Uso recomendado</th>
+              <th class="px-3 py-2 border-b">Notas</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="border border-slate-200 px-2 py-1">Minolta 20mm f/2.8</td>
-              <td class="border border-slate-200 px-2 py-1">Paisaje amplio / arquitectura</td>
-              <td class="border border-slate-200 px-2 py-1">f/5.6 – f/8</td>
-              <td class="border border-slate-200 px-2 py-1">Paisaje día / Paisaje nocturno urbano</td>
+            <!-- 20mm -->
+            <tr class="border-b last:border-b-0">
+              <td class="px-3 py-2 font-medium">Minolta 20mm</td>
+              <td class="px-3 py-2">f/8 – f/11</td>
+              <td class="px-3 py-2">
+                Paisaje de día, Paisaje nocturno
+              </td>
+              <td class="px-3 py-2">
+                Paisaje amplio, arquitectura, interiores amplios
+              </td>
+              <td class="px-3 py-2">
+                Ideal para cielos, nubes y líneas fuertes; vigila distorsión en bordes.
+              </td>
             </tr>
-            <tr>
-              <td class="border border-slate-200 px-2 py-1">Minolta 24mm f/2.8</td>
-              <td class="border border-slate-200 px-2 py-1">Paisaje / calle</td>
-              <td class="border border-slate-200 px-2 py-1">f/5.6 – f/8</td>
-              <td class="border border-slate-200 px-2 py-1">Paisaje día / Interior sin flash</td>
+
+            <!-- 24mm -->
+            <tr class="border-b last:border-b-0 bg-slate-50/40">
+              <td class="px-3 py-2 font-medium">Minolta 24mm</td>
+              <td class="px-3 py-2">f/5.6 – f/8</td>
+              <td class="px-3 py-2">
+                Paisaje de día, Calle / documental
+              </td>
+              <td class="px-3 py-2">
+                Paisaje, calle, grupos pequeños
+              </td>
+              <td class="px-3 py-2">
+                Menos extremo que el 20mm; muy versátil para viaje.
+              </td>
             </tr>
-            <tr>
-              <td class="border border-slate-200 px-2 py-1">Minolta 50mm f/1.4</td>
-              <td class="border border-slate-200 px-2 py-1">Retrato / general</td>
-              <td class="border border-slate-200 px-2 py-1">f/2 – f/4</td>
-              <td class="border border-slate-200 px-2 py-1">Retrato exterior / Interior sin flash</td>
+
+            <!-- 50mm -->
+            <tr class="border-b last:border-b-0">
+              <td class="px-3 py-2 font-medium">Minolta 50mm (f/1.4 o f/1.7)</td>
+              <td class="px-3 py-2">f/2.8 – f/4</td>
+              <td class="px-3 py-2">
+                Retrato exterior, Retrato interior, Calle / documental
+              </td>
+              <td class="px-3 py-2">
+                Retrato, detalle, uso general
+              </td>
+              <td class="px-3 py-2">
+                A máxima apertura da look más suave; en f/2.8–f/4 se vuelve muy nítido.
+              </td>
             </tr>
-            <tr>
-              <td class="border border-slate-200 px-2 py-1">Minolta 70-210mm f/4 (Beercan)</td>
-              <td class="border border-slate-200 px-2 py-1">Retrato comprimido / detalle</td>
-              <td class="border border-slate-200 px-2 py-1">f/5.6 – f/8 (sobre todo en el extremo largo)</td>
-              <td class="border border-slate-200 px-2 py-1">Retrato exterior / Acción (en buena luz)</td>
+
+            <!-- 100mm macro -->
+            <tr class="border-b last:border-b-0 bg-slate-50/40">
+              <td class="px-3 py-2 font-medium">Minolta 100mm Macro</td>
+              <td class="px-3 py-2">f/5.6 – f/8</td>
+              <td class="px-3 py-2">
+                Retrato exterior, Macro detallado
+              </td>
+              <td class="px-3 py-2">
+                Macro, retrato cerrado, detalles de producto
+              </td>
+              <td class="px-3 py-2">
+                Usa trípode o buena velocidad; ojo con la profundidad de campo muy corta en macro.
+              </td>
             </tr>
+
+            <!-- 70–210mm -->
+            <tr class="border-b last:border-b-0">
+              <td class="px-3 py-2 font-medium">Minolta 70–210mm</td>
+              <td class="px-3 py-2">f/5.6 – f/8 (sobre todo entre 100–150mm)</td>
+              <td class="px-3 py-2">
+                Retrato exterior, Acción / deporte
+              </td>
+              <td class="px-3 py-2">
+                Retrato comprimido, deporte ligero, fauna cercana
+              </td>
+              <td class="px-3 py-2">
+                A 70–135mm da muy buen bokeh; cuida velocidad (≥ 1/250s) para evitar trepidación.
+              </td>
+            </tr>
+
+            <!-- 17–35mm -->
+            <tr class="border-b last:border-b-0 bg-slate-50/40">
+              <td class="px-3 py-2 font-medium">Minolta 17–35mm</td>
+              <td class="px-3 py-2">f/7.1 – f/9 (24–28mm)</td>
+              <td class="px-3 py-2">
+                Paisaje de día, Paisaje nocturno (con trípode)
+              </td>
+              <td class="px-3 py-2">
+                Paisaje muy amplio, interiores, arquitectura
+              </td>
+              <td class="px-3 py-2">
+                En 17mm la distorsión es fuerte; el rango 24–28mm suele ser más limpio.
+              </td>
+            </tr>
+
+            <!-- 28–75mm -->
+            <tr class="border-b last:border-b-0">
+              <td class="px-3 py-2 font-medium">Minolta 28–75mm</td>
+              <td class="px-3 py-2">f/4 – f/5.6 (35–60mm)</td>
+              <td class="px-3 py-2">
+                Calle / documental, Retrato exterior, Paisaje de día
+              </td>
+              <td class="px-3 py-2">
+                Zoom estándar de uso general
+              </td>
+              <td class="px-3 py-2">
+                Buen “todo terreno”: 28mm para ambiente, 50–75mm para retrato.
+              </td>
+            </tr>
+
+            <!-- 35–105mm -->
+            <tr class="border-b last:border-b-0 bg-slate-50/40">
+              <td class="px-3 py-2 font-medium">Minolta 35–105mm</td>
+              <td class="px-3 py-2">f/5.6 – f/8</td>
+              <td class="px-3 py-2">
+                Calle / documental, Retrato exterior
+              </td>
+              <td class="px-3 py-2">
+                Viaje, escenas urbanas, retratos en 70–105mm
+              </td>
+              <td class="px-3 py-2">
+                Muy útil si quieres un solo zoom para caminar todo el día.
+              </td>
+            </tr>
+
+            <!-- 100–400mm -->
+            <tr class="border-b last:border-b-0">
+              <td class="px-3 py-2 font-medium">Minolta 100–400mm</td>
+              <td class="px-3 py-2">f/7.1 – f/8 (200–300mm)</td>
+              <td class="px-3 py-2">
+                Acción / deporte, Fauna
+              </td>
+              <td class="px-3 py-2">
+                Fauna, deporte, detalles lejanos en paisaje
+              </td>
+              <td class="px-3 py-2">
+                Usa velocidades altas (≥ 1/500s) y, si puedes, apoyo/trípode; ojo con el calor y turbulencia de aire.
+              </td>
+            </tr>
+
+            <!-- 500mm -->
             <tr>
-              <td class="border border-slate-200 px-2 py-1">Minolta 100mm macro</td>
-              <td class="border border-slate-200 px-2 py-1">Macro / detalle / retrato</td>
-              <td class="border border-slate-200 px-2 py-1">f/5.6 – f/8</td>
-              <td class="border border-slate-200 px-2 py-1">Paisaje día / Retrato interior</td>
+              <td class="px-3 py-2 font-medium">Minolta 500mm</td>
+              <td class="px-3 py-2">fijo (p.ej. f/8 en muchos catadióptricos)</td>
+              <td class="px-3 py-2">
+                Fauna, Acción / deporte, Detalle lejano
+              </td>
+              <td class="px-3 py-2">
+                Fauna distante, luna, compresiones fuertes en paisaje
+              </td>
+              <td class="px-3 py-2">
+                Muy sensible a vibraciones y atmósfera; usa velocidades altas y apoyo sólido.
+              </td>
             </tr>
           </tbody>
         </table>
