@@ -4,41 +4,55 @@
   <meta charset="utf-8">
   <title>Menús Sony SLT A99V – Resumen en español</title>
   <style>
+    :root {
+      color-scheme: dark;
+    }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 16px;
       line-height: 1.5;
-      background: #f5f5f5;
+      background: #020617; /* slate-950 */
+      color: #e5e7eb;       /* slate-200 */
     }
+
     h1, h2, h3 {
-      color: #222;
+      color: #f9fafb; /* casi blanco */
     }
+
     h1 {
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
     }
+
     h2 {
       font-size: 1.4rem;
       margin-top: 2rem;
-      border-bottom: 2px solid #ccc;
+      border-bottom: 2px solid #1f2937; /* slate-800 */
       padding-bottom: 0.25rem;
     }
+
     h3 {
       font-size: 1.1rem;
       margin-top: 1.2rem;
     }
+
     p.intro {
       max-width: 800px;
       font-size: 0.95rem;
+      color: #cbd5f5; /* texto secundario claro */
     }
+
     nav {
       margin: 1.5rem 0;
       padding: 1rem;
-      background: #ffffff;
+      background: #020617;
       border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      box-shadow: 0 1px 3px rgba(15,23,42,0.9);
       max-width: 900px;
+      border: 1px solid #1f2937;
     }
+
     nav ul {
       list-style: none;
       padding-left: 0;
@@ -47,63 +61,95 @@
       gap: 0.4rem 1.5rem;
       margin: 0;
     }
+
     nav a {
       text-decoration: none;
-      color: #0050a8;
+      color: #93c5fd; /* azul claro */
       font-size: 0.9rem;
     }
+
     nav a:hover {
       text-decoration: underline;
     }
+
     .menu-section {
-      background: #ffffff;
+      background: #020617;
       padding: 1rem;
       border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      box-shadow: 0 1px 3px rgba(15,23,42,0.9);
       max-width: 1000px;
       margin-bottom: 1.5rem;
+      border: 1px solid #1f2937;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.9rem;
       table-layout: fixed;
     }
+
     th, td {
-      border: 1px solid #ddd;
+      border: 1px solid #1f2937; /* slate-800 */
       padding: 0.4rem 0.5rem;
       vertical-align: top;
       word-wrap: break-word;
       overflow-wrap: break-word;
     }
+
     th {
-      background: #f0f0f0;
+      background: #0f172a;   /* slate-900 */
       font-weight: 600;
       text-align: left;
+      color: #e5e7eb;
     }
+
+    td {
+      color: #e5e7eb;
+    }
+
     .top-link {
       text-align: right;
       margin-top: 0.5rem;
       font-size: 0.8rem;
     }
+
     .top-link a {
-      color: #0050a8;
+      color: #93c5fd;
       text-decoration: none;
     }
+
     .top-link a:hover {
       text-decoration: underline;
     }
+
     .ref-link {
       font-size: 0.85rem;
       margin: 0.4rem 0 0.8rem;
+      color: #a5b4fc; /* violeta claro */
     }
+
     .ref-link a {
-      color: #00804b;
+      color: #4ade80; /* verde claro para resaltar referencia */
       text-decoration: none;
     }
+
     .ref-link a:hover {
       text-decoration: underline;
     }
+
+    /* Simular clases tailwind usadas en el header de regreso,
+       para que no queden "muertas" en modo oscuro */
+    .text-sm { font-size: 0.875rem; }
+    .text-xs { font-size: 0.75rem; }
+    .text-blue-700 { color: #60a5fa; }
+    .text-slate-500 { color: #9ca3af; }
+    .hover\:underline:hover { text-decoration: underline; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+
     @media (max-width: 768px) {
       body {
         margin: 8px;
@@ -111,6 +157,10 @@
       nav ul {
         flex-direction: column;
         gap: 0.3rem;
+      }
+      .flex {
+        flex-direction: column;
+        gap: 0.5rem;
       }
     }
   </style>
@@ -133,7 +183,6 @@
       <li><a href="#menu-cardtool">Menú Herramienta Tarjeta Memoria</a></li>
       <li><a href="#menu-clock">Menú de Configuración del Reloj</a></li>
       <li><a href="#menu-setup">Menú Configuración</a></li>
-      
     </ul>
   </nav>
 
@@ -142,7 +191,7 @@
     <a href="index.html" class="text-sm text-blue-700 hover:underline">
       ← Volver al índice
     </a>
-    <span class="text-xs text-slate-500">  Sony SLT-A99V – Menús (Hipertexto)</span>
+    <span class="text-xs text-slate-500">Sony SLT-A99V – Menús (Hipertexto)</span>
   </div>
 
   <!-- Menú de toma de imágenes fijas -->
@@ -902,224 +951,224 @@
         </tr>
       </thead>
 
-    <tbody>
+      <tbody>
 
-      <!-- MENÚ 1 -->
-      <tr class="submenu-row">
-        <td colspan="3"><strong>Menú 1 (Configuración del reloj)</strong></td>
-      </tr>
+        <!-- MENÚ 1 -->
+        <tr class="submenu-row">
+          <td colspan="3"><strong>Menú 1 (Configuración del reloj)</strong></td>
+        </tr>
 
-      <tr>
-        <td>Ajuste fecha/hora</td>
-        <td>
-          Ajusta la fecha, la hora y el horario de verano.  
-          Se puede establecer el formato de fecha y la zona horaria inicial.
-        </td>
-        <td>—</td>
-      </tr>
+        <tr>
+          <td>Ajuste fecha/hora</td>
+          <td>
+            Ajusta la fecha, la hora y el horario de verano.  
+            Se puede establecer el formato de fecha y la zona horaria inicial.
+          </td>
+          <td>—</td>
+        </tr>
 
-      <tr>
-        <td>Configuración área</td>
-        <td>
-          Selecciona la zona horaria correspondiente al país o región donde se usará la cámara.
-        </td>
-        <td>Lista de regiones</td>
-      </tr>
+        <tr>
+          <td>Configuración área</td>
+          <td>
+            Selecciona la zona horaria correspondiente al país o región donde se usará la cámara.
+          </td>
+          <td>Lista de regiones</td>
+        </tr>
 
-      <tr>
-        <td>Inicio menú</td>
-        <td>
-          Define si el cursor aparece en el primer elemento del menú o en el último elemento usado.
-        </td>
-        <td>Principal / Anterior</td>
-      </tr>
+        <tr>
+          <td>Inicio menú</td>
+          <td>
+            Define si el cursor aparece en el primer elemento del menú o en el último elemento usado.
+          </td>
+          <td>Principal / Anterior</td>
+        </tr>
 
-    </tbody>
-  </table>
+      </tbody>
+    </table>
 
-  <div class="top-link"><a href="#top">Volver al inicio ▲</a></div>
-</section>
+    <div class="top-link"><a href="#top">Volver al inicio ▲</a></div>
+  </section>
 
   <!-- Menú Configuración -->
-<section id="menu-setup" class="menu-section">
-  <h2>Menú Configuración</h2>
-  <p class="ref-link">
-    Referencia manual:
-    <a href="viewer.html?file=SonySLTA99V.pdf&page=44" onclick="window.location.href=this.href; return false;">
-      Abrir PDF en la página 44 (Menú Configuración)
-    </a>
-  </p>
+  <section id="menu-setup" class="menu-section">
+    <h2>Menú Configuración</h2>
+    <p class="ref-link">
+      Referencia manual:
+      <a href="viewer.html?file=SonySLTA99V.pdf&page=44" onclick="window.location.href=this.href; return false;">
+        Abrir PDF en la página 44 (Menú Configuración)
+      </a>
+    </p>
 
-  <p>
-    Ajustes generales de funcionamiento del cuerpo de la cámara: brillo, energía, HDMI, USB,
-    GPS, diales, idioma, limpieza del sensor y restauración del sistema.
-  </p>
+    <p>
+      Ajustes generales de funcionamiento del cuerpo de la cámara: brillo, energía, HDMI, USB,
+      GPS, diales, idioma, limpieza del sensor y restauración del sistema.
+    </p>
 
-  <table>
-    <thead>
-      <tr>
-        <th style="width: 24%;">Elemento</th>
-        <th style="width: 46%;">Descripción</th>
-        <th style="width: 30%;">Opciones principales</th>
-      </tr>
-    </thead>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 24%;">Elemento</th>
+          <th style="width: 46%;">Descripción</th>
+          <th style="width: 30%;">Opciones principales</th>
+        </tr>
+      </thead>
 
-    <tbody>
+      <tbody>
 
-      <!-- MENÚ 1 -->
-      <tr class="submenu-row"><td colspan="3"><strong>Menú 1 (Configuración)</strong></td></tr>
+        <!-- MENÚ 1 -->
+        <tr class="submenu-row"><td colspan="3"><strong>Menú 1 (Configuración)</strong></td></tr>
 
-      <tr>
-        <td>Inicio menú</td>
-        <td>Determina si el cursor reaparece en el primer ítem o en el último usado.</td>
-        <td>Principal / Anterior</td>
-      </tr>
+        <tr>
+          <td>Inicio menú</td>
+          <td>Determina si el cursor reaparece en el primer ítem o en el último usado.</td>
+          <td>Principal / Anterior</td>
+        </tr>
 
-      <tr>
-        <td>Guía del dial de modo</td>
-        <td>Muestra información explicando el modo seleccionado en el dial.</td>
-        <td>Activar / Desactivar</td>
-      </tr>
+        <tr>
+          <td>Guía del dial de modo</td>
+          <td>Muestra información explicando el modo seleccionado en el dial.</td>
+          <td>Activar / Desactivar</td>
+        </tr>
 
-      <tr>
-        <td>Brillo LCD</td>
-        <td>Ajusta el brillo de la pantalla LCD.</td>
-        <td>Auto / Manual / Tpo soleado</td>
-      </tr>
+        <tr>
+          <td>Brillo LCD</td>
+          <td>Ajusta el brillo de la pantalla LCD.</td>
+          <td>Auto / Manual / Tpo soleado</td>
+        </tr>
 
-      <tr>
-        <td>Brillo del visor</td>
-        <td>Ajusta el brillo del visor electrónico.</td>
-        <td>Auto / Manual</td>
-      </tr>
+        <tr>
+          <td>Brillo del visor</td>
+          <td>Ajusta el brillo del visor electrónico.</td>
+          <td>Auto / Manual</td>
+        </tr>
 
-      <tr>
-        <td>Temperatura color visor</td>
-        <td>Ajuste fino de la temperatura de color del visor.</td>
-        <td>+2 / +1 / 0 / -1 / -2</td>
-      </tr>
+        <tr>
+          <td>Temperatura color visor</td>
+          <td>Ajuste fino de la temperatura de color del visor.</td>
+          <td>+2 / +1 / 0 / -1 / -2</td>
+        </tr>
 
-      <!-- MENÚ 2 -->
-      <tr class="submenu-row"><td colspan="3"><strong>Menú 2 (Configuración)</strong></td></tr>
+        <!-- MENÚ 2 -->
+        <tr class="submenu-row"><td colspan="3"><strong>Menú 2 (Configuración)</strong></td></tr>
 
-      <tr>
-        <td>Ajustes GPS (Sólo SLT-A99V)</td>
-        <td>Configura las funciones del receptor GPS integrado.</td>
-        <td>Activar / Desactivar / Ajustes GPS</td>
-      </tr>
+        <tr>
+          <td>Ajustes GPS (Sólo SLT-A99V)</td>
+          <td>Configura las funciones del receptor GPS integrado.</td>
+          <td>Activar / Desactivar / Ajustes GPS</td>
+        </tr>
 
-      <tr>
-        <td>Ahorro de energía</td>
-        <td>Nivel general de ahorro energético.</td>
-        <td>Max / Estándar</td>
-      </tr>
+        <tr>
+          <td>Ahorro de energía</td>
+          <td>Nivel general de ahorro energético.</td>
+          <td>Max / Estándar</td>
+        </tr>
 
-      <tr>
-        <td>Hora inicio ahorro ener.</td>
-        <td>Tiempo de inactividad antes de entrar en reposo.</td>
-        <td>30 min / 5 min / 1 min / 20 s / 10 s</td>
-      </tr>
+        <tr>
+          <td>Hora inicio ahorro ener.</td>
+          <td>Tiempo de inactividad antes de entrar en reposo.</td>
+          <td>30 min / 5 min / 1 min / 20 s / 10 s</td>
+        </tr>
 
-      <tr>
-        <td>Resolución HDMI</td>
-        <td>Resolución de salida cuando se conecta a un televisor.</td>
-        <td>Auto / 1080p / 1080i</td>
-      </tr>
+        <tr>
+          <td>Resolución HDMI</td>
+          <td>Resolución de salida cuando se conecta a un televisor.</td>
+          <td>Auto / 1080p / 1080i</td>
+        </tr>
 
-      <tr>
-        <td>CTRL.POR HDMI</td>
-        <td>Activa el control remoto mediante BRAVIA Sync.</td>
-        <td>Activar / Desactivar</td>
-      </tr>
+        <tr>
+          <td>CTRL.POR HDMI</td>
+          <td>Activa el control remoto mediante BRAVIA Sync.</td>
+          <td>Activar / Desactivar</td>
+        </tr>
 
-      <tr>
-        <td>Mostrar la inform. HDMI</td>
-        <td>Muestra imagen por HDMI con o sin info de grabación.</td>
-        <td>Activado / Desactivado</td>
-      </tr>
+        <tr>
+          <td>Mostrar la inform. HDMI</td>
+          <td>Muestra imagen por HDMI con o sin info de grabación.</td>
+          <td>Activado / Desactivado</td>
+        </tr>
 
-      <!-- MENÚ 3 -->
-      <tr class="submenu-row"><td colspan="3"><strong>Menú 3 (Configuración)</strong></td></tr>
+        <!-- MENÚ 3 -->
+        <tr class="submenu-row"><td colspan="3"><strong>Menú 3 (Configuración)</strong></td></tr>
 
-      <tr>
-        <td>Ajustes de carga*</td>
-        <td>Activa carga inalámbrica en tarjetas Eye-Fi compatibles.</td>
-        <td>Activar / Desactivar</td>
-      </tr>
+        <tr>
+          <td>Ajustes de carga*</td>
+          <td>Activa carga inalámbrica en tarjetas Eye-Fi compatibles.</td>
+          <td>Activar / Desactivar</td>
+        </tr>
 
-      <tr>
-        <td>Conexión USB</td>
-        <td>Selecciona el modo USB al conectar la cámara.</td>
-        <td>Auto / Almacenamiento masivo / MTP / PC remoto</td>
-      </tr>
+        <tr>
+          <td>Conexión USB</td>
+          <td>Selecciona el modo USB al conectar la cámara.</td>
+          <td>Auto / Almacenamiento masivo / MTP / PC remoto</td>
+        </tr>
 
-      <tr>
-        <td>Ajuste USB LUN</td>
-        <td>Cómo se presentan las tarjetas al conectarse por USB.</td>
-        <td>Multi / Sencillo</td>
-      </tr>
+        <tr>
+          <td>Ajuste USB LUN</td>
+          <td>Cómo se presentan las tarjetas al conectarse por USB.</td>
+          <td>Multi / Sencillo</td>
+        </tr>
 
-      <tr>
-        <td>Señales audio</td>
-        <td>Activa o desactiva los pitidos de confirmación.</td>
-        <td>Activar / Desactivar</td>
-      </tr>
+        <tr>
+          <td>Señales audio</td>
+          <td>Activa o desactiva los pitidos de confirmación.</td>
+          <td>Activar / Desactivar</td>
+        </tr>
 
-      <tr>
-        <td>Selector PAL/NTSC</td>
-        <td>Convierte el formato de vídeo según región.</td>
-        <td>PAL / NTSC</td>
-      </tr>
+        <tr>
+          <td>Selector PAL/NTSC</td>
+          <td>Convierte el formato de vídeo según región.</td>
+          <td>PAL / NTSC</td>
+        </tr>
 
-      <tr>
-        <td>Capt. tamaño APS-C</td>
-        <td>Activa recorte APS-C cuando el objetivo lo requiere.</td>
-        <td>Activar / Automático</td>
-      </tr>
+        <tr>
+          <td>Capt. tamaño APS-C</td>
+          <td>Activa recorte APS-C cuando el objetivo lo requiere.</td>
+          <td>Activar / Automático</td>
+        </tr>
 
-      <tr>
-        <td>Micro ajuste AF</td>
-        <td>Ajuste fino del enfoque por objetivo.</td>
-        <td>Configurar / Cantidad / Borrar todo</td>
-      </tr>
+        <tr>
+          <td>Micro ajuste AF</td>
+          <td>Ajuste fino del enfoque por objetivo.</td>
+          <td>Configurar / Cantidad / Borrar todo</td>
+        </tr>
 
-      <!-- MENÚ 4 -->
-      <tr class="submenu-row"><td colspan="3"><strong>Menú 4 (Configuración)</strong></td></tr>
+        <!-- MENÚ 4 -->
+        <tr class="submenu-row"><td colspan="3"><strong>Menú 4 (Configuración)</strong></td></tr>
 
-      <tr>
-        <td>Versión</td>
-        <td>Muestra la versión del software interno.</td>
-        <td>—</td>
-      </tr>
+        <tr>
+          <td>Versión</td>
+          <td>Muestra la versión del software interno.</td>
+          <td>—</td>
+        </tr>
 
-      <tr>
-        <td>Idioma</td>
-        <td>Selecciona el idioma de los menús.</td>
-        <td>—</td>
-      </tr>
+        <tr>
+          <td>Idioma</td>
+          <td>Selecciona el idioma de los menús.</td>
+          <td>—</td>
+        </tr>
 
-      <tr>
-        <td>Modo limpieza</td>
-        <td>Activa el sistema de limpieza del sensor.</td>
-        <td>Ejecutar</td>
-      </tr>
+        <tr>
+          <td>Modo limpieza</td>
+          <td>Activa el sistema de limpieza del sensor.</td>
+          <td>Ejecutar</td>
+        </tr>
 
-      <tr>
-        <td>Modo demostración</td>
-        <td>Activa una demo de reproducción en la cámara.</td>
-        <td>Activar / Desactivar</td>
-      </tr>
+        <tr>
+          <td>Modo demostración</td>
+          <td>Activa una demo de reproducción en la cámara.</td>
+          <td>Activar / Desactivar</td>
+        </tr>
 
-      <tr>
-        <td>Inicializar</td>
-        <td>Restaura los ajustes del sistema.</td>
-        <td>Reponer ajuste / Reponer Modo Grab. / Reponer todo</td>
-      </tr>
+        <tr>
+          <td>Inicializar</td>
+          <td>Restaura los ajustes del sistema.</td>
+          <td>Reponer ajuste / Reponer Modo Grab. / Reponer todo</td>
+        </tr>
 
-    </tbody>
-  </table>
+      </tbody>
+    </table>
 
-  <div class="top-link"><a href="#top">Volver al inicio ▲</a></div>
-</section>
+    <div class="top-link"><a href="#top">Volver al inicio ▲</a></div>
+  </section>
 </body>
 </html>
