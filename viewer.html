@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Visor PDF – Sony</title>
+  <title>Visor pdf – Sony</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Tailwind para estilos rápidos (opcional, igual que en index) -->
@@ -12,10 +12,10 @@
     canvas { max-width: 100%; height: auto; }
   </style>
 
-  <!-- PDF.js desde CDN -->
+  <!-- pdf.js desde CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.min.js"></script>
   <script>
-    // Configurar worker de PDF.js
+    // Configurar worker de pdf.js
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.worker.min.js";
   </script>
@@ -65,7 +65,7 @@
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const fileParam = urlParams.get("file") || "SonyA900.PDF";
+    const fileParam = urlParams.get("file") || "SonyA900.pdf";
     const pageParam = parseInt(urlParams.get("page") || "1", 10);
 
     const pdfUrl = fileParam; // relativo al mismo repo
@@ -110,7 +110,7 @@
       totalPages = pdf.numPages;
       renderPage(currentPage);
     }).catch(err => {
-      alert("No se pudo cargar el PDF: " + err.message);
+      alert("No se pudo cargar el pdf: " + err.message);
     });
 
     // Controles
