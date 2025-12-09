@@ -9,51 +9,103 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-[15px] leading-relaxed">
 
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <!-- Header fijo con botón volver + toggles -->
+  <header class="sticky top-0 z-20 bg-slate-100/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700">
+    <div class="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
+      </a>
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-      <a href="index.html" class="text-sm text-blue-700 hover:underline">
-  ← Volver al índice
-</a>
-      <span class="text-xs text-slate-500">
-        Sony A900 – Manual PDF
-      </span>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 · Menú Grabación 3 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-5">
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
         3. Menú Grabación 3
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Ajustes relacionados con el comportamiento del enfoque automático (AF),
         prioridad de disparo y el iluminador AF.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
       <!-- 3.1 Ajustes AF-A -->
       <div>
-        <h2 class="font-bold text-lg">3.1 Ajustes AF-A</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.3_1.title">3.1 Ajustes AF-A</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.3_1.text">
           Define cómo se comporta la posición “A” de la palanca de modo de enfoque.
           Permite, por ejemplo, usar <strong>DMF (Enfoque Manual Directo)</strong>:
           la cámara enfoca automáticamente, y luego puedes hacer un ajuste fino girando
           el anillo de enfoque del objetivo.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=107"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="107"
+             href="viewer.html?file=SonyA900_ES.pdf&page=107"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.3_1.ref1">
             [Pág. 107 – Ajustes AF-A / DMF]
           </a>
         </p>
         <p class="text-xs mt-1">
-          Ver Detalle:
-          <a href="href="viewer.html?file=SonyA900.pdf&page=56"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.detail">Ver detalle:</span>
+          <a data-pdf-page="56"
+             href="viewer.html?file=SonyA900_ES.pdf&page=56"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.3_1.ref2">
             [Pág. 56 – Ajustes AF-A / DMF]
           </a>
         </p>
@@ -61,8 +113,8 @@
 
       <!-- 3.2 Área AF -->
       <div>
-        <h2 class="font-bold text-lg">3.2 Área AF</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.3_2.title">3.2 Área AF</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.3_2.text">
           Selecciona el área de enfoque que utilizará la cámara:
           <br>
           • <strong>Ancho</strong> – La cámara decide entre las 9 áreas AF disponibles (más puntos adicionales).<br>
@@ -70,14 +122,20 @@
           • <strong>Local</strong> – Permite elegir manualmente el punto AF usando el multiselector.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=107"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="107"
+             href="viewer.html?file=SonyA900_ES.pdf&page=107"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.3_2.ref1">
             [Pág. 107 – Área AF]
           </a>
         </p>
         <p class="text-xs mt-1">
-          Ver Detalle:
-          <a href="viewer.html?file=SonyA900.pdf&page=53"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.detail">Ver detalle:</span>
+          <a data-pdf-page="53"
+             href="viewer.html?file=SonyA900_ES.pdf&page=53"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.3_2.ref2">
             [Pág. 53 – Área AF]
           </a>
         </p>
@@ -85,8 +143,8 @@
 
       <!-- 3.3 Ajust.prioridad -->
       <div>
-        <h2 class="font-bold text-lg">3.3 Ajust.prioridad (Prioridad AF/disparo)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.3_3.title">3.3 Ajust.prioridad (Prioridad AF/disparo)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.3_3.text">
           Decide qué tiene prioridad al disparar en AF:
           <br>
           • <strong>AF</strong> – El obturador solo se libera cuando el enfoque está confirmado
@@ -95,32 +153,41 @@
             perfectamente confirmado, útil cuando la prioridad es no perder el momento.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=107"  class="text-blue-700 hover:underline">
-            [Pág. 107 – Menú Grabación 3 / Ajust.prioridad]
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="107"
+             href="viewer.html?file=SonyA900_ES.pdf&page=107"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.3_3.ref">
+            [Pág. 107 – Ajust.prioridad]
           </a>
         </p>
       </div>
 
       <!-- 3.4 Iluminador AF -->
       <div>
-        <h2 class="font-bold text-lg">3.4 Iluminador AF</h2>
-        <p class="text-sm text-slate-700">
-          Activa o desactiva el <strong>iluminador AF</strong>, un haz de luz rojo que ayuda a la cámara
+        <h2 class="font-bold text-lg" data-i18n="sec.3_4.title">3.4 Iluminador AF</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.3_4.text">
+          Activa o desactiva el <strong>iluminador AF</strong>, un haz de luz que ayuda a la cámara
           a enfocar en condiciones de baja luz o bajo contraste. Puede ajustarse en:
           <br>
           • <strong>Automático</strong> – Se enciende cuando la cámara lo necesita.<br>
           • <strong>Desactivar</strong> – No se utiliza el iluminador AF (ni el de la cámara, ni el del flash).
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=107"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="107"
+             href="viewer.html?file=SonyA900_ES.pdf&page=107"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.3_4.ref1">
             [Pág. 107 – Iluminador AF]
           </a>
         </p>
         <p class="text-xs mt-1">
-          Ver Detalle:
-          <a href="viewer.html?file=SonyA900.pdf&page=55"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.detail">Ver detalle:</span>
+          <a data-pdf-page="55"
+             href="viewer.html?file=SonyA900_ES.pdf&page=55"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.3_4.ref2">
             [Pág. 55 – Iluminador AF]
           </a>
         </p>
@@ -128,18 +195,21 @@
 
       <!-- 3.5 AF c/obturador -->
       <div>
-        <h2 class="font-bold text-lg">3.5 AF c/obturador</h2>
-        <p class="text-sm text-slate-700">
-          Activar el enfoque <strong>Cuando se presiona el botón disparador</strong>, hasta la mitad. Puede desactivar esta acción.:
+        <h2 class="font-bold text-lg" data-i18n="sec.3_5.title">3.5 AF c/obturador</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.3_5.text">
+          Controla si la cámara realiza enfoque automático al presionar el botón disparador
+          hasta la mitad:
           <br>
-          • <strong>Activar</strong> – Ajusta el enfoque pulsando el botón disparador hasta la
-mitad.<br>
-          • <strong>Desactivar</strong> – No ajusta el enfoque pulsando el botón disparador hasta la
-mitad
+          • <strong>Activar</strong> – Ajusta el enfoque al presionar el botón disparador hasta la mitad.<br>
+          • <strong>Desactivar</strong> – El botón disparador no activa el AF (recomendado si usas AF-ON
+          en otro botón y quieres separar enfoque y disparo).
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=108"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="108"
+             href="viewer.html?file=SonyA900_ES.pdf&page=108"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.3_5.ref">
             [Pág. 108 – AF c/obturador]
           </a>
         </p>
@@ -147,45 +217,179 @@ mitad
 
       <!-- 3.6 RR Exp.Larga -->
       <div>
-        <h2 class="font-bold text-lg">3.6 RR Exp.Larga</h2>
-        <p class="text-sm text-slate-700">
-          Activar <strong>La exposición larga </strong> hace que el ruido sea más evidente<br>
-          • <strong>Activar</strong> – Cuando el tiempo de exposición es de un segundo o más, se
-realiza el proceso de reducción de ruido por un tiempo igual
-al que ha estado abierto el obturador.<br>
-          • <strong>Desactivar</strong> – Este modo no realiza reducción de ruido.
+        <h2 class="font-bold text-lg" data-i18n="sec.3_6.title">3.6 RR Exp.Larga</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.3_6.text">
+          La exposición larga hace que el ruido sea más evidente en la imagen. Esta opción
+          controla la <strong>reducción de ruido en exposiciones largas</strong> (normalmente
+          cuando el tiempo es de 1 s o más):
+          <br>
+          • <strong>Activar</strong> – Cuando el tiempo de exposición es de 1 segundo o más, la cámara realiza
+          un segundo “disparo negro” del mismo tiempo para restar el ruido (reduce hot pixels).<br>
+          • <strong>Desactivar</strong> – No se aplica reducción de ruido específica para exposiciones largas.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=108"  class="text-blue-700 hover:underline">
-            [Pág. 108 – AF c/obturador]
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="108"
+             href="viewer.html?file=SonyA900_ES.pdf&page=108"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.3_6.ref">
+            [Pág. 108 – RR Exp.Larga]
           </a>
         </p>
       </div>
 
-       <!-- 3.7 RR ISO Alta -->
+      <!-- 3.7 RR ISO Alta -->
       <div>
-        <h2 class="font-bold text-lg">3.6 RR Exp.Larga</h2>
-        <p class="text-sm text-slate-700">
-          Cuando se toma una imagen <strong>con un ISO alto, </strong>igual o superior a 1600la cámara reduce el ruido<br>
-          • <strong>Alto</strong> – Cuando se selecciona [Alto], la reducción de ruido funciona<br>
-          • <strong>Normal/Bajo</strong> – Cuando se selecciona [Alto], la reducción de ruido funciona
-con mayor eficacia.
-          • <strong>Desactivar</strong> – No reduce el ruido.
-          • <strong>Nota</strong> – La velocidad de la toma continua se ralentiza cuando se ajusta en [Alto]. 
-
+        <h2 class="font-bold text-lg" data-i18n="sec.3_7.title">3.7 RR ISO Alta</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.3_7.text">
+          Controla la <strong>reducción de ruido a ISO alto</strong> (por ejemplo, ISO 1600 o superior):
+          <br>
+          • <strong>Alto</strong> – La reducción de ruido actúa con mayor intensidad (imágenes más limpias pero menos detalle fino).<br>
+          • <strong>Normal/Bajo</strong> – Reducción de ruido moderada, buen equilibrio entre detalle y limpieza.<br>
+          • <strong>Desactivar</strong> – No aplica reducción de ruido adicional en ISOs altos.
+          <br><br>
+          Nota: la velocidad de disparo continuo puede disminuir cuando se ajusta en <strong>Alto</strong>.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=108"  class="text-blue-700 hover:underline">
-            [Pág. 108 – AF c/obturador]
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="108"
+             href="viewer.html?file=SonyA900_ES.pdf&page=108"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.3_7.ref">
+            [Pág. 108 – RR ISO Alta]
           </a>
         </p>
       </div>
 
     </section>
 
-  </div>
+  </main>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 · Recording Menu 3 – PDF manual",
+
+        "theme.label": "Dark mode",
+        "ref.label": "Reference:",
+        "ref.detail": "See detail:",
+
+        "title": "3. Recording Menu 3",
+        "intro": "Settings related to autofocus behavior (AF), release priority and the AF illuminator.",
+
+        "sec.3_1.title": "3.1 AF-A settings",
+        "sec.3_1.text": "Defines how the “A” position of the focus mode lever behaves. For example, you can use DMF (Direct Manual Focus): the camera focuses automatically and then you can fine-tune focus using the lens focus ring.",
+        "sec.3_1.ref1": "[Pg. 107 – AF-A / DMF settings]",
+        "sec.3_1.ref2": "[Pg. 56 – AF-A / DMF details]",
+
+        "sec.3_2.title": "3.2 AF area",
+        "sec.3_2.text": "Selects the AF area used by the camera:\n• Wide – The camera chooses among the 9 AF areas (plus assist points).\n• Spot – Uses a single central AF point for maximum precision.\n• Local – You manually select the AF point using the multi-selector.",
+        "sec.3_2.ref1": "[Pg. 107 – AF area]",
+        "sec.3_2.ref2": "[Pg. 53 – AF area details]",
+
+        "sec.3_3.title": "3.3 Priority setup (AF/Release)",
+        "sec.3_3.text": "Decides what has priority when shooting in AF:\n• AF – The shutter is released only when focus is confirmed (sharpness priority).\n• Release – The shutter can fire even if focus is not perfectly confirmed, useful when timing is critical.",
+        "sec.3_3.ref": "[Pg. 107 – Priority settings]",
+
+        "sec.3_4.title": "3.4 AF illuminator",
+        "sec.3_4.text": "Controls the AF illuminator, a light that helps the camera focus in low light or low contrast scenes:\n• Auto – Turns on when the camera needs it.\n• Off – Disables the AF illuminator (both camera and flash).",
+        "sec.3_4.ref1": "[Pg. 107 – AF illuminator]",
+        "sec.3_4.ref2": "[Pg. 55 – AF illuminator details]",
+
+        "sec.3_5.title": "3.5 AF w/ shutter",
+        "sec.3_5.text": "Controls whether autofocus is activated by half-pressing the shutter button:\n• On – Half-pressing the shutter activates AF.\n• Off – The shutter button does not start AF (recommended if you use AF-ON on another button and want to separate focusing from releasing).",
+        "sec.3_5.ref": "[Pg. 108 – AF w/ shutter]",
+
+        "sec.3_6.title": "3.6 Long exposure NR",
+        "sec.3_6.text": "Long exposures make noise more visible. This setting controls long exposure noise reduction (typically for exposures of 1 second or longer):\n• On – For exposures of 1s or longer the camera takes a second “dark frame” of the same duration to subtract noise and hot pixels.\n• Off – No specific long exposure noise reduction is applied.",
+        "sec.3_6.ref": "[Pg. 108 – Long exposure NR]",
+
+        "sec.3_7.title": "3.7 High ISO NR",
+        "sec.3_7.text": "Controls noise reduction at high ISO values (e.g. ISO 1600 or higher):\n• High – Stronger noise reduction (cleaner images but less fine detail).\n• Normal/Low – Moderate noise reduction, good balance between detail and cleanliness.\n• Off – No additional high ISO noise reduction.\n\nNote: continuous shooting speed may slow down when set to High.",
+        "sec.3_7.ref": "[Pg. 108 – High ISO NR]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.textContent;
+        }
+
+        if (lang === 'en') {
+          if (map[key]) {
+            el.textContent = "";
+            const parts = map[key].split("\n");
+            parts.forEach((part, idx) => {
+              if (idx > 0) el.appendChild(document.createElement("br"));
+              el.appendChild(document.createTextNode(part));
+            });
+          }
+        } else {
+          if (el.dataset.i18nEs) {
+            el.textContent = el.dataset.i18nEs;
+          }
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
