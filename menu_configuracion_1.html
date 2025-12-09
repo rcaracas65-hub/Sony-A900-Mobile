@@ -90,7 +90,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="122"
-             href="viewer.html?file=SonyA900_ES.pdf&page=122"
+             href="../viewer.html?file=SonyA900_ES.pdf&page=122"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_1.ref">
             [Pág. 122 – Brillo LCD]
@@ -108,7 +108,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="122"
-             href="viewer.html?file=SonyA900_ES.pdf&page=122"
+             href="../viewer.html?file=SonyA900_ES.pdf&page=122"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_2.ref">
             [Pág. 122 – Tiem.visu.info.]
@@ -130,7 +130,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="123"
-             href="viewer.html?file=SonyA900_ES.pdf&page=123"
+             href="../viewer.html?file=SonyA900_ES.pdf&page=123"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_3.ref">
             [Pág. 123 – Ahorro energía]
@@ -149,7 +149,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="123"
-             href="viewer.html?file=SonyA900_ES.pdf&page=123"
+             href="../viewer.html?file=SonyA900_ES.pdf&page=123"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_4.ref">
             [Pág. 123 – Salida vídeo]
@@ -169,7 +169,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="123"
-             href="viewer.html?file=SonyA900_ES.pdf&page=123"
+             href="../viewer.html?file=SonyA900_ES.pdf&page=123"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_5.ref">
             [Pág. 123 – Salida HDMI]
@@ -186,7 +186,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="123"
-             href="viewer.html?file=SonyA900_ES.pdf&page=123"
+             href="../viewer.html?file=SonyA900_ES.pdf&page=123"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_6.ref">
             [Pág. 123 – Idioma]
@@ -203,7 +203,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="123"
-             href="viewer.html?file=SonyA900_ES.pdf&page=123"
+             href="../viewer.html?file=SonyA900_ES.pdf&page=123"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_7.ref">
             [Pág. 123 – Ajuste fecha/hora]
@@ -217,7 +217,6 @@
 
   <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
   <script>
-    // Traducciones SOLO en inglés (el español se toma del HTML original)
     const translations = {
       en: {
         "header.back": "← Back to index",
@@ -262,7 +261,7 @@
       const root = document.documentElement;
       root.lang = lang;
 
-      // Estilos de botones ES/EN
+      // Botones ES/EN
       document.querySelectorAll('[data-lang-active]').forEach(btn => {
         const btnLang = btn.getAttribute('data-lang-active');
         const isActive = (btnLang === lang);
@@ -282,7 +281,6 @@
         }
         if (lang === 'en') {
           if (map[key]) {
-            // Soportar saltos de línea \n
             el.textContent = "";
             const parts = map[key].split("\n");
             parts.forEach((part, idx) => {
@@ -297,11 +295,11 @@
         }
       });
 
-      // PDFs según idioma (ajusta nombres si cambian)
+      // PDFs según idioma (nota: viewer.html está en raíz, por eso ../)
       const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
       document.querySelectorAll('a[data-pdf-page]').forEach(a => {
         const page = a.getAttribute('data-pdf-page');
-        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+        a.href = `../viewer.html?file=${pdfFile}&page=${page}`;
       });
 
       localStorage.setItem('manualLang', lang);
