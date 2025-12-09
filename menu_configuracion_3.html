@@ -9,35 +9,80 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
 
   <div class="max-w-4xl mx-auto px-4 py-8">
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-      <a href="index.html" class="text-sm text-blue-700 hover:underline">
-      ← Volver al índice
+    <!-- Encabezado + regreso + toggles -->
+    <div class="mb-6 flex items-center justify-between gap-3">
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
       </a>
-      <span class="text-xs text-slate-500">Sony A900 – Manual PDF</span>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="text-xs text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
         12. Menú Configuración 3
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Ajustes de comportamiento general del menú, confirmación de borrado, señales de audio,
         limpieza del sensor, microajuste de enfoque automático y tipo de pantalla de enfoque.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
       <!-- 12.1 Inicio menú -->
       <div>
-        <h2 class="font-bold text-lg">12.1 Inicio menú</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.12_1.title">12.1 Inicio menú</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.12_1.text">
           Elige qué pestaña aparece primero al pulsar el botón <strong>MENU</strong>:
           <br>
           • <strong>Menú Grabación</strong> – Entra directo a los ajustes de disparo. <br>
@@ -45,8 +90,11 @@
           • <strong>Menú principal</strong> – Siempre comienza desde la primera pestaña.
         </p>
         <p class="text-xs mt-1">
-          Referencia manual:
-          <a href="viewer.html?file=SonyA900.pdf&page=127"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia manual:</span>
+          <a data-pdf-page="127"
+             href="viewer.html?file=SonyA900_ES.pdf&page=127"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.12_1.ref">
             [Pág. 127 – Inicio menú]
           </a>
         </p>
@@ -54,20 +102,23 @@
 
       <!-- 12.2 Confirm.borrar -->
       <div>
-        <h2 class="font-bold text-lg">12.2 Confirm.borrar (Confirmación borrar)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.12_2.title">12.2 Confirm.borrar (Confirmación borrar)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.12_2.text">
           Determina qué opción aparece preseleccionada cuando borras una imagen:
           <br>
           • <strong>“Sí” predeterminado</strong> – Borrado rápido (menos seguro).<br>
           • <strong>“No” predeterminado</strong> – Reduce el riesgo de borrar por error.
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.12_2.tip">
           Recomendada: dejar <strong>“No”</strong> como opción por defecto para evitar borrados accidentales
           cuando vas rápido navegando.
         </p>
         <p class="text-xs mt-1">
-          Referencia manual:
-          <a href="viewer.html?file=SonyA900.pdf&page=127"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia manual:</span>
+          <a data-pdf-page="127"
+             href="viewer.html?file=SonyA900_ES.pdf&page=127"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.12_2.ref">
             [Pág. 127 – Confirm.borrar]
           </a>
         </p>
@@ -75,19 +126,22 @@
 
       <!-- 12.3 Señales audio -->
       <div>
-        <h2 class="font-bold text-lg">12.3 Señales audio</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.12_3.title">12.3 Señales audio</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.12_3.text">
           Activa o desactiva los pitidos de la cámara:
           <br>
           • <strong>Activar</strong> – Se oye un beep al confirmar enfoque (AF), al usar el autodisparador, etc. <br>
           • <strong>Desactivar</strong> – La cámara trabaja en silencio (útil en eventos, iglesias, conciertos…).
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.12_3.tip">
           Si eres muy de fotografía “discreta”, dejarlo desactivado ayuda mucho a pasar desapercibido.
         </p>
         <p class="text-xs mt-1">
-          Referencia manual:
-          <a href="viewer.html?file=SonyA900.pdf&page=127"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia manual:</span>
+          <a data-pdf-page="127"
+             href="viewer.html?file=SonyA900_ES.pdf&page=127"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.12_3.ref">
             [Pág. 127 – Señales audio]
           </a>
         </p>
@@ -95,19 +149,22 @@
 
       <!-- 12.4 Modo limpieza -->
       <div>
-        <h2 class="font-bold text-lg">12.4 Modo limpieza</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.12_4.title">12.4 Modo limpieza</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.12_4.text">
           Inicia el procedimiento de <strong>limpieza del sensor</strong>.  
           La cámara realiza un movimiento de vibración del filtro delante del sensor, y en algunos casos
           prepara el equipo para limpieza manual con pera de aire (según se indica en el manual).
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.12_4.tip">
           Es recomendable usar este modo cuando notes manchas recurrentes en el cielo o fondos lisos,
           especialmente al disparar a f/16–f/22.
         </p>
         <p class="text-xs mt-1">
-          Referencia manual:
-          <a href="viewer.html?file=SonyA900.pdf&page=128"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia manual:</span>
+          <a data-pdf-page="128"
+             href="viewer.html?file=SonyA900_ES.pdf&page=128"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.12_4.ref">
             [Pág. 128 – Modo limpieza]
           </a>
         </p>
@@ -115,21 +172,24 @@
 
       <!-- 12.5 Micro ajuste AF -->
       <div>
-        <h2 class="font-bold text-lg">12.5 Micro ajuste AF</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.12_5.title">12.5 Micro ajuste AF</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.12_5.text">
           Permite corregir <strong>front focus / back focus</strong> para cada objetivo:
           <br>
           • <strong>Desactivar</strong> – No se aplica microajuste. <br>
           • <strong>Activar</strong> – Puedes ajustar el enfoque en pasos finos (+/-) para compensar desajustes
           entre cuerpo y objetivo.
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.12_5.tip">
           La cámara puede recordar ajustes para varios objetivos diferentes.  
           Ideal si notas que un objetivo siempre enfoca ligeramente por delante o por detrás del punto.
         </p>
         <p class="text-xs mt-1">
-          Referencia manual:
-          <a href="viewer.html?file=SonyA900.pdf&page=128"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia manual:</span>
+          <a data-pdf-page="128"
+             href="viewer.html?file=SonyA900_ES.pdf&page=128"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.12_5.ref">
             [Pág. 128 – Micro ajuste AF]
           </a>
         </p>
@@ -137,21 +197,24 @@
 
       <!-- 12.6 Pantalla enfoq. -->
       <div>
-        <h2 class="font-bold text-lg">12.6 Pantalla enfoq. (Pantalla de enfoque)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.12_6.title">12.6 Pantalla enfoq. (Pantalla de enfoque)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.12_6.text">
           Selecciona el tipo de <strong>pantalla de enfoque</strong> instalado en el visor:
           <br>
           • <strong>Tipo G</strong> – Pantalla estándar de la cámara (general).<br>
           • <strong>Tipo M</strong> – Pensada para precisión con enfoque manual y teles. <br>
           • <strong>Tipo L</strong> – Otra variante según estilo de composición (ver tabla del manual).
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.12_6.tip">
           Es importante que esta opción coincida con la pantalla físicamente instalada,
           para que el visor muestre la luminosidad y el enfoque de forma precisa.
         </p>
         <p class="text-xs mt-1">
-          Referencia manual:
-          <a href="viewer.html?file=SonyA900.pdf&page=129"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia manual:</span>
+          <a data-pdf-page="129"
+             href="viewer.html?file=SonyA900_ES.pdf&page=129"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.12_6.ref">
             [Pág. 129 – Pantalla enfoq.]
           </a>
         </p>
@@ -161,5 +224,128 @@
 
   </div>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 – PDF manual",
+
+        "theme.label": "Dark mode",
+
+        "title": "12. Setup Menu 3",
+        "intro": "Settings for general menu behavior, delete confirmation, audio signals, sensor cleaning, AF micro adjustment and focusing screen type.",
+
+        "ref.label": "Manual reference:",
+
+        "sec.12_1.title": "12.1 Menu start",
+        "sec.12_1.text": "Chooses which tab appears first when you press the MENU button:\n• Recording menu – Goes straight to shooting settings.\n• Last screen used – Returns to the last tab you were on.\n• Main menu – Always starts from the first tab.",
+        "sec.12_1.ref": "[Pg. 127 – Menu start]",
+
+        "sec.12_2.title": "12.2 Delete confirmation",
+        "sec.12_2.text": "Determines which option is preselected when deleting an image:\n• “Yes” default – Faster deletion (less safe).\n• “No” default – Reduces the risk of accidental deletion.",
+        "sec.12_2.tip": "Recommended: keep “No” as the default option to avoid accidental deletions when navigating quickly.",
+        "sec.12_2.ref": "[Pg. 127 – Delete confirmation]",
+
+        "sec.12_3.title": "12.3 Audio signals",
+        "sec.12_3.text": "Enables or disables the camera beeps:\n• On – A beep is heard on AF confirmation, self-timer, etc.\n• Off – The camera works silently (useful in events, churches, concerts…).",
+        "sec.12_3.tip": "If you like to shoot discreetly, keeping this off helps you go unnoticed.",
+        "sec.12_3.ref": "[Pg. 127 – Audio signals]",
+
+        "sec.12_4.title": "12.4 Cleaning mode",
+        "sec.12_4.text": "Starts the sensor cleaning procedure. The camera vibrates the filter in front of the sensor and, in some cases, prepares the body for manual cleaning with a blower (as described in the manual).",
+        "sec.12_4.tip": "Use this mode when you see recurring spots in skies or smooth backgrounds, especially at f/16–f/22.",
+        "sec.12_4.ref": "[Pg. 128 – Cleaning mode]",
+
+        "sec.12_5.title": "12.5 AF micro adjustment",
+        "sec.12_5.text": "Allows you to correct front focus / back focus for each lens:\n• Off – No micro adjustment is applied.\n• On – You can fine-tune focus (+/–) to compensate for misalignment between body and lens.",
+        "sec.12_5.tip": "The camera can remember adjustments for several lenses. Ideal if a lens consistently focuses slightly in front of or behind the subject.",
+        "sec.12_5.ref": "[Pg. 128 – AF micro adjustment]",
+
+        "sec.12_6.title": "12.6 Focusing screen",
+        "sec.12_6.text": "Selects the type of focusing screen installed in the viewfinder:\n• Type G – Standard camera screen (general use).\n• Type M – Designed for precise manual focus and telephoto lenses.\n• Type L – Alternative variant depending on composition style (see table in the manual).",
+        "sec.12_6.tip": "It is important that this setting matches the screen physically installed so the viewfinder displays brightness and focus accurately.",
+        "sec.12_6.ref": "[Pg. 129 – Focusing screen]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.textContent;
+        }
+        if (lang === 'en') {
+          if (map[key]) {
+            el.textContent = "";
+            const parts = map[key].split("\n");
+            parts.forEach((part, idx) => {
+              if (idx > 0) el.appendChild(document.createElement("br"));
+              el.appendChild(document.createTextNode(part));
+            });
+          }
+        } else {
+          if (el.dataset.i18nEs) {
+            el.textContent = el.dataset.i18nEs;
+          }
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
