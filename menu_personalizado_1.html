@@ -9,84 +9,147 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-[15px] leading-relaxed">
 
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <!-- Header fijo con botón volver + toggles -->
+  <header class="sticky top-0 z-20 bg-slate-100/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700">
+    <div class="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
+      </a>
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-      <a href="index.html" class="text-sm text-blue-700 hover:underline">
-  ← Volver al índice
-</a>
-      <span class="text-xs text-slate-500">Sony A900 – Manual PDF</span>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 · Menú Personalizado 1 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-5">
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
         5. Menú Personalizado 1
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Configura el comportamiento del enfoque automático, selección AF, velocidad AF y
         prioridad del disparo en AF-S o AF-C.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
       <!-- 5.1 Botón AF/MF -->
       <div>
-        <h2 class="font-bold text-lg">5.1 Botón AF/MF</h2>
-        <p class="text-sm text-slate-700">
-          Cambia <strong>de AF/MF </strong>mientras se mantiene apretado el botón AF/MF<br>
+        <h2 class="font-bold text-lg" data-i18n="sec.5_1.title">5.1 Botón AF/MF</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.5_1.text">
+          Cambia entre <strong>AF y MF</strong> mientras se mantiene pulsado el botón AF/MF:
+          <br>
           • <strong>Control AF/MF</strong> → El botón se utiliza para cambiar entre enfoque automático y
-enfoque manual<br>
+          enfoque manual.<br>
           • <strong>Bloqueo AF</strong> → El botón se utiliza como botón de bloqueo AF.
-Pulse el botón disparador para tomar imágenes mientras
-mantiene pulsado el botón AF/MF.
+          Mantén pulsado AF/MF para fijar el enfoque y dispara con el botón principal.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=111"  class="text-blue-700 hover:underline">
-            [Pág. 111 –Cambio sencillo de AF/MF]
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="111"
+             href="viewer.html?file=SonyA900_ES.pdf&page=111"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.5_1.ref1">
+            [Pág. 111 – Cambio sencillo de AF/MF]
           </a>
         </p>
         <p class="text-xs mt-1">
-          Ver Detalle:
-          <a href="viewer.html?file=SonyA900.pdf&page=57"  class="text-blue-700 hover:underline">
-            [Pág. 57 –Cambio sencillo de AF/MF]
+          <span data-i18n="ref.detail">Ver detalle:</span>
+          <a data-pdf-page="57"
+             href="viewer.html?file=SonyA900_ES.pdf&page=57"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.5_1.ref2">
+            [Pág. 57 – Cambio sencillo de AF/MF]
           </a>
         </p>
       </div>
 
       <!-- 5.2 Control AF/MF -->
       <div>
-        <h2 class="font-bold text-lg">5.2 Control AF/MF</h2>
-        <p class="text-sm text-slate-700">
-          Si [Botón AF/MF] <strong>se ajusta en [Control AF/MF], </strong>se puede cambiar el
-modo de operación del botón AF/MF.<br>
+        <h2 class="font-bold text-lg" data-i18n="sec.5_2.title">5.2 Control AF/MF</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.5_2.text">
+          Si <strong>[Botón AF/MF]</strong> está ajustado en <strong>[Control AF/MF]</strong>, se puede cambiar el
+          modo de operación del botón:
+          <br>
           • <strong>Retener</strong> → AF y MF se conmutan sólo mientras se mantiene pulsado el
-botón.<br>
-          • <strong>Alternar</strong> → Pulse y suelte el botón para cambiar entre AF y MF.<br>
+          botón.<br>
+          • <strong>Alternar</strong> → Pulsa y suelta el botón para cambiar entre AF y MF.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=111"  class="text-blue-700 hover:underline">
-            [Pág. 111 –Control AF/MF]
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="111"
+             href="viewer.html?file=SonyA900_ES.pdf&page=111"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.5_2.ref">
+            [Pág. 111 – Control AF/MF]
           </a>
         </p>
       </div>
 
       <!-- 5.3 Velocidad AF -->
       <div>
-        <h2 class="font-bold text-lg">5.3 Velocidad AF</h2>
-        <p class="text-sm text-slate-700">
-         Puede seleccionar <strong>velocidad de enfoque </strong>cuando se activa el enfoque
-automático.<br>
-          • <strong>Rápido</strong> → Confirma el enfoque rápidamente.<br>
-          • <strong>Lento</strong> → Confirma el enfoque despacio.</p>
+        <h2 class="font-bold text-lg" data-i18n="sec.5_3.title">5.3 Velocidad AF</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.5_3.text">
+          Selecciona la <strong>velocidad de enfoque</strong> cuando se activa el AF:
+          <br>
+          • <strong>Rápido</strong> → Confirma el enfoque con mayor rapidez (útil en acción).<br>
+          • <strong>Lento</strong> → Confirma el enfoque más despacio, puede ayudar a evitar cambios bruscos.
+        </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=111"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="111"
+             href="viewer.html?file=SonyA900_ES.pdf&page=111"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.5_3.ref">
             [Pág. 111 – Velocidad AF]
           </a>
         </p>
@@ -94,39 +157,45 @@ automático.<br>
 
       <!-- 5.4 Visual.área AF -->
       <div>
-        <h2 class="font-bold text-lg">5.4 Visual.área AF</h2>
-        <p class="text-sm text-slate-700">
-          Cuando se ajusta el enfoque, el área AF local enfocada se ilumina
-brevemente en rojo.<br>
-          • <strong>0,6 s</strong> → El área AF local se ilumina durante 0,6 segundos. 
+        <h2 class="font-bold text-lg" data-i18n="sec.5_4.title">5.4 Visual.área AF</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.5_4.text">
+          Controla cómo se ilumina el área AF local seleccionada en el visor:
           <br>
+          • <strong>0,6 s</strong> → El área AF local se ilumina en rojo durante 0,6 segundos.<br>
           • <strong>0,3 s</strong> → El área AF local se ilumina durante 0,3 segundos.<br>
           • <strong>Desactivar</strong> → El área AF local se ilumina sólo cuando se pulsa el
-multiselector.
+          multiselector.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=111"  class="text-blue-700 hover:underline">
-            [Pág. 111 – Visual.área AF ]
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="111"
+             href="viewer.html?file=SonyA900_ES.pdf&page=111"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.5_4.ref">
+            [Pág. 111 – Visual.área AF]
           </a>
         </p>
       </div>
 
       <!-- 5.5 Botón ret.enfoq -->
       <div>
-        <h2 class="font-bold text-lg">5.5 Botón ret.enfoq</h2>
-        <p class="text-sm text-slate-700">
-          Si utiliza un objetivo equipado con un botón de retención del enfoque,
-puede cambiar la función del botón para previsualizar una toma.
+        <h2 class="font-bold text-lg" data-i18n="sec.5_5.title">5.5 Botón ret.enfoq</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.5_5.text">
+          Si utilizas un objetivo equipado con botón de retención de enfoque, puedes
+          cambiar su función para previsualizar la toma:
           <br>
-          • <strong>Ret.enfoque</strong> → El botón se utiliza como botón de retención del enfoque.
-          <br>
-          • <strong>Previsual.Ópti</strong> → El botón se utiliza como botón de previsualización óptica.
-           <br>
-          • <strong>Previs. Intel.</strong> → El botón se utiliza como botón de previsualización
-inteligente.
+          • <strong>Ret.enfoque</strong> → El botón mantiene el enfoque bloqueado mientras se pulsa.<br>
+          • <strong>Previsual.Ópti</strong> → El botón se usa para previsualización óptica
+          (cierra el diafragma a la apertura seleccionada).<br>
+          • <strong>Previs.Intel.</strong> → El botón activa la previsualización inteligente
+          (simula exposición, balance de blancos, etc.).
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=112"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="112"
+             href="viewer.html?file=SonyA900_ES.pdf&page=112"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.5_5.ref">
             [Pág. 112 – Botón ret.enfoq]
           </a>
         </p>
@@ -134,62 +203,199 @@ inteligente.
 
       <!-- 5.6 Rev.automática -->
       <div>
-        <h2 class="font-bold text-lg">5.6 Rev.automática</h2>
-        <p class="text-sm text-slate-700">
-          Después de grabar una imagen, puede visualizarla en el monitor LCD.
-Puede cambiar el tiempo de visualización.
-<br>
-          • <strong>10 s, 5 s, 2 s, </strong> → Muestra la imagen en el monitor LCD durante el tiempo seleccionado.
-           <br>
-          • <strong>Desactivar</strong> → Desactiva la revisión automática.
-inteligente.
-<br>
-          • <strong>Nota</strong> → En la revisión automática no se visualizará la imagen en posición vertical aunque
-haya tomado la imagen en posición vertical.
-        <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=120"  class="text-blue-700 hover:underline">
-            [Pág. 120 – Rev.automática] 
+        <h2 class="font-bold text-lg" data-i18n="sec.5_6.title">5.6 Rev.automática</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.5_6.text">
+          Después de grabar una imagen, la cámara puede mostrarla automáticamente
+          en el monitor LCD durante un tiempo determinado:
+          <br>
+          • <strong>10 s, 5 s, 2 s</strong> → Muestra la imagen durante el tiempo seleccionado.<br>
+          • <strong>Desactivar</strong> → No se muestra la imagen automáticamente.
+          <br><br>
+          Nota: en la revisión automática no se visualizará la imagen en posición vertical
+          aunque se haya tomado en vertical.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=112"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="112"
+             href="viewer.html?file=SonyA900_ES.pdf&page=112"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.5_6.ref1">
             [Pág. 112 – Rev.automática]
+          </a>
+        </p>
+        <p class="text-xs mt-1">
+          <span data-i18n="ref.detail">Ver detalle:</span>
+          <a data-pdf-page="120"
+             href="viewer.html?file=SonyA900_ES.pdf&page=120"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.5_6.ref2">
+            [Pág. 120 – Rev.automática]
           </a>
         </p>
       </div>
 
-    <!-- 5.7Func.Previsual. -->
+      <!-- 5.7 Func.Previsual. -->
       <div>
-        <h2 class="font-bold text-lg">5.7 Func.Previsual.</h2>
-        <p class="text-sm text-slate-700">
-          Puede seleccionar la función de previsualización. Para ver detalles sobre la
-función de previsualización,consulte la página: <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=84"  class="text-blue-700 hover:underline">
-            [Pág. 84 – Utilización de la función de
-previsualización]
-          </a><br>
-          • <strong>Inteligente</strong> → Utiliza la función de previsualización inteligente 
+        <h2 class="font-bold text-lg" data-i18n="sec.5_7.title">5.7 Func.Previsual.</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.5_7.text">
+          Selecciona qué tipo de <strong>previsualización</strong> se utiliza al pulsar el botón
+          de previsualización:
           <br>
-          • <strong>0,3 s</strong> → El área AF local se ilumina durante 0,3 segundos.<br>
-          • <strong>Previsual.Ópti</strong> → Utiliza sólo la función de previsualización óptica.
+          • <strong>Inteligente</strong> → Usa la previsualización inteligente (simula exposición,
+          balance de blancos, estilos creativos, etc.).<br>
+          • <strong>Previsual.Ópti</strong> → Usa sólo previsualización óptica (diafragma real
+          sin simulación electrónica adicional).
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=112"  class="text-blue-700 hover:underline">
-            [Pág. 112 – Visual.área AF ]
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="112"
+             href="viewer.html?file=SonyA900_ES.pdf&page=112"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.5_7.ref1">
+            [Pág. 112 – Func.Previsual.]
           </a>
         </p>
         <p class="text-xs mt-1">
-          Ver Detalle:
-          <a href="viewer.html?file=SonyA900.pdf&page=84"  class="text-blue-700 hover:underline">
-            [Pág. 84 – Visual.área AF ]
+          <span data-i18n="ref.detail">Ver detalle:</span>
+          <a data-pdf-page="84"
+             href="viewer.html?file=SonyA900_ES.pdf&page=84"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.5_7.ref2">
+            [Pág. 84 – Utilización de la función de previsualización]
           </a>
         </p>
-
       </div>
 
     </section>
 
-  </div>
+  </main>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 · Custom Menu 1 – PDF manual",
+
+        "theme.label": "Dark mode",
+        "ref.label": "Reference:",
+        "ref.detail": "See detail:",
+
+        "title": "5. Custom Menu 1",
+        "intro": "Configures autofocus behavior, AF area display, AF speed and AF-S / AF-C shooting priority.",
+
+        "sec.5_1.title": "5.1 AF/MF button",
+        "sec.5_1.text": "Changes between AF and MF while the AF/MF button is held:\n• AF/MF control → The button toggles between autofocus and manual focus.\n• AF lock → The button acts as an AF lock button. Hold AF/MF to lock focus and shoot with the main shutter button.",
+        "sec.5_1.ref1": "[Pg. 111 – Easy AF/MF switching]",
+        "sec.5_1.ref2": "[Pg. 57 – Easy AF/MF switching]",
+
+        "sec.5_2.title": "5.2 AF/MF control",
+        "sec.5_2.text": "If [AF/MF button] is set to [AF/MF control], you can change how the button operates:\n• Hold → AF and MF switch only while the button is held down.\n• Toggle → Press and release the button to switch between AF and MF.",
+        "sec.5_2.ref": "[Pg. 111 – AF/MF control]",
+
+        "sec.5_3.title": "5.3 AF speed",
+        "sec.5_3.text": "Selects the focusing speed when autofocus is activated:\n• Fast → Confirms focus more quickly (useful for action).\n• Slow → Confirms focus more slowly, which can help avoid abrupt changes.",
+        "sec.5_3.ref": "[Pg. 111 – AF speed]",
+
+        "sec.5_4.title": "5.4 AF area illumination",
+        "sec.5_4.text": "Controls how the selected local AF area lights up in the viewfinder:\n• 0.6 s → The AF area lights in red for 0.6 seconds.\n• 0.3 s → The AF area lights for 0.3 seconds.\n• Off → The AF area only lights when the multi-selector is pressed.",
+        "sec.5_4.ref": "[Pg. 111 – AF area illumination]",
+
+        "sec.5_5.title": "5.5 Focus hold button",
+        "sec.5_5.text": "If you use a lens with a focus hold button, you can change its function to preview the shot:\n• Focus hold → The button holds focus while it is pressed.\n• Optical preview → The button is used for optical depth-of-field preview (stops down to the selected aperture).\n• Intelligent preview → The button activates intelligent preview (simulates exposure, white balance, etc.).",
+        "sec.5_5.ref": "[Pg. 112 – Focus hold button]",
+
+        "sec.5_6.title": "5.6 Auto review",
+        "sec.5_6.text": "After an image is recorded, the camera can automatically display it on the LCD for a set time:\n• 10 s, 5 s, 2 s → Shows the image for the selected duration.\n• Off → Disables automatic image review.\n\nNote: in auto review, images are not rotated for vertical display even if they were taken in portrait orientation.",
+        "sec.5_6.ref1": "[Pg. 112 – Auto review]",
+        "sec.5_6.ref2": "[Pg. 120 – Auto review]",
+
+        "sec.5_7.title": "5.7 Preview function",
+        "sec.5_7.text": "Selects which type of preview is used when pressing the preview button:\n• Intelligent → Uses intelligent preview (simulates exposure, white balance, creative styles, etc.).\n• Optical preview → Uses only optical preview (stops down the aperture without extra simulation).",
+        "sec.5_7.ref1": "[Pg. 112 – Preview function]",
+        "sec.5_7.ref2": "[Pg. 84 – Using the preview function]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.innerHTML;
+        }
+
+        if (lang === 'en') {
+          if (!map[key]) return;
+          // Permitimos <br> y <strong> simples usando \n como salto
+          const raw = map[key];
+          const parts = raw.split("\n");
+          el.innerHTML = "";
+          parts.forEach((part, idx) => {
+            if (idx > 0) el.appendChild(document.createElement("br"));
+            el.appendChild(document.createTextNode(part));
+          });
+        } else {
+          el.innerHTML = el.dataset.i18nEs;
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
