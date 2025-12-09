@@ -31,7 +31,7 @@
 
     <!-- Encabezado + regreso + toggles -->
     <div class="mb-6 flex items-center justify-between gap-3">
-      <a href="../index.html"
+      <a href="index.html"
          class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
          data-i18n="header.back">
         ← Volver al índice
@@ -90,7 +90,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="122"
-             href="../viewer.html?file=SonyA900_ES.pdf&page=122"
+             href="viewer.html?file=SonyA900_ES.pdf&page=122"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_1.ref">
             [Pág. 122 – Brillo LCD]
@@ -108,7 +108,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="122"
-             href="../viewer.html?file=SonyA900_ES.pdf&page=122"
+             href="viewer.html?file=SonyA900_ES.pdf&page=122"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_2.ref">
             [Pág. 122 – Tiem.visu.info.]
@@ -130,7 +130,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="123"
-             href="../viewer.html?file=SonyA900_ES.pdf&page=123"
+             href="viewer.html?file=SonyA900_ES.pdf&page=123"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_3.ref">
             [Pág. 123 – Ahorro energía]
@@ -149,7 +149,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="123"
-             href="../viewer.html?file=SonyA900_ES.pdf&page=123"
+             href="viewer.html?file=SonyA900_ES.pdf&page=123"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_4.ref">
             [Pág. 123 – Salida vídeo]
@@ -169,7 +169,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="123"
-             href="../viewer.html?file=SonyA900_ES.pdf&page=123"
+             href="viewer.html?file=SonyA900_ES.pdf&page=123"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_5.ref">
             [Pág. 123 – Salida HDMI]
@@ -186,7 +186,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="123"
-             href="../viewer.html?file=SonyA900_ES.pdf&page=123"
+             href="viewer.html?file=SonyA900_ES.pdf&page=123"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_6.ref">
             [Pág. 123 – Idioma]
@@ -203,7 +203,7 @@
         </p>
         <p class="text-xs mt-1">
           <a data-pdf-page="123"
-             href="../viewer.html?file=SonyA900_ES.pdf&page=123"
+             href="viewer.html?file=SonyA900_ES.pdf&page=123"
              class="text-blue-700 dark:text-blue-400 hover:underline"
              data-i18n="sec.10_7.ref">
             [Pág. 123 – Ajuste fecha/hora]
@@ -295,11 +295,11 @@
         }
       });
 
-      // PDFs según idioma (nota: viewer.html está en raíz, por eso ../)
+      // PDFs según idioma (viewer.html en raíz)
       const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
       document.querySelectorAll('a[data-pdf-page]').forEach(a => {
         const page = a.getAttribute('data-pdf-page');
-        a.href = `../viewer.html?file=${pdfFile}&page=${page}`;
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
       });
 
       localStorage.setItem('manualLang', lang);
