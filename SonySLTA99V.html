@@ -1,1125 +1,1208 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <title>Menús Sony SLT A99V – Resumen en español</title>
+  <meta charset="utf-8" />
+  <title>Sony SLT-A99V – Menús (Hipertexto)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      margin: 16px;
-      line-height: 1.5;
-      background: #f5f5f5;
-    }
-    h1, h2, h3 {
-      color: #222;
-    }
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      font-size: 1.4rem;
-      margin-top: 2rem;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 0.25rem;
-    }
-    h3 {
-      font-size: 1.1rem;
-      margin-top: 1.2rem;
-    }
-    p.intro {
-      max-width: 800px;
-      font-size: 0.95rem;
-    }
-    nav {
-      margin: 1.5rem 0;
-      padding: 1rem;
-      background: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-      max-width: 900px;
-    }
-    nav ul {
-      list-style: none;
-      padding-left: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem 1.5rem;
-      margin: 0;
-    }
-    nav a {
-      text-decoration: none;
-      color: #0050a8;
-      font-size: 0.9rem;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    .menu-section {
-      background: #ffffff;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-      max-width: 1000px;
-      margin-bottom: 1.5rem;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
-      table-layout: fixed;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 0.4rem 0.5rem;
-      vertical-align: top;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-    th {
-      background: #f0f0f0;
-      font-weight: 600;
-      text-align: left;
-    }
-    .top-link {
-      text-align: right;
-      margin-top: 0.5rem;
-      font-size: 0.8rem;
-    }
-    .top-link a {
-      color: #0050a8;
-      text-decoration: none;
-    }
-    .top-link a:hover {
-      text-decoration: underline;
-    }
-    .ref-link {
-      font-size: 0.85rem;
-      margin: 0.4rem 0 0.8rem;
-    }
-    .ref-link a {
-      color: #00804b;
-      text-decoration: none;
-    }
-    .ref-link a:hover {
-      text-decoration: underline;
-    }
-    @media (max-width: 768px) {
-      body {
-        margin: 8px;
-      }
-      nav ul {
-        flex-direction: column;
-        gap: 0.3rem;
-      }
-    }
+    body { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
   </style>
-</head>
-<body>
-  <a id="top"></a>
-  <h1>Menús Sony SLT-A99 / SLT-A99V (ES)</h1>
-  <p class="intro">
-    Este hipertexto resume la sección de <strong>“Funciones seleccionadas con el botón MENU”</strong>
-    del manual en español de la Sony SLT-A99/A99V. Está organizado por tipo de menú para que
-    puedas consultar rápidamente qué hace cada opción y qué parámetros tiene.
-  </p>
 
-  <nav>
-    <ul>
-      <li><a href="#menu-stills">Menú de Toma de Imágenes fijas</a></li>
-      <li><a href="#menu-movie">Menú de Grabación de Películas</a></li>
-      <li><a href="#menu-custom">Menú Personalizado</a></li>
-      <li><a href="#menu-playback">Menú Reproducción</a></li>
-      <li><a href="#menu-cardtool">Menú Herramienta Tarjeta Memoria</a></li>
-      <li><a href="#menu-clock">Menú de Configuración del Reloj</a></li>
-      <li><a href="#menu-setup">Menú Configuración</a></li>
-      
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+</head>
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-[15px] leading-relaxed">
+<a id="top"></a>
+
+<!-- Header fijo con botón volver + toggles -->
+<header class="sticky top-0 z-20 bg-slate-100/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700 mb-4">
+  <div class="max-w-5xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+    <a href="index.html"
+       class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+       data-i18n="header.back">
+      ← Volver al índice
+    </a>
+
+    <div class="flex items-center gap-2 text-xs">
+      <span class="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400" data-i18n="header.subtitle">
+        Sony SLT-A99 / SLT-A99V – Menús (Hipertexto PDF)
+      </span>
+
+      <!-- Toggle idioma -->
+      <div class="flex items-center gap-1">
+        <button type="button"
+                data-lang-active="es"
+                onclick="setLanguage('es')"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+          ES
+        </button>
+        <button type="button"
+                data-lang-active="en"
+                onclick="setLanguage('en')"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+          EN
+        </button>
+      </div>
+
+      <!-- Toggle modo oscuro -->
+      <button type="button"
+              onclick="toggleTheme()"
+              class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+        <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+        <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-5xl mx-auto px-4 pb-8 space-y-6">
+
+  <!-- Título e intro -->
+  <section>
+    <h1 class="text-2xl md:text-3xl font-extrabold mb-1" data-i18n="title">
+      Menús Sony SLT-A99 / SLT-A99V (ES)
+    </h1>
+    <p class="text-sm text-slate-700 dark:text-slate-300 max-w-3xl" data-i18n="intro">
+      Este hipertexto resume la sección de <strong>“Funciones seleccionadas con el botón MENU”</strong>
+      del manual en español de la Sony SLT-A99/A99V. Está organizado por tipo de menú para que
+      puedas consultar rápidamente qué hace cada opción y qué parámetros tiene.
+    </p>
+  </section>
+
+  <!-- NAV -->
+  <nav class="bg-white dark:bg-slate-800 rounded-xl shadow p-4">
+    <ul class="flex flex-wrap gap-x-6 gap-y-1 text-sm">
+      <li><a href="#menu-stills" class="text-blue-700 dark:text-blue-400 hover:underline" data-i18n="nav.stills">Menú de Toma de Imágenes fijas</a></li>
+      <li><a href="#menu-movie" class="text-blue-700 dark:text-blue-400 hover:underline" data-i18n="nav.movie">Menú de Grabación de Películas</a></li>
+      <li><a href="#menu-custom" class="text-blue-700 dark:text-blue-400 hover:underline" data-i18n="nav.custom">Menú Personalizado</a></li>
+      <li><a href="#menu-playback" class="text-blue-700 dark:text-blue-400 hover:underline" data-i18n="nav.playback">Menú Reproducción</a></li>
+      <li><a href="#menu-cardtool" class="text-blue-700 dark:text-blue-400 hover:underline" data-i18n="nav.card">Menú Herramienta Tarjeta Memoria</a></li>
+      <li><a href="#menu-clock" class="text-blue-700 dark:text-blue-400 hover:underline" data-i18n="nav.clock">Menú de Configuración del Reloj</a></li>
+      <li><a href="#menu-setup" class="text-blue-700 dark:text-blue-400 hover:underline" data-i18n="nav.setup">Menú Configuración</a></li>
     </ul>
   </nav>
 
-  <!-- Encabezado + regreso -->
-  <div class="mb-6 flex items-center justify-between">
-    <a href="index.html" class="text-sm text-blue-700 hover:underline">
-      ← Volver al índice
-    </a>
-    <span class="text-xs text-slate-500">  Sony SLT-A99V – Menús (Hipertexto)</span>
-  </div>
-
   <!-- Menú de toma de imágenes fijas -->
-  <section id="menu-stills" class="menu-section">
-    <h2>Menú de toma de imágenes fijas</h2>
-    <p class="ref-link">
+  <section id="menu-stills" class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-4">
+    <h2 class="text-xl font-bold" data-i18n="stills.title">Menú de toma de imágenes fijas</h2>
+    <p class="text-xs text-slate-600 dark:text-slate-300" data-i18n="ref.label">
       Referencia manual:
-      <a href="viewer.html?file=SonySLTA99V.pdf&page=35"
-         onclick="window.location.href=this.href; return false;">
+      <a data-pdf-page="35"
+         href="viewer.html?file=SonySLTA99V_ES.pdf&page=35"
+         class="text-emerald-700 dark:text-emerald-400 hover:underline"
+         data-i18n="stills.ref">
         Abrir PDF en la página 35 (Menú de toma de imágenes fijas)
       </a>
     </p>
-    <p>
+    <p class="text-sm text-slate-700 dark:text-slate-200">
       Ajustes principales para fotos fijas: tamaño, calidad, relación de aspecto, funciones de
       reducción de ruido, flash, estabilización y comportamiento del disparador.
     </p>
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 24%;">Elemento</th>
-          <th style="width: 46%;">Descripción</th>
-          <th style="width: 30%;">Opciones principales</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- MENÚ 1 -->
-        <tr class="submenu-row">
-          <td colspan="3"><strong>Menú 1 (Toma de imágenes fijas)</strong></td>
-        </tr>
-        <tr>
-          <td>Tamaño de imagen</td>
-          <td>Selecciona el tamaño de las imágenes fijas.</td>
-          <td>L / M / S</td>
-        </tr>
-        <tr>
-          <td>Relación de aspecto</td>
-          <td>Define la proporción del fotograma para las fotos.</td>
-          <td>3:2 / 16:9</td>
-        </tr>
-        <tr>
-          <td>Calidad</td>
-          <td>Define la calidad de las imágenes fijas.</td>
-          <td>RAW / RAW &amp; JPEG / Extrafina / Fina / Estándar</td>
-        </tr>
-        <tr>
-          <td>Panorama: tamaño</td>
-          <td>Selecciona el tamaño de las imágenes panorámicas.</td>
-          <td>Estándar / Ancho</td>
-        </tr>
-        <tr>
-          <td>Panorama: dirección</td>
-          <td>Define la dirección de barrido para las imágenes panorámicas.</td>
-          <td>Derecha / Izquier. / Arriba / Abajo</td>
-        </tr>
 
-        <!-- MENÚ 2 -->
-        <tr class="submenu-row">
-          <td colspan="3"><strong>Menú 2 (Toma de imágenes fijas)</strong></td>
-        </tr>
-        <tr>
-          <td>Zoom Imag. Clara</td>
-          <td>
-            Acerca la imagen con un zoom de mejor calidad que el zoom digital
-            convencional.
-          </td>
-          <td>Activar / Desactivar</td>
-        </tr>
-        <tr>
-          <td>Zoom digital</td>
-          <td>
-            Acerca la imagen con un zoom de ampliación mayor, sacrificando algo
-            de calidad.
-          </td>
-          <td>Activar / Desactivar</td>
-        </tr>
-        <tr>
-          <td>RR Exp. Larga</td>
-          <td>
-            Reducción de ruido para exposiciones largas (aprox. 1 segundo o más).
-          </td>
-          <td>Activar / Desactivar</td>
-        </tr>
-        <tr>
-          <td>RR ISO Alta</td>
-          <td>
-            Reducción de ruido al fotografiar con sensibilidades ISO altas.
-          </td>
-          <td>Normal / Bajo / Desactivar</td>
-        </tr>
-        <tr>
-          <td>Control flash</td>
-          <td>
-            Método de medición para determinar la cantidad de luz del flash.
-          </td>
-          <td>Flash ADI / Preflash TTL</td>
-        </tr>
-        <tr>
-          <td>Iluminador AF</td>
-          <td>
-            Activa la luz de ayuda al enfoque para motivos poco iluminados.
-          </td>
-          <td>Automático / Desactivar</td>
-        </tr>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-xs sm:text-[13px] table-fixed">
+        <thead>
+          <tr>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[24%]">
+              Elemento
+            </th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[46%]">
+              Descripción
+            </th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[30%]">
+              Opciones principales
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MENÚ 1 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border border-slate-200 dark:border-slate-700 px-2 py-1 font-semibold">
+              Menú 1 (Toma de imágenes fijas)
+            </td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Tamaño de imagen</td>
+            <td class="border px-2 py-1 align-top">Selecciona el tamaño de las imágenes fijas.</td>
+            <td class="border px-2 py-1 align-top">L / M / S</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Relación de aspecto</td>
+            <td class="border px-2 py-1 align-top">Define la proporción del fotograma para las fotos.</td>
+            <td class="border px-2 py-1 align-top">3:2 / 16:9</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Calidad</td>
+            <td class="border px-2 py-1 align-top">Define la calidad de las imágenes fijas.</td>
+            <td class="border px-2 py-1 align-top">RAW / RAW &amp; JPEG / Extrafina / Fina / Estándar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Panorama: tamaño</td>
+            <td class="border px-2 py-1 align-top">Selecciona el tamaño de las imágenes panorámicas.</td>
+            <td class="border px-2 py-1 align-top">Estándar / Ancho</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Panorama: dirección</td>
+            <td class="border px-2 py-1 align-top">Define la dirección de barrido para las imágenes panorámicas.</td>
+            <td class="border px-2 py-1 align-top">Derecha / Izquier. / Arriba / Abajo</td>
+          </tr>
 
-        <!-- MENÚ 3 -->
-        <tr class="submenu-row">
-          <td colspan="3"><strong>Menú 3 (Toma de imágenes fijas)</strong></td>
-        </tr>
-        <tr>
-          <td>SteadyShot (foto)</td>
-          <td>
-            Estabilización de imagen para reducir trepidación al hacer fotos.
-          </td>
-          <td>Activar / Desactivar</td>
-        </tr>
-        <tr>
-          <td>Velocidad AF</td>
-          <td>
-            Ajusta la velocidad de enfoque automático (útil por ejemplo en macro
-            o motivos estáticos).
-          </td>
-          <td>Rápido / Lento</td>
-        </tr>
-        <tr>
-          <td>Rango color</td>
-          <td>
-            Selecciona el espacio de color utilizado para las imágenes fijas.
-          </td>
-          <td>sRGB / AdobeRGB</td>
-        </tr>
-        <tr>
-          <td>Controlad. silencioso</td>
-          <td>
-            Asigna funciones al multicontrolador silencioso para modificar
-            parámetros (por ejemplo ISO, compensación de exposición, modo
-            de medición, etc.) durante la toma de fotos sin hacer ruido.
-          </td>
-          <td>Función asignable (ISO, Comp. exp., Medición, etc.)</td>
-        </tr>
+          <!-- MENÚ 2 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">
+              Menú 2 (Toma de imágenes fijas)
+            </td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Zoom Imag. Clara</td>
+            <td class="border px-2 py-1 align-top">
+              Acerca la imagen con un zoom de mejor calidad que el zoom digital convencional.
+            </td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Zoom digital</td>
+            <td class="border px-2 py-1 align-top">
+              Acerca la imagen con un zoom de ampliación mayor, sacrificando algo de calidad.
+            </td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">RR Exp. Larga</td>
+            <td class="border px-2 py-1 align-top">
+              Reducción de ruido para exposiciones largas (aprox. 1 segundo o más).
+            </td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">RR ISO Alta</td>
+            <td class="border px-2 py-1 align-top">
+              Reducción de ruido al fotografiar con sensibilidades ISO altas.
+            </td>
+            <td class="border px-2 py-1 align-top">Normal / Bajo / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Control flash</td>
+            <td class="border px-2 py-1 align-top">
+              Método de medición para determinar la cantidad de luz del flash.
+            </td>
+            <td class="border px-2 py-1 align-top">Flash ADI / Preflash TTL</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Iluminador AF</td>
+            <td class="border px-2 py-1 align-top">
+              Activa la luz de ayuda al enfoque para motivos poco iluminados.
+            </td>
+            <td class="border px-2 py-1 align-top">Automático / Desactivar</td>
+          </tr>
 
-        <!-- MENÚ 4 -->
-        <tr class="submenu-row">
-          <td colspan="3"><strong>Menú 4 (Toma de imágenes fijas)</strong></td>
-        </tr>
-        <tr>
-          <td>Paso exposición</td>
-          <td>
-            Elige el tamaño del incremento en pasos de exposición para velocidad,
-            abertura y compensación.
-          </td>
-          <td>0,5 EV / 0,3 EV</td>
-        </tr>
-        <tr>
-          <td>Ajust.prioridad</td>
-          <td>
-            Define si el obturador puede disparar aunque el enfoque no esté
-            confirmado en AF, o si se prioriza el enfoque.
-          </td>
-          <td>AF / Liberar</td>
-        </tr>
-        <tr>
-          <td>AF c/obturador</td>
-          <td>
-            Determina si el enfoque automático se activa al pulsar el disparador
-            hasta la mitad, permitiendo separar AF y medición/exposición.
-          </td>
-          <td>Activar / Desactivar</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="top-link"><a href="#top">Volver al inicio ▲</a></div>
+          <!-- MENÚ 3 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">
+              Menú 3 (Toma de imágenes fijas)
+            </td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">SteadyShot (foto)</td>
+            <td class="border px-2 py-1 align-top">
+              Estabilización de imagen para reducir trepidación al hacer fotos.
+            </td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Velocidad AF</td>
+            <td class="border px-2 py-1 align-top">
+              Ajusta la velocidad de enfoque automático (útil por ejemplo en macro o motivos estáticos).
+            </td>
+            <td class="border px-2 py-1 align-top">Rápido / Lento</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Rango color</td>
+            <td class="border px-2 py-1 align-top">
+              Selecciona el espacio de color utilizado para las imágenes fijas.
+            </td>
+            <td class="border px-2 py-1 align-top">sRGB / AdobeRGB</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Controlad. silencioso</td>
+            <td class="border px-2 py-1 align-top">
+              Asigna funciones al multicontrolador silencioso para modificar
+              parámetros (por ejemplo ISO, compensación de exposición, modo
+              de medición, etc.) durante la toma de fotos sin hacer ruido.
+            </td>
+            <td class="border px-2 py-1 align-top">Función asignable (ISO, Comp. exp., Medición, etc.)</td>
+          </tr>
+
+          <!-- MENÚ 4 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">
+              Menú 4 (Toma de imágenes fijas)
+            </td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Paso exposición</td>
+            <td class="border px-2 py-1 align-top">
+              Elige el tamaño del incremento en pasos de exposición para velocidad,
+              abertura y compensación.
+            </td>
+            <td class="border px-2 py-1 align-top">0,5 EV / 0,3 EV</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Ajust.prioridad</td>
+            <td class="border px-2 py-1 align-top">
+              Define si el obturador puede disparar aunque el enfoque no esté
+              confirmado en AF, o si se prioriza el enfoque.
+            </td>
+            <td class="border px-2 py-1 align-top">AF / Liberar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">AF c/obturador</td>
+            <td class="border px-2 py-1 align-top">
+              Determina si el enfoque automático se activa al pulsar el disparador
+              hasta la mitad, permitiendo separar AF y medición/exposición.
+            </td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-right text-[11px] mt-2">
+      <a href="#top" class="text-blue-700 dark:text-blue-400 hover:underline">Volver al inicio ▲</a>
+    </div>
   </section>
 
   <!-- Menú de grabación de películas -->
-  <section id="menu-movie" class="menu-section">
-    <h2>Menú de grabación de películas</h2>
-    <p class="ref-link">
-      Referencia manual:
-      <a href="viewer.html?file=SonySLTA99V.pdf&page=37"
-         onclick="window.location.href=this.href; return false;">
+  <section id="menu-movie" class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-4">
+    <h2 class="text-xl font-bold" data-i18n="movie.title">Menú de grabación de películas</h2>
+    <p class="text-xs text-slate-600 dark:text-slate-300">
+      <span data-i18n="ref.label">Referencia manual:</span>
+      <a data-pdf-page="37"
+         href="viewer.html?file=SonySLTA99V_ES.pdf&page=37"
+         class="text-emerald-700 dark:text-emerald-400 hover:underline"
+         data-i18n="movie.ref">
         Abrir PDF en la página 37 (Menú de grabación de películas)
       </a>
     </p>
-    <p>
+    <p class="text-sm text-slate-700 dark:text-slate-200">
       Ajustes específicos para video: formato, tamaño, estabilización, seguimiento AF,
       sonido y reducción de ruido de viento.
     </p>
 
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 24%;">Elemento</th>
-          <th style="width: 46%;">Descripción</th>
-          <th style="width: 30%;">Opciones principales</th>
-        </tr>
-      </thead>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-xs sm:text-[13px] table-fixed">
+        <thead>
+          <tr>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[24%]">Elemento</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[46%]">Descripción</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[30%]">Opciones principales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MENÚ 1 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">
+              Menú 1 (Grabación de películas)
+            </td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Formato de archivo</td>
+            <td class="border px-2 py-1 align-top">Selecciona el formato en el que se grabarán las películas.</td>
+            <td class="border px-2 py-1 align-top">AVCHD / MP4</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Tamaño de imagen (Película)</td>
+            <td class="border px-2 py-1 align-top">Define la resolución y tasa de bits de las películas.</td>
+            <td class="border px-2 py-1 align-top">
+              60i/50i 24M(FX), 17M(FH)<br>
+              60p/50p 28M(PS)<br>
+              24p/25p 24M(FX), 17M(FH)<br>
+              1440×1080 12M / VGA 3M
+            </td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">SteadyShot (Película)</td>
+            <td class="border px-2 py-1 align-top">Estabilización de imagen para grabación de películas.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Durac. seguimiento AF</td>
+            <td class="border px-2 py-1 align-top">
+              Sensibilidad del seguimiento del enfoque automático durante
+              la grabación de video.
+            </td>
+            <td class="border px-2 py-1 align-top">Alto / Medio / Bajo</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Auto obturador lento</td>
+            <td class="border px-2 py-1 align-top">
+              Permite bajar la velocidad de obturación automáticamente
+              en escenas oscuras para vídeo.
+            </td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Controlad. silencioso (Película)</td>
+            <td class="border px-2 py-1 align-top">
+              Asigna funciones al multicontrolador silencioso para realizar
+              ajustes sin ruido durante la grabación.
+            </td>
+            <td class="border px-2 py-1 align-top">
+              Nivel audio / Modo AF / Área AF / ISO / Comp. exp. /
+              Medición / Vel. obturador / Abertura
+            </td>
+          </tr>
 
-      <tbody>
+          <!-- MENÚ 2 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">
+              Menú 2 (Grabación de películas)
+            </td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Grabación de sonido</td>
+            <td class="border px-2 py-1 align-top">Activa o desactiva la grabación de audio.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Reducc. ruido viento</td>
+            <td class="border px-2 py-1 align-top">Reduce el ruido del viento durante la grabación de audio.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Visual. nivel aud.</td>
+            <td class="border px-2 py-1 align-top">Muestra u oculta el medidor del nivel de audio.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Nivel grabac. audio</td>
+            <td class="border px-2 py-1 align-top">Ajusta la sensibilidad del micrófono al grabar vídeo.</td>
+            <td class="border px-2 py-1 align-top">0 a 31</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Tiempo salida audio</td>
+            <td class="border px-2 py-1 align-top">
+              Ajusta la latencia del audio en los auriculares para monitoreo.
+              Útil para reducir eco o desfase.
+            </td>
+            <td class="border px-2 py-1 align-top">En vivo / Sincronización labios</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <!-- MENÚ 1 -->
-        <tr class="submenu-row">
-          <td colspan="3"><strong>Menú 1 (Grabación de películas)</strong></td>
-        </tr>
-
-        <tr>
-          <td>Formato de archivo</td>
-          <td>Selecciona el formato en el que se grabarán las películas.</td>
-          <td>AVCHD / MP4</td>
-        </tr>
-
-        <tr>
-          <td>Tamaño de imagen (Película)</td>
-          <td>Define la resolución y tasa de bits de las películas.</td>
-          <td>
-            60i/50i 24M(FX), 17M(FH)<br>
-            60p/50p 28M(PS)<br>
-            24p/25p 24M(FX), 17M(FH)<br>
-            1440×1080 12M / VGA 3M
-          </td>
-        </tr>
-
-        <tr>
-          <td>SteadyShot (Película)</td>
-          <td>Estabilización de imagen para grabación de películas.</td>
-          <td>Activar / Desactivar</td>
-        </tr>
-
-        <tr>
-          <td>Durac. seguimiento AF</td>
-          <td>
-            Sensibilidad del seguimiento del enfoque automático durante
-            la grabación de video.
-          </td>
-          <td>Alto / Medio / Bajo</td>
-        </tr>
-
-        <tr>
-          <td>Auto obturador lento</td>
-          <td>
-            Permite bajar la velocidad de obturación automáticamente
-            en escenas oscuras para vídeo.
-          </td>
-          <td>Activar / Desactivar</td>
-        </tr>
-
-        <tr>
-          <td>Controlad. silencioso (Película)</td>
-          <td>
-            Asigna funciones al multicontrolador silencioso para realizar
-            ajustes sin ruido durante la grabación.
-          </td>
-          <td>
-            Nivel audio / Modo AF / Área AF / ISO / Comp. exp. /
-            Medición / Vel. obturador / Abertura
-          </td>
-        </tr>
-
-        <!-- MENÚ 2 -->
-        <tr class="submenu-row">
-          <td colspan="3"><strong>Menú 2 (Grabación de películas)</strong></td>
-        </tr>
-
-        <tr>
-          <td>Grabación de sonido</td>
-          <td>Activa o desactiva la grabación de audio.</td>
-          <td>Activar / Desactivar</td>
-        </tr>
-
-        <tr>
-          <td>Reducc. ruido viento</td>
-          <td>Reduce el ruido del viento durante la grabación de audio.</td>
-          <td>Activar / Desactivar</td>
-        </tr>
-
-        <tr>
-          <td>Visual. nivel aud.</td>
-          <td>Muestra u oculta el medidor del nivel de audio.</td>
-          <td>Activar / Desactivar</td>
-        </tr>
-
-        <tr>
-          <td>Nivel grabac. audio</td>
-          <td>Ajusta la sensibilidad del micrófono al grabar vídeo.</td>
-          <td>0 a 31</td>
-        </tr>
-
-        <tr>
-          <td>Tiempo salida audio</td>
-          <td>
-            Ajusta la latencia del audio en los auriculares para monitoreo.
-            Útil para reducir eco o desfase.
-          </td>
-          <td>En vivo / Sincronización labios</td>
-        </tr>
-
-      </tbody>
-    </table>
-
-    <div class="top-link"><a href="#top">Volver al inicio ▲</a></div>
+    <div class="text-right text-[11px] mt-2">
+      <a href="#top" class="text-blue-700 dark:text-blue-400 hover:underline">Volver al inicio ▲</a>
+    </div>
   </section>
 
   <!-- Menú Personalizado -->
-  <section id="menu-custom" class="menu-section">
-    <h2>Menú Personalizado</h2>
-    <p class="ref-link">
-      Referencia manual:
-      <a href="viewer.html?file=SonySLTA99V.pdf&page=38" onclick="window.location.href=this.href; return false;">
+  <section id="menu-custom" class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-4">
+    <h2 class="text-xl font-bold" data-i18n="custom.title">Menú Personalizado</h2>
+    <p class="text-xs text-slate-600 dark:text-slate-300">
+      <span data-i18n="ref.label">Referencia manual:</span>
+      <a data-pdf-page="38"
+         href="viewer.html?file=SonySLTA99V_ES.pdf&page=38"
+         class="text-emerald-700 dark:text-emerald-400 hover:underline"
+         data-i18n="custom.ref">
         Abrir PDF en página 38 (Menú Personalizado)
       </a>
     </p>
-
-    <p>
+    <p class="text-sm text-slate-700 dark:text-slate-200">
       Opciones de comportamiento de botones, visor/pantalla, enfoque, cuadrícula,
       ajustes de exposición y funciones avanzadas.
     </p>
 
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 24%;">Elemento</th>
-          <th style="width: 46%;">Descripción</th>
-          <th style="width: 30%;">Opciones principales</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-xs sm:text-[13px] table-fixed">
+        <thead>
+          <tr>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[24%]">Elemento</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[46%]">Descripción</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[30%]">Opciones principales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MENÚ 1 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 1 (Personalizado)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">AF Eye-Start</td>
+            <td class="border px-2 py-1 align-top">Activa el enfoque automático al acercar el ojo al visor.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Ajuste FINDER/LCD</td>
+            <td class="border px-2 py-1 align-top">Selecciona cómo cambia entre visor y pantalla LCD.</td>
+            <td class="border px-2 py-1 align-top">Automático / Manual</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Reducción ojos rojos</td>
+            <td class="border px-2 py-1 align-top">Reduce ojos rojos al usar flash.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Liberar sin objetivo</td>
+            <td class="border px-2 py-1 align-top">Permite disparar sin lente montado.</td>
+            <td class="border px-2 py-1 align-top">Habilitar / Inhabilitar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Auto. super. Capt. cont.</td>
+            <td class="border px-2 py-1 align-top">Activa la captura continua en Auto. Superior.</td>
+            <td class="border px-2 py-1 align-top">Automático / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Auto. sup. Extrac. imág.</td>
+            <td class="border px-2 py-1 align-top">Guarda imágenes adicionales en Auto. Superior.</td>
+            <td class="border px-2 py-1 align-top">Automático / Desactivar</td>
+          </tr>
 
-        <!-- MENÚ 1 -->
-        <tr class="submenu-row"><td colspan="3"><strong>Menú 1 (Personalizado)</strong></td></tr>
+          <!-- MENÚ 2 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 2 (Personalizado)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Línea de cuadrícula</td>
+            <td class="border px-2 py-1 align-top">Muestra una cuadrícula para componer.</td>
+            <td class="border px-2 py-1 align-top">Regla tercios / Cuadrada / Diag.+cuadr / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Rev. automática</td>
+            <td class="border px-2 py-1 align-top">Tiempo en pantalla de la foto después de disparo.</td>
+            <td class="border px-2 py-1 align-top">10s / 5s / 2s / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Botón DISP (monitor)</td>
+            <td class="border px-2 py-1 align-top">Modos de pantalla disponibles en LCD.</td>
+            <td class="border px-2 py-1 align-top">Gráfica / Info / Sin info / Nivel / Histograma / Visor</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Botón DISP (visor)</td>
+            <td class="border px-2 py-1 align-top">Modos de pantalla disponibles en el visor.</td>
+            <td class="border px-2 py-1 align-top">Gráfica / Info / Sin info / Nivel / Histograma</td>
+          </tr>
 
-        <tr>
-          <td>AF Eye-Start</td>
-          <td>Activa el enfoque automático al acercar el ojo al visor.</td>
-          <td>Activar / Desactivar</td>
-        </tr>
-        <tr>
-          <td>Ajuste FINDER/LCD</td>
-          <td>Selecciona cómo cambia entre visor y pantalla LCD.</td>
-          <td>Automático / Manual</td>
-        </tr>
-        <tr>
-          <td>Reducción ojos rojos</td>
-          <td>Reduce ojos rojos al usar flash.</td>
-          <td>Activar / Desactivar</td>
-        </tr>
-        <tr>
-          <td>Liberar sin objetivo</td>
-          <td>Permite disparar sin lente montado.</td>
-          <td>Habilitar / Inhabilitar</td>
-        </tr>
-        <tr>
-          <td>Auto. super. Capt. cont.</td>
-          <td>Activa la captura continua en Auto. Superior.</td>
-          <td>Automático / Desactivar</td>
-        </tr>
-        <tr>
-          <td>Auto. sup. Extrac. imág.</td>
-          <td>Guarda imágenes adicionales en Auto. Superior.</td>
-          <td>Automático / Desactivar</td>
-        </tr>
+          <!-- MENÚ 3 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 3 (Personalizado)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Botón AF RANGE</td>
+            <td class="border px-2 py-1 align-top">Función del botón AF RANGE del objetivo.</td>
+            <td class="border px-2 py-1 align-top">Retener AF / Otras funciones</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Visualización en directo</td>
+            <td class="border px-2 py-1 align-top">Método de visualización Live View.</td>
+            <td class="border px-2 py-1 align-top">Visualiz. directa / Efecto definido</td>
+          </tr>
 
-        <!-- MENÚ 2 -->
-        <tr class="submenu-row"><td colspan="3"><strong>Menú 2 (Personalizado)</strong></td></tr>
+          <!-- MENÚ 4 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 4 (Personalizado)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Función botón AEL</td>
+            <td class="border px-2 py-1 align-top">Asigna función al botón AEL.</td>
+            <td class="border px-2 py-1 align-top">AE Hold / Comp. exp / ISO / Medición / etc.</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Botón ISO</td>
+            <td class="border px-2 py-1 align-top">Asigna función al botón ISO.</td>
+            <td class="border px-2 py-1 align-top">ISO / WB / Medición / etc.</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Botón AF/MF</td>
+            <td class="border px-2 py-1 align-top">Cambia entre AF y MF o asigna otra función.</td>
+            <td class="border px-2 py-1 align-top">AF/MF / Bloq. AF / etc.</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Botón retención enfoq.</td>
+            <td class="border px-2 py-1 align-top">Función del botón de retención del objetivo.</td>
+            <td class="border px-2 py-1 align-top">Retención AF / Vista previa</td>
+          </tr>
 
-        <tr>
-          <td>Línea de cuadrícula</td>
-          <td>Muestra una cuadrícula para componer.</td>
-          <td>Regla tercios / Cuadrada / Diag.+cuadr / Desactivar</td>
-        </tr>
-        <tr>
-          <td>Rev. automática</td>
-          <td>Tiempo en pantalla de la foto después de disparo.</td>
-          <td>10s / 5s / 2s / Desactivar</td>
-        </tr>
-        <tr>
-          <td>Botón DISP (monitor)</td>
-          <td>Modos de pantalla disponibles en LCD.</td>
-          <td>Gráfica / Info / Sin info / Nivel / Histograma / Visor</td>
-        </tr>
-        <tr>
-          <td>Botón DISP (visor)</td>
-          <td>Modos de pantalla disponibles en el visor.</td>
-          <td>Gráfica / Info / Sin info / Nivel / Histograma</td>
-        </tr>
+          <!-- MENÚ 5 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 5 (Personalizado)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Botón MOVIE</td>
+            <td class="border px-2 py-1 align-top">Cuando responde el botón de grabar vídeo.</td>
+            <td class="border px-2 py-1 align-top">Siempre / Solo modo Película</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Ajuste diales M</td>
+            <td class="border px-2 py-1 align-top">Cuál dial controla apertura y cuál velocidad en modo M.</td>
+            <td class="border px-2 py-1 align-top">Vel. del / Abert. tras / Viceversa</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Comp. dial exp.</td>
+            <td class="border px-2 py-1 align-top">Permite usar un dial para compensar exposición.</td>
+            <td class="border px-2 py-1 align-top">Desactivado / Frontal / Trasero</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Orden var.exp.</td>
+            <td class="border px-2 py-1 align-top">Orden del bracketing de exposición.</td>
+            <td class="border px-2 py-1 align-top">0→-→+ / -→0→+</td>
+          </tr>
 
-        <!-- MENÚ 3 -->
-        <tr class="submenu-row"><td colspan="3"><strong>Menú 3 (Personalizado)</strong></td></tr>
+          <!-- MENÚ 6 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 6 (Personalizado)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Comp. objetivo: sombras</td>
+            <td class="border px-2 py-1 align-top">Corrige viñeteo según el objetivo.</td>
+            <td class="border px-2 py-1 align-top">Auto / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Seguimiento prior.cara</td>
+            <td class="border px-2 py-1 align-top">Prioriza rostros durante el seguimiento AF.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <tr>
-          <td>Botón AF RANGE</td>
-          <td>Función del botón AF RANGE del objetivo.</td>
-          <td>Retener AF / Otras funciones</td>
-        </tr>
-        <tr>
-          <td>Visualización en directo</td>
-          <td>Método de visualización Live View.</td>
-          <td>Visualiz. directa / Efecto definido</td>
-        </tr>
-
-        <!-- MENÚ 4 -->
-        <tr class="submenu-row"><td colspan="3"><strong>Menú 4 (Personalizado)</strong></td></tr>
-
-        <tr>
-          <td>Función botón AEL</td>
-          <td>Asigna función al botón AEL.</td>
-          <td>AE Hold / Comp. exp / ISO / Medición / etc.</td>
-        </tr>
-        <tr>
-          <td>Botón ISO</td>
-          <td>Asigna función al botón ISO.</td>
-          <td>ISO / WB / Medición / etc.</td>
-        </tr>
-        <tr>
-          <td>Botón AF/MF</td>
-          <td>Cambia entre AF y MF o asigna otra función.</td>
-          <td>AF/MF / Bloq. AF / etc.</td>
-        </tr>
-        <tr>
-          <td>Botón retención enfoq.</td>
-          <td>Función del botón de retención del objetivo.</td>
-          <td>Retención AF / Vista previa</td>
-        </tr>
-
-        <!-- MENÚ 5 -->
-        <tr class="submenu-row"><td colspan="3"><strong>Menú 5 (Personalizado)</strong></td></tr>
-
-        <tr>
-          <td>Botón MOVIE</td>
-          <td>Cuando responde el botón de grabar vídeo.</td>
-          <td>Siempre / Solo modo Película</td>
-        </tr>
-        <tr>
-          <td>Ajuste diales M</td>
-          <td>Cuál dial controla apertura y cuál velocidad en modo M.</td>
-          <td>Vel. del / Abert. tras / Viceversa</td>
-        </tr>
-        <tr>
-          <td>Comp. dial exp.</td>
-          <td>Permite usar un dial para compensar exposición.</td>
-          <td>Desactivado / Frontal / Trasero</td>
-        </tr>
-        <tr>
-          <td>Orden var.exp.</td>
-          <td>Orden del bracketing de exposición.</td>
-          <td>0→-→+ / -→0→+</td>
-        </tr>
-
-        <!-- MENÚ 6 -->
-        <tr class="submenu-row"><td colspan="3"><strong>Menú 6 (Personalizado)</strong></td></tr>
-
-        <tr>
-          <td>Comp. objetivo: sombras</td>
-          <td>Corrige viñeteo según el objetivo.</td>
-          <td>Auto / Desactivar</td>
-        </tr>
-        <tr>
-          <td>Seguimiento prior.cara</td>
-          <td>Prioriza rostros durante el seguimiento AF.</td>
-          <td>Activar / Desactivar</td>
-        </tr>
-
-      </tbody>
-    </table>
-
-    <div class="top-link"><a href="#top">Volver al inicio ▲</a></div>
+    <div class="text-right text-[11px] mt-2">
+      <a href="#top" class="text-blue-700 dark:text-blue-400 hover:underline">Volver al inicio ▲</a>
+    </div>
   </section>
 
   <!-- Menú Reproducción -->
-  <section id="menu-playback" class="menu-section">
-    <h2>Menú Reproducción</h2>
-    <p class="ref-link">
-      Referencia manual:
-      <a href="viewer.html?file=SonySLTA99V.pdf&page=42" onclick="window.location.href=this.href; return false;">
+  <section id="menu-playback" class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-4">
+    <h2 class="text-xl font-bold" data-i18n="playback.title">Menú Reproducción</h2>
+    <p class="text-xs text-slate-600 dark:text-slate-300">
+      <span data-i18n="ref.label">Referencia manual:</span>
+      <a data-pdf-page="42"
+         href="viewer.html?file=SonySLTA99V_ES.pdf&page=42"
+         class="text-emerald-700 dark:text-emerald-400 hover:underline"
+         data-i18n="playback.ref">
         Abrir PDF en página 42 (Menú Reproducción)
       </a>
     </p>
-
-    <p>
+    <p class="text-sm text-slate-700 dark:text-slate-200">
       Opciones para visualizar, borrar, clasificar y reproducir imágenes y vídeos.
     </p>
 
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 24%;">Elemento</th>
-          <th style="width: 46%;">Descripción</th>
-          <th style="width: 30%;">Opciones principales</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-xs sm:text-[13px] table-fixed">
+        <thead>
+          <tr>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[24%]">Elemento</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[46%]">Descripción</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[30%]">Opciones principales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MENÚ 1 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 1 (Reproducción)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Selec. im. fija/pelíc.</td>
+            <td class="border px-2 py-1 align-top">Selecciona el tipo de material a visualizar.</td>
+            <td class="border px-2 py-1 align-top">Fotos / MP4 / AVCHD</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Borrar</td>
+            <td class="border px-2 py-1 align-top">Elimina imágenes o vídeos seleccionados.</td>
+            <td class="border px-2 py-1 align-top">Múltiples / Carpeta / Todo AVCHD</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Diapositivas</td>
+            <td class="border px-2 py-1 align-top">Reproduce imágenes como presentación.</td>
+            <td class="border px-2 py-1 align-top">Intervalo / Repetir / Tipo de imagen</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Índice imágenes</td>
+            <td class="border px-2 py-1 align-top">Cambia el número de miniaturas en pantalla.</td>
+            <td class="border px-2 py-1 align-top">4 / 9</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Especific. Impresión</td>
+            <td class="border px-2 py-1 align-top">Configura DPOF para imprimir.</td>
+            <td class="border px-2 py-1 align-top">Fecha / Selección</td>
+          </tr>
 
-        <!-- MENÚ 1 -->
-        <tr class="submenu-row"><td colspan="3"><strong>Menú 1 (Reproducción)</strong></td></tr>
+          <!-- MENÚ 2 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 2 (Reproducción)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Selecc. soporte reprod.</td>
+            <td class="border px-2 py-1 align-top">Selecciona la ranura desde donde se reproducen archivos.</td>
+            <td class="border px-2 py-1 align-top">Ranura 1 / Ranura 2</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Selecc. soporte grabac.</td>
+            <td class="border px-2 py-1 align-top">Ranura utilizada para grabación.</td>
+            <td class="border px-2 py-1 align-top">Ranura 1 / Ranura 2</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Ajustes de volumen</td>
+            <td class="border px-2 py-1 align-top">Ajusta volumen de reproducción de vídeo.</td>
+            <td class="border px-2 py-1 align-top">0 a 7</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Visualización reprod.</td>
+            <td class="border px-2 py-1 align-top">Giro automático de imágenes verticales.</td>
+            <td class="border px-2 py-1 align-top">Auto / Manual</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <tr>
-          <td>Selec. im. fija/pelíc.</td>
-          <td>Selecciona el tipo de material a visualizar.</td>
-          <td>Fotos / MP4 / AVCHD</td>
-        </tr>
-        <tr>
-          <td>Borrar</td>
-          <td>Elimina imágenes o vídeos seleccionados.</td>
-          <td>Múltiples / Carpeta / Todo AVCHD</td>
-        </tr>
-        <tr>
-          <td>Diapositivas</td>
-          <td>Reproduce imágenes como presentación.</td>
-          <td>Intervalo / Repetir / Tipo de imagen</td>
-        </tr>
-        <tr>
-          <td>Índice imágenes</td>
-          <td>Cambia el número de miniaturas en pantalla.</td>
-          <td>4 / 9</td>
-        </tr>
-        <tr>
-          <td>Especific. Impresión</td>
-          <td>Configura DPOF para imprimir.</td>
-          <td>Fecha / Selección</td>
-        </tr>
-
-        <!-- MENÚ 2 -->
-        <tr class="submenu-row"><td colspan="3"><strong>Menú 2 (Reproducción)</strong></td></tr>
-
-        <tr>
-          <td>Selecc. soporte reprod.</td>
-          <td>Selecciona la ranura desde donde se reproducen archivos.</td>
-          <td>Ranura 1 / Ranura 2</td>
-        </tr>
-        <tr>
-          <td>Selecc. soporte grabac.</td>
-          <td>Ranura utilizada para grabación.</td>
-          <td>Ranura 1 / Ranura 2</td>
-        </tr>
-        <tr>
-          <td>Ajustes de volumen</td>
-          <td>Ajusta volumen de reproducción de vídeo.</td>
-          <td>0 a 7</td>
-        </tr>
-        <tr>
-          <td>Visualización reprod.</td>
-          <td>Giro automático de imágenes verticales.</td>
-          <td>Auto / Manual</td>
-        </tr>
-
-      </tbody>
-    </table>
-
-    <div class="top-link"><a href="#top">Volver al inicio ▲</a></div>
+    <div class="text-right text-[11px] mt-2">
+      <a href="#top" class="text-blue-700 dark:text-blue-400 hover:underline">Volver al inicio ▲</a>
+    </div>
   </section>
 
   <!-- Menú Herramienta tarjeta memoria -->
-  <section id="menu-cardtool" class="menu-section">
-    <h2>Menú Herramienta tarjeta memoria</h2>
-    <p class="ref-link">
-      Referencia manual:
-      <a href="viewer.html?file=SonySLTA99V.pdf&page=43" onclick="window.location.href=this.href; return false;">
+  <section id="menu-cardtool" class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-4">
+    <h2 class="text-xl font-bold" data-i18n="card.title">Menú Herramienta tarjeta memoria</h2>
+    <p class="text-xs text-slate-600 dark:text-slate-300">
+      <span data-i18n="ref.label">Referencia manual:</span>
+      <a data-pdf-page="43"
+         href="viewer.html?file=SonySLTA99V_ES.pdf&page=43"
+         class="text-emerald-700 dark:text-emerald-400 hover:underline"
+         data-i18n="card.ref">
         Abrir PDF en la página 43 (Menú Herramienta tarjeta memoria)
       </a>
     </p>
-
-    <p>
+    <p class="text-sm text-slate-700 dark:text-slate-200">
       Ajustes relacionados con la tarjeta de memoria: protección de archivos, selección
       de ranura, modo de grabación, formato, numeración y gestión de carpetas.
     </p>
 
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 24%;">Elemento</th>
-          <th style="width: 46%;">Descripción</th>
-          <th style="width: 30%;">Opciones principales</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-xs sm:text-[13px] table-fixed">
+        <thead>
+          <tr>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[24%]">Elemento</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[46%]">Descripción</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[30%]">Opciones principales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MENÚ 1 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 1 (Herramienta tarjeta memoria)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Proteger</td>
+            <td class="border px-2 py-1 align-top">
+              Protege o desprotege imágenes para evitar que se borren
+              accidentalmente.
+            </td>
+            <td class="border px-2 py-1 align-top">
+              Múlt. imágenes / Cancelar todas las imágenes /
+              Cancelar todas pelíc. (MP4) / Cancel. tod. arch. ver AVCHD
+            </td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Especific. Impresión</td>
+            <td class="border px-2 py-1 align-top">
+              Selecciona o cancela imágenes para impresión (DPOF) y si se imprime
+              la fecha.
+            </td>
+            <td class="border px-2 py-1 align-top">Ajustar DPOF / Imprimir fecha</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Selecc. soporte reprod.</td>
+            <td class="border px-2 py-1 align-top">
+              Selecciona la ranura de tarjeta que se utilizará para la
+              reproducción de imágenes/vídeos.
+            </td>
+            <td class="border px-2 py-1 align-top">Ranura 1 / Ranura 2</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Copiar</td>
+            <td class="border px-2 py-1 align-top">
+              Duplica imágenes de una tarjeta de memoria a otra (útil cuando hay
+              dos tarjetas instaladas).
+            </td>
+            <td class="border px-2 py-1 align-top">–</td>
+          </tr>
 
-        <!-- MENÚ 1 -->
-        <tr class="submenu-row">
-          <td colspan="3"><strong>Menú 1 (Herramienta tarjeta memoria)</strong></td>
-        </tr>
+          <!-- MENÚ 2 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 2 (Herramienta tarjeta memoria)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Ajustes de volumen</td>
+            <td class="border px-2 py-1 align-top">
+              Ajusta el volumen de reproducción de películas al revisar vídeo
+              en la cámara.
+            </td>
+            <td class="border px-2 py-1 align-top">0 a 7</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Visualización reprod.</td>
+            <td class="border px-2 py-1 align-top">
+              Define cómo se muestra una imagen tomada en orientación vertical
+              durante la reproducción.
+            </td>
+            <td class="border px-2 py-1 align-top">Girar automát. / Girar manualm.</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Selecc. soporte grabac.</td>
+            <td class="border px-2 py-1 align-top">
+              Selecciona la ranura de tarjeta de memoria que se utilizará como
+              destino de grabación.
+            </td>
+            <td class="border px-2 py-1 align-top">Ranura 1 / Ranura 2</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Modo de grabación</td>
+            <td class="border px-2 py-1 align-top">
+              Define cómo se usan las dos tarjetas cuando ambas están insertadas:
+              simultáneo, separado, etc.
+            </td>
+            <td class="border px-2 py-1 align-top">
+              Estándar / Grab simult (Img fija) / Grab simult (Película) /
+              Grab sim (Img fij/Pel) / Separar (JPEG/RAW) /
+              Separar (img fij./pelíc.)
+            </td>
+          </tr>
 
-        <tr>
-          <td>Proteger</td>
-          <td>
-            Protege o desprotege imágenes para evitar que se borren
-            accidentalmente.
-          </td>
-          <td>
-            Múlt. imágenes / Cancelar todas las imágenes /
-            Cancelar todas pelíc. (MP4) / Cancel. tod. arch. ver AVCHD
-          </td>
-        </tr>
+          <!-- MENÚ 3 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 3 (Herramienta tarjeta memoria)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Formatear</td>
+            <td class="border px-2 py-1 align-top">
+              Formatea la tarjeta de memoria seleccionada. Borra todos los
+              datos de la tarjeta.
+            </td>
+            <td class="border px-2 py-1 align-top">–</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Número archivo</td>
+            <td class="border px-2 py-1 align-top">
+              Define cómo se asignan los números de archivo a fotos y vídeos MP4
+              (continuos o reiniciando).
+            </td>
+            <td class="border px-2 py-1 align-top">Serie / Reponer</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Nombre carpeta</td>
+            <td class="border px-2 py-1 align-top">
+              Define el formato del nombre de las carpetas donde se guardan
+              las fotos.
+            </td>
+            <td class="border px-2 py-1 align-top">Forma normal / Forma fecha</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Selec. carpeta grab.</td>
+            <td class="border px-2 py-1 align-top">
+              Cambia la carpeta activa en la que se guardan las imágenes fijas
+              y películas MP4.
+            </td>
+            <td class="border px-2 py-1 align-top">Seleccionar carpeta existente</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Carpeta nueva</td>
+            <td class="border px-2 py-1 align-top">
+              Crea una carpeta nueva para guardar imágenes fijas y películas MP4.
+            </td>
+            <td class="border px-2 py-1 align-top">Crear nueva carpeta</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Recuperar BD imág.</td>
+            <td class="border px-2 py-1 align-top">
+              Recupera el archivo de base de datos de imágenes de la tarjeta
+              para poder grabar y reproducir de nuevo si se ha dañado.
+            </td>
+            <td class="border px-2 py-1 align-top">Ejecutar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Ver espacio tarjeta</td>
+            <td class="border px-2 py-1 align-top">
+              Muestra el tiempo de grabación restante para películas y el número
+              de fotos que aún se pueden tomar en la tarjeta.
+            </td>
+            <td class="border px-2 py-1 align-top">Mostrar información</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <tr>
-          <td>Especific. Impresión</td>
-          <td>
-            Selecciona o cancela imágenes para impresión (DPOF) y si se imprime
-            la fecha.
-          </td>
-          <td>Ajustar DPOF / Imprimir fecha</td>
-        </tr>
-
-        <tr>
-          <td>Selecc. soporte reprod.</td>
-          <td>
-            Selecciona la ranura de tarjeta que se utilizará para la
-            reproducción de imágenes/vídeos.
-          </td>
-          <td>Ranura 1 / Ranura 2</td>
-        </tr>
-
-        <tr>
-          <td>Copiar</td>
-          <td>
-            Duplica imágenes de una tarjeta de memoria a otra (útil cuando hay
-            dos tarjetas instaladas).
-          </td>
-          <td>–</td>
-        </tr>
-
-        <!-- MENÚ 2 -->
-        <tr class="submenu-row">
-          <td colspan="3"><strong>Menú 2 (Herramienta tarjeta memoria)</strong></td>
-        </tr>
-
-        <tr>
-          <td>Ajustes de volumen</td>
-          <td>
-            Ajusta el volumen de reproducción de películas al revisar vídeo
-            en la cámara.
-          </td>
-          <td>0 a 7</td>
-        </tr>
-
-        <tr>
-          <td>Visualización reprod.</td>
-          <td>
-            Define cómo se muestra una imagen tomada en orientación vertical
-            durante la reproducción.
-          </td>
-          <td>Girar automát. / Girar manualm.</td>
-        </tr>
-
-        <tr>
-          <td>Selecc. soporte grabac.</td>
-          <td>
-            Selecciona la ranura de tarjeta de memoria que se utilizará como
-            destino de grabación.
-          </td>
-          <td>Ranura 1 / Ranura 2</td>
-        </tr>
-
-        <tr>
-          <td>Modo de grabación</td>
-          <td>
-            Define cómo se usan las dos tarjetas cuando ambas están insertadas:
-            simultáneo, separado, etc.
-          </td>
-          <td>
-            Estándar / Grab simult (Img fija) / Grab simult (Película) /
-            Grab sim (Img fij/Pel) / Separar (JPEG/RAW) /
-            Separar (img fij./pelíc.)
-          </td>
-        </tr>
-
-        <!-- MENÚ 3 -->
-        <tr class="submenu-row">
-          <td colspan="3"><strong>Menú 3 (Herramienta tarjeta memoria)</strong></td>
-        </tr>
-
-        <tr>
-          <td>Formatear</td>
-          <td>
-            Formatea la tarjeta de memoria seleccionada. Borra todos los
-            datos de la tarjeta.
-          </td>
-          <td>–</td>
-        </tr>
-
-        <tr>
-          <td>Número archivo</td>
-          <td>
-            Define cómo se asignan los números de archivo a fotos y vídeos MP4
-            (continuos o reiniciando).
-          </td>
-          <td>Serie / Reponer</td>
-        </tr>
-
-        <tr>
-          <td>Nombre carpeta</td>
-          <td>
-            Define el formato del nombre de las carpetas donde se guardan
-            las fotos.
-          </td>
-          <td>Forma normal / Forma fecha</td>
-        </tr>
-
-        <tr>
-          <td>Selec. carpeta grab.</td>
-          <td>
-            Cambia la carpeta activa en la que se guardan las imágenes fijas
-            y películas MP4.
-          </td>
-          <td>Seleccionar carpeta existente</td>
-        </tr>
-
-        <tr>
-          <td>Carpeta nueva</td>
-          <td>
-            Crea una carpeta nueva para guardar imágenes fijas y películas MP4.
-          </td>
-          <td>Crear nueva carpeta</td>
-        </tr>
-
-        <tr>
-          <td>Recuperar BD imág.</td>
-          <td>
-            Recupera el archivo de base de datos de imágenes de la tarjeta
-            para poder grabar y reproducir de nuevo si se ha dañado.
-          </td>
-          <td>Ejecutar</td>
-        </tr>
-
-        <tr>
-          <td>Ver espacio tarjeta</td>
-          <td>
-            Muestra el tiempo de grabación restante para películas y el número
-            de fotos que aún se pueden tomar en la tarjeta.
-          </td>
-          <td>Mostrar información</td>
-        </tr>
-
-      </tbody>
-    </table>
-
-    <div class="top-link"><a href="#top">Volver al inicio ▲</a></div>
+    <div class="text-right text-[11px] mt-2">
+      <a href="#top" class="text-blue-700 dark:text-blue-400 hover:underline">Volver al inicio ▲</a>
+    </div>
   </section>
 
   <!-- Menú de configuración del reloj -->
-  <section id="menu-clock" class="menu-section">
-    <h2>Menú de configuración del reloj</h2>
-    <p class="ref-link">
-      Referencia manual:
-      <a href="viewer.html?file=SonySLTA99V.pdf&page=44" onclick="window.location.href=this.href; return false;">
+  <section id="menu-clock" class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-4">
+    <h2 class="text-xl font-bold" data-i18n="clock.title">Menú de configuración del reloj</h2>
+    <p class="text-xs text-slate-600 dark:text-slate-300">
+      <span data-i18n="ref.label">Referencia manual:</span>
+      <a data-pdf-page="44"
+         href="viewer.html?file=SonySLTA99V_ES.pdf&page=44"
+         class="text-emerald-700 dark:text-emerald-400 hover:underline"
+         data-i18n="clock.ref">
         Abrir PDF en la página 44 (Menú de configuración del reloj)
       </a>
     </p>
-
-    <p>
+    <p class="text-sm text-slate-700 dark:text-slate-200">
       Ajustes relacionados con la fecha, la hora, la zona horaria y el comportamiento del menú.
     </p>
 
-    <table>
-      <thead>
-        <tr>
-          <th style="width: 24%;">Elemento</th>
-          <th style="width: 46%;">Descripción</th>
-          <th style="width: 30%;">Opciones principales</th>
-        </tr>
-      </thead>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-xs sm:text-[13px] table-fixed">
+        <thead>
+          <tr>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[24%]">Elemento</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[46%]">Descripción</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[30%]">Opciones principales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 1 (Configuración del reloj)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Ajuste fecha/hora</td>
+            <td class="border px-2 py-1 align-top">
+              Ajusta la fecha, la hora y el horario de verano.
+              Se puede establecer el formato de fecha y la zona horaria inicial.
+            </td>
+            <td class="border px-2 py-1 align-top">—</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Configuración área</td>
+            <td class="border px-2 py-1 align-top">
+              Selecciona la zona horaria correspondiente al país o región donde se usará la cámara.
+            </td>
+            <td class="border px-2 py-1 align-top">Lista de regiones</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Inicio menú</td>
+            <td class="border px-2 py-1 align-top">
+              Define si el cursor aparece en el primer elemento del menú o en el último elemento usado.
+            </td>
+            <td class="border px-2 py-1 align-top">Principal / Anterior</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-    <tbody>
-
-      <!-- MENÚ 1 -->
-      <tr class="submenu-row">
-        <td colspan="3"><strong>Menú 1 (Configuración del reloj)</strong></td>
-      </tr>
-
-      <tr>
-        <td>Ajuste fecha/hora</td>
-        <td>
-          Ajusta la fecha, la hora y el horario de verano.  
-          Se puede establecer el formato de fecha y la zona horaria inicial.
-        </td>
-        <td>—</td>
-      </tr>
-
-      <tr>
-        <td>Configuración área</td>
-        <td>
-          Selecciona la zona horaria correspondiente al país o región donde se usará la cámara.
-        </td>
-        <td>Lista de regiones</td>
-      </tr>
-
-      <tr>
-        <td>Inicio menú</td>
-        <td>
-          Define si el cursor aparece en el primer elemento del menú o en el último elemento usado.
-        </td>
-        <td>Principal / Anterior</td>
-      </tr>
-
-    </tbody>
-  </table>
-
-  <div class="top-link"><a href="#top">Volver al inicio ▲</a></div>
-</section>
+    <div class="text-right text-[11px] mt-2">
+      <a href="#top" class="text-blue-700 dark:text-blue-400 hover:underline">Volver al inicio ▲</a>
+    </div>
+  </section>
 
   <!-- Menú Configuración -->
-<section id="menu-setup" class="menu-section">
-  <h2>Menú Configuración</h2>
-  <p class="ref-link">
-    Referencia manual:
-    <a href="viewer.html?file=SonySLTA99V.pdf&page=44" onclick="window.location.href=this.href; return false;">
-      Abrir PDF en la página 44 (Menú Configuración)
-    </a>
-  </p>
+  <section id="menu-setup" class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-4">
+    <h2 class="text-xl font-bold" data-i18n="setup.title">Menú Configuración</h2>
+    <p class="text-xs text-slate-600 dark:text-slate-300">
+      <span data-i18n="ref.label">Referencia manual:</span>
+      <a data-pdf-page="44"
+         href="viewer.html?file=SonySLTA99V_ES.pdf&page=44"
+         class="text-emerald-700 dark:text-emerald-400 hover:underline"
+         data-i18n="setup.ref">
+        Abrir PDF en la página 44 (Menú Configuración)
+      </a>
+    </p>
+    <p class="text-sm text-slate-700 dark:text-slate-200">
+      Ajustes generales de funcionamiento del cuerpo de la cámara: brillo, energía, HDMI, USB,
+      GPS, diales, idioma, limpieza del sensor y restauración del sistema.
+    </p>
 
-  <p>
-    Ajustes generales de funcionamiento del cuerpo de la cámara: brillo, energía, HDMI, USB,
-    GPS, diales, idioma, limpieza del sensor y restauración del sistema.
-  </p>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-xs sm:text-[13px] table-fixed">
+        <thead>
+          <tr>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[24%]">Elemento</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[46%]">Descripción</th>
+            <th class="border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/60 px-2 py-1 w-[30%]">Opciones principales</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- MENÚ 1 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 1 (Configuración)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Inicio menú</td>
+            <td class="border px-2 py-1 align-top">Determina si el cursor reaparece en el primer ítem o en el último usado.</td>
+            <td class="border px-2 py-1 align-top">Principal / Anterior</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Guía del dial de modo</td>
+            <td class="border px-2 py-1 align-top">Muestra información explicando el modo seleccionado en el dial.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Brillo LCD</td>
+            <td class="border px-2 py-1 align-top">Ajusta el brillo de la pantalla LCD.</td>
+            <td class="border px-2 py-1 align-top">Auto / Manual / Tpo soleado</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Brillo del visor</td>
+            <td class="border px-2 py-1 align-top">Ajusta el brillo del visor electrónico.</td>
+            <td class="border px-2 py-1 align-top">Auto / Manual</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Temperatura color visor</td>
+            <td class="border px-2 py-1 align-top">Ajuste fino de la temperatura de color del visor.</td>
+            <td class="border px-2 py-1 align-top">+2 / +1 / 0 / -1 / -2</td>
+          </tr>
 
-  <table>
-    <thead>
-      <tr>
-        <th style="width: 24%;">Elemento</th>
-        <th style="width: 46%;">Descripción</th>
-        <th style="width: 30%;">Opciones principales</th>
-      </tr>
-    </thead>
+          <!-- MENÚ 2 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 2 (Configuración)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Ajustes GPS (Sólo SLT-A99V)</td>
+            <td class="border px-2 py-1 align-top">Configura las funciones del receptor GPS integrado.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar / Ajustes GPS</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Ahorro de energía</td>
+            <td class="border px-2 py-1 align-top">Nivel general de ahorro energético.</td>
+            <td class="border px-2 py-1 align-top">Max / Estándar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Hora inicio ahorro ener.</td>
+            <td class="border px-2 py-1 align-top">Tiempo de inactividad antes de entrar en reposo.</td>
+            <td class="border px-2 py-1 align-top">30 min / 5 min / 1 min / 20 s / 10 s</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Resolución HDMI</td>
+            <td class="border px-2 py-1 align-top">Resolución de salida cuando se conecta a un televisor.</td>
+            <td class="border px-2 py-1 align-top">Auto / 1080p / 1080i</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">CTRL.POR HDMI</td>
+            <td class="border px-2 py-1 align-top">Activa el control remoto mediante BRAVIA Sync.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Mostrar la inform. HDMI</td>
+            <td class="border px-2 py-1 align-top">Muestra imagen por HDMI con o sin info de grabación.</td>
+            <td class="border px-2 py-1 align-top">Activado / Desactivado</td>
+          </tr>
 
-    <tbody>
+          <!-- MENÚ 3 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 3 (Configuración)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Ajustes de carga*</td>
+            <td class="border px-2 py-1 align-top">Activa carga inalámbrica en tarjetas Eye-Fi compatibles.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Conexión USB</td>
+            <td class="border px-2 py-1 align-top">Selecciona el modo USB al conectar la cámara.</td>
+            <td class="border px-2 py-1 align-top">Auto / Almacenamiento masivo / MTP / PC remoto</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Ajuste USB LUN</td>
+            <td class="border px-2 py-1 align-top">Cómo se presentan las tarjetas al conectarse por USB.</td>
+            <td class="border px-2 py-1 align-top">Multi / Sencillo</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Señales audio</td>
+            <td class="border px-2 py-1 align-top">Activa o desactiva los pitidos de confirmación.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Selector PAL/NTSC</td>
+            <td class="border px-2 py-1 align-top">Convierte el formato de vídeo según región.</td>
+            <td class="border px-2 py-1 align-top">PAL / NTSC</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Capt. tamaño APS-C</td>
+            <td class="border px-2 py-1 align-top">Activa recorte APS-C cuando el objetivo lo requiere.</td>
+            <td class="border px-2 py-1 align-top">Activar / Automático</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Micro ajuste AF</td>
+            <td class="border px-2 py-1 align-top">Ajuste fino del enfoque por objetivo.</td>
+            <td class="border px-2 py-1 align-top">Configurar / Cantidad / Borrar todo</td>
+          </tr>
 
-      <!-- MENÚ 1 -->
-      <tr class="submenu-row"><td colspan="3"><strong>Menú 1 (Configuración)</strong></td></tr>
+          <!-- MENÚ 4 -->
+          <tr class="bg-slate-100/70 dark:bg-slate-900/50">
+            <td colspan="3" class="border px-2 py-1 font-semibold">Menú 4 (Configuración)</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Versión</td>
+            <td class="border px-2 py-1 align-top">Muestra la versión del software interno.</td>
+            <td class="border px-2 py-1 align-top">—</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Idioma</td>
+            <td class="border px-2 py-1 align-top">Selecciona el idioma de los menús.</td>
+            <td class="border px-2 py-1 align-top">—</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Modo limpieza</td>
+            <td class="border px-2 py-1 align-top">Activa el sistema de limpieza del sensor.</td>
+            <td class="border px-2 py-1 align-top">Ejecutar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Modo demostración</td>
+            <td class="border px-2 py-1 align-top">Activa una demo de reproducción en la cámara.</td>
+            <td class="border px-2 py-1 align-top">Activar / Desactivar</td>
+          </tr>
+          <tr>
+            <td class="border px-2 py-1 align-top">Inicializar</td>
+            <td class="border px-2 py-1 align-top">Restaura los ajustes del sistema.</td>
+            <td class="border px-2 py-1 align-top">Reponer ajuste / Reponer Modo Grab. / Reponer todo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-      <tr>
-        <td>Inicio menú</td>
-        <td>Determina si el cursor reaparece en el primer ítem o en el último usado.</td>
-        <td>Principal / Anterior</td>
-      </tr>
+    <div class="text-right text-[11px] mt-2">
+      <a href="#top" class="text-blue-700 dark:text-blue-400 hover:underline">Volver al inicio ▲</a>
+    </div>
+  </section>
 
-      <tr>
-        <td>Guía del dial de modo</td>
-        <td>Muestra información explicando el modo seleccionado en el dial.</td>
-        <td>Activar / Desactivar</td>
-      </tr>
+</main>
 
-      <tr>
-        <td>Brillo LCD</td>
-        <td>Ajusta el brillo de la pantalla LCD.</td>
-        <td>Auto / Manual / Tpo soleado</td>
-      </tr>
+<!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+<script>
+  const translations = {
+    en: {
+      "header.back": "← Back to index",
+      "header.subtitle": "Sony SLT-A99 / SLT-A99V – Menus (PDF Hypertext)",
+      "theme.label": "Dark mode",
+      "ref.label": "Reference:",
 
-      <tr>
-        <td>Brillo del visor</td>
-        <td>Ajusta el brillo del visor electrónico.</td>
-        <td>Auto / Manual</td>
-      </tr>
+      "title": "Sony SLT-A99 / SLT-A99V Menus (EN)",
+      "intro": "This hypertext summarizes the “Functions selected with the MENU button” section from the Sony SLT-A99/A99V manual. It is organized by menu type so you can quickly see what each option does and which parameters it offers.",
 
-      <tr>
-        <td>Temperatura color visor</td>
-        <td>Ajuste fino de la temperatura de color del visor.</td>
-        <td>+2 / +1 / 0 / -1 / -2</td>
-      </tr>
+      "nav.stills": "Still Image Shooting Menu",
+      "nav.movie": "Movie Recording Menu",
+      "nav.custom": "Custom Menu",
+      "nav.playback": "Playback Menu",
+      "nav.card": "Memory Card Tool Menu",
+      "nav.clock": "Clock Setup Menu",
+      "nav.setup": "Setup Menu",
 
-      <!-- MENÚ 2 -->
-      <tr class="submenu-row"><td colspan="3"><strong>Menú 2 (Configuración)</strong></td></tr>
+      "stills.title": "Still Image Shooting Menu",
+      "stills.ref": "Open PDF at page 35 (Still Image Shooting Menu)",
 
-      <tr>
-        <td>Ajustes GPS (Sólo SLT-A99V)</td>
-        <td>Configura las funciones del receptor GPS integrado.</td>
-        <td>Activar / Desactivar / Ajustes GPS</td>
-      </tr>
+      "movie.title": "Movie Recording Menu",
+      "movie.ref": "Open PDF at page 37 (Movie Recording Menu)",
 
-      <tr>
-        <td>Ahorro de energía</td>
-        <td>Nivel general de ahorro energético.</td>
-        <td>Max / Estándar</td>
-      </tr>
+      "custom.title": "Custom Menu",
+      "custom.ref": "Open PDF at page 38 (Custom Menu)",
 
-      <tr>
-        <td>Hora inicio ahorro ener.</td>
-        <td>Tiempo de inactividad antes de entrar en reposo.</td>
-        <td>30 min / 5 min / 1 min / 20 s / 10 s</td>
-      </tr>
+      "playback.title": "Playback Menu",
+      "playback.ref": "Open PDF at page 42 (Playback Menu)",
 
-      <tr>
-        <td>Resolución HDMI</td>
-        <td>Resolución de salida cuando se conecta a un televisor.</td>
-        <td>Auto / 1080p / 1080i</td>
-      </tr>
+      "card.title": "Memory Card Tool Menu",
+      "card.ref": "Open PDF at page 43 (Memory Card Tool Menu)",
 
-      <tr>
-        <td>CTRL.POR HDMI</td>
-        <td>Activa el control remoto mediante BRAVIA Sync.</td>
-        <td>Activar / Desactivar</td>
-      </tr>
+      "clock.title": "Clock Setup Menu",
+      "clock.ref": "Open PDF at page 44 (Clock Setup Menu)",
 
-      <tr>
-        <td>Mostrar la inform. HDMI</td>
-        <td>Muestra imagen por HDMI con o sin info de grabación.</td>
-        <td>Activado / Desactivado</td>
-      </tr>
+      "setup.title": "Setup Menu",
+      "setup.ref": "Open PDF at page 44 (Setup Menu)"
+    }
+  };
 
-      <!-- MENÚ 3 -->
-      <tr class="submenu-row"><td colspan="3"><strong>Menú 3 (Configuración)</strong></td></tr>
+  function applyTranslations(lang) {
+    const root = document.documentElement;
+    root.lang = lang;
 
-      <tr>
-        <td>Ajustes de carga*</td>
-        <td>Activa carga inalámbrica en tarjetas Eye-Fi compatibles.</td>
-        <td>Activar / Desactivar</td>
-      </tr>
+    // Botones ES/EN
+    document.querySelectorAll('[data-lang-active]').forEach(btn => {
+      const btnLang = btn.getAttribute('data-lang-active');
+      const isActive = (btnLang === lang);
+      btn.classList.toggle('bg-slate-900', isActive);
+      btn.classList.toggle('text-white', isActive);
+      btn.classList.toggle('bg-slate-200', !isActive);
+      btn.classList.toggle('dark:bg-slate-700', !isActive);
+      btn.classList.toggle('text-slate-800', !isActive);
+      btn.classList.toggle('dark:text-slate-100', !isActive);
+    });
 
-      <tr>
-        <td>Conexión USB</td>
-        <td>Selecciona el modo USB al conectar la cámara.</td>
-        <td>Auto / Almacenamiento masivo / MTP / PC remoto</td>
-      </tr>
+    const map = translations[lang] || {};
 
-      <tr>
-        <td>Ajuste USB LUN</td>
-        <td>Cómo se presentan las tarjetas al conectarse por USB.</td>
-        <td>Multi / Sencillo</td>
-      </tr>
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
 
-      <tr>
-        <td>Señales audio</td>
-        <td>Activa o desactiva los pitidos de confirmación.</td>
-        <td>Activar / Desactivar</td>
-      </tr>
+      if (!el.dataset.i18nEs) {
+        el.dataset.i18nEs = el.innerHTML;
+      }
 
-      <tr>
-        <td>Selector PAL/NTSC</td>
-        <td>Convierte el formato de vídeo según región.</td>
-        <td>PAL / NTSC</td>
-      </tr>
+      if (lang === 'en') {
+        if (!map[key]) return;
+        const raw = map[key];
+        const parts = raw.split("\n");
+        el.innerHTML = "";
+        parts.forEach((part, idx) => {
+          if (idx > 0) el.appendChild(document.createElement("br"));
+          el.appendChild(document.createTextNode(part));
+        });
+      } else {
+        el.innerHTML = el.dataset.i18nEs;
+      }
+    });
 
-      <tr>
-        <td>Capt. tamaño APS-C</td>
-        <td>Activa recorte APS-C cuando el objetivo lo requiere.</td>
-        <td>Activar / Automático</td>
-      </tr>
+    // PDFs según idioma (viewer.html está en raíz)
+    const pdfFile = (lang === 'en') ? 'SonySLTA99V_EN.pdf' : 'SonySLTA99V_ES.pdf';
+    document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+      const page = a.getAttribute('data-pdf-page');
+      a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+    });
 
-      <tr>
-        <td>Micro ajuste AF</td>
-        <td>Ajuste fino del enfoque por objetivo.</td>
-        <td>Configurar / Cantidad / Borrar todo</td>
-      </tr>
+    localStorage.setItem('manualLang', lang);
+  }
 
-      <!-- MENÚ 4 -->
-      <tr class="submenu-row"><td colspan="3"><strong>Menú 4 (Configuración)</strong></td></tr>
+  function setLanguage(lang) {
+    applyTranslations(lang);
+  }
 
-      <tr>
-        <td>Versión</td>
-        <td>Muestra la versión del software interno.</td>
-        <td>—</td>
-      </tr>
+  function updateThemeIcon() {
+    const icon = document.getElementById('theme-icon');
+    if (!icon) return;
+    const isDark = document.documentElement.classList.contains('dark');
+    icon.textContent = isDark ? '☀️' : '🌙';
+  }
 
-      <tr>
-        <td>Idioma</td>
-        <td>Selecciona el idioma de los menús.</td>
-        <td>—</td>
-      </tr>
+  function toggleTheme() {
+    const root = document.documentElement;
+    const isDark = root.classList.contains('dark');
+    if (isDark) {
+      root.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      root.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
+    updateThemeIcon();
+  }
 
-      <tr>
-        <td>Modo limpieza</td>
-        <td>Activa el sistema de limpieza del sensor.</td>
-        <td>Ejecutar</td>
-      </tr>
-
-      <tr>
-        <td>Modo demostración</td>
-        <td>Activa una demo de reproducción en la cámara.</td>
-        <td>Activar / Desactivar</td>
-      </tr>
-
-      <tr>
-        <td>Inicializar</td>
-        <td>Restaura los ajustes del sistema.</td>
-        <td>Reponer ajuste / Reponer Modo Grab. / Reponer todo</td>
-      </tr>
-
-    </tbody>
-  </table>
-
-  <div class="top-link"><a href="#top">Volver al inicio ▲</a></div>
-</section>
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedLang = localStorage.getItem('manualLang') || 'es';
+    applyTranslations(storedLang);
+    updateThemeIcon();
+  });
+</script>
 </body>
 </html>
