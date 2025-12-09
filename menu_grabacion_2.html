@@ -11,41 +11,91 @@
       font-family: 'Inter', sans-serif;
     }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-[15px] leading-relaxed">
 
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <!-- Header fijo con botón volver + toggles -->
+  <header class="sticky top-0 z-20 bg-slate-100/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700">
+    <div class="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
+      </a>
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-      <a href="index.html" class="text-sm text-blue-700 hover:underline">
-  ← Volver al índice
-</a>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 · Menú Grabación 2 – Manual PDF
+        </span>
 
-      <span class="text-xs text-slate-500">Sony A900 – Manual PDF</span>
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-5">
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
         2. Menú Grabación 2
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Ajustes relacionados con el flash, compensación, ISO automático y comportamiento general del disparo.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
       <!-- 2.1 Modo flash -->
       <div>
-        <h2 class="font-bold text-lg">2.1 Modo flash</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.2_1.title">2.1 Modo flash</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.2_1.text">
           Selecciona cómo funcionará el flash incorporado o externo:
           <strong>Fill-flash</strong>, <strong>Flash lento</strong>, <strong>Sincronización trasera</strong>, <strong>Inalámbrico</strong>.
         </p>
         <p class="text-xs mt-1">
-          Referencia: 
-          <a href="viewer.html?file=SonyA900.pdf&page=105"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="105"
+             href="viewer.html?file=SonyA900_ES.pdf&page=105"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.2_1.ref">
             [Pág. 105 – Modo flash]
           </a>
         </p>
@@ -53,13 +103,16 @@
 
       <!-- 2.2 Comp.flash -->
       <div>
-        <h2 class="font-bold text-lg">2.2 Comp.flash (Compensación del Flash)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.2_2.title">2.2 Comp.flash (Compensación del Flash)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.2_2.text">
           Ajusta la potencia del flash entre –2.0 y +2.0 EV para equilibrar sujetos y fondo.
         </p>
         <p class="text-xs mt-1">
-           Referencia: 
-          <a href="viewer.html?file=SonyA900.pdf&page=106"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="106"
+             href="viewer.html?file=SonyA900_ES.pdf&page=106"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.2_2.ref">
             [Pág. 106 – Compensación de flash]
           </a>
         </p>
@@ -67,14 +120,17 @@
 
       <!-- 2.3 Avance exposición -->
       <div>
-        <h2 class="font-bold text-lg">2.3 Avance exposic. (Paso de exposición)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.2_3.title">2.3 Avance exposic. (Paso de exposición)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.2_3.text">
           Define si los ajustes de exposición cambian en incrementos de
           <strong>0.3 EV</strong> o <strong>0.5 EV</strong>.
         </p>
         <p class="text-xs mt-1">
-           Referencia: 
-          <a href="viewer.html?file=SonyA900.pdf&page=108"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="108"
+             href="viewer.html?file=SonyA900_ES.pdf&page=108"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.2_3.ref">
             [Pág. 108 – Incremento de exposición]
           </a>
         </p>
@@ -82,21 +138,134 @@
 
       <!-- 2.4 ISO Auto -->
       <div>
-        <h2 class="font-bold text-lg">2.4 ISO Auto (Límite)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.2_4.title">2.4 ISO Auto (Límite)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.2_4.text">
           Elige el rango permitido cuando se usa ISO Automático.  
           Por ejemplo: <strong>200–800</strong>, <strong>200–1600</strong>, etc.
         </p>
         <p class="text-xs mt-1">
-           Referencia: 
-          <a href="viewer.html?file=SonyA900.pdf&page=106"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="106"
+             href="viewer.html?file=SonyA900_ES.pdf&page=106"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.2_4.ref">
             [Pág. 106 – ISO automático]
           </a>
         </p>
       </div>
 
     </section>
-  </div>
+  </main>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 · Recording Menu 2 – PDF manual",
+
+        "theme.label": "Dark mode",
+        "ref.label": "Reference:",
+
+        "title": "2. Recording Menu 2",
+        "intro": "Settings related to flash, flash compensation, Auto ISO and general shooting behavior.",
+
+        "sec.2_1.title": "2.1 Flash mode",
+        "sec.2_1.text": "Selects how the built-in or external flash will operate: Fill-flash, Slow sync, Rear sync, Wireless.",
+        "sec.2_1.ref": "[Pg. 105 – Flash mode]",
+
+        "sec.2_2.title": "2.2 Flash compensation",
+        "sec.2_2.text": "Adjusts flash power between –2.0 and +2.0 EV to balance subject and background.",
+        "sec.2_2.ref": "[Pg. 106 – Flash compensation]",
+
+        "sec.2_3.title": "2.3 Exposure step",
+        "sec.2_3.text": "Defines whether exposure adjustments change in steps of 0.3 EV or 0.5 EV.",
+        "sec.2_3.ref": "[Pg. 108 – Exposure step]",
+
+        "sec.2_4.title": "2.4 Auto ISO (limit)",
+        "sec.2_4.text": "Chooses the allowed range when using Auto ISO. For example: 200–800, 200–1600, etc.",
+        "sec.2_4.ref": "[Pg. 106 – Auto ISO]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.textContent;
+        }
+
+        if (lang === 'en') {
+          if (map[key]) {
+            el.textContent = "";
+            const parts = map[key].split("\n");
+            parts.forEach((part, idx) => {
+              if (idx > 0) el.appendChild(document.createElement("br"));
+              el.appendChild(document.createTextNode(part));
+            });
+          }
+        } else {
+          if (el.dataset.i18nEs) {
+            el.textContent = el.dataset.i18nEs;
+          }
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
