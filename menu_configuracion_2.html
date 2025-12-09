@@ -9,40 +9,89 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
 
   <div class="max-w-4xl mx-auto px-4 py-8">
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-      <a href="index.html" class="text-sm text-blue-700 hover:underline">
-      ← Volver al índice
+    <!-- Encabezado + regreso + toggles -->
+    <div class="mb-6 flex items-center justify-between gap-3">
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
       </a>
-      <span class="text-xs text-slate-500">Sony A900 – Manual PDF</span>
+
+      <div class="flex items-center gap-2 text-xs">
+        <span class="text-xs text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
         11. Menú Configuración 2
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Administración de tarjetas de memoria, numeración y organización de carpetas,
         así como la configuración de la conexión USB para transferencias a computadora.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
       <!-- 11.1 Tarjeta memoria -->
       <div>
-        <h2 class="font-bold text-lg">11.1 Tarjeta memoria</h2>
-        <p class="text-sm text-slate-700">
-          Selecciona qué ranura utilizar: <strong>Cf</strong> (CompactFlash) o <strong>MS</strong> (Memory Stick Duo).  
+        <h2 class="font-bold text-lg" data-i18n="sec.11_1.title">11.1 Tarjeta memoria</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.11_1.text">
+          Selecciona qué ranura utilizar: <strong>CF</strong> (CompactFlash) o <strong>MS</strong> (Memory Stick Duo).  
           Puedes trabajar con dos tarjetas y cambiar rápidamente entre ellas.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=124"  class="text-blue-700 hover:underline">
+          <a data-pdf-page="124"
+             href="viewer.html?file=SonyA900_ES.pdf&page=124"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.11_1.ref">
             [Pág. 124 – Tarjeta memoria]
           </a>
         </p>
@@ -50,15 +99,18 @@
 
       <!-- 11.2 Número archivo -->
       <div>
-        <h2 class="font-bold text-lg">11.2 Número archivo</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.11_2.title">11.2 Número archivo</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.11_2.text">
           Define cómo se numeran los archivos:
           <br>
           • <strong>Serie</strong> – La numeración continúa aunque cambies o formatees la tarjeta. <br>
           • <strong>Restablecer</strong> – Reinicia la numeración desde 0001 al crear una carpeta nueva o formatear.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=125"  class="text-blue-700 hover:underline">
+          <a data-pdf-page="125"
+             href="viewer.html?file=SonyA900_ES.pdf&page=125"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.11_2.ref">
             [Pág. 125 – Número archivo]
           </a>
         </p>
@@ -66,14 +118,17 @@
 
       <!-- 11.3 Nombre carpeta -->
       <div>
-        <h2 class="font-bold text-lg">11.3 Nombre carpeta</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.11_3.title">11.3 Nombre carpeta</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.11_3.text">
           Permite elegir el tipo de nombre para las carpetas donde se guardan las imágenes:  
           • <strong>Estándar</strong> – Formato DSCxxxx. <br>
           • <strong>Fecha</strong> – Crea carpetas según la fecha (ej.: 101MSDCF).
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=125"  class="text-blue-700 hover:underline">
+          <a data-pdf-page="125"
+             href="viewer.html?file=SonyA900_ES.pdf&page=125"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.11_3.ref">
             [Pág. 125 – Nombre carpeta]
           </a>
         </p>
@@ -81,15 +136,18 @@
 
       <!-- 11.4 Selecc.carpeta / Carpeta nueva -->
       <div>
-        <h2 class="font-bold text-lg">11.4 Selecc.carpeta / Carpeta nueva</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.11_4.title">11.4 Selecc.carpeta / Carpeta nueva</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.11_4.text">
           Permite gestionar las carpetas en la tarjeta de memoria:
           <br>
           • <strong>Seleccionar carpeta</strong> – Elige la carpeta donde quieres que se guarden las imágenes. <br>
           • <strong>Crear carpeta nueva</strong> – Útil para separar sesiones, viajes o proyectos.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=125"  class="text-blue-700 hover:underline">
+          <a data-pdf-page="125"
+             href="viewer.html?file=SonyA900_ES.pdf&page=125"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.11_4.ref">
             [Pág. 125 – Selecc.carpeta / Carpeta nueva]
           </a>
         </p>
@@ -97,15 +155,18 @@
 
       <!-- 11.5 Conexión USB -->
       <div>
-        <h2 class="font-bold text-lg">11.5 Conexión USB</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.11_5.title">11.5 Conexión USB</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.11_5.text">
           Define cómo se comporta la cámara al conectarla por USB a la computadora:
           <br>
           • <strong>Control PTP</strong> – Protocolo de transferencia de imágenes (compatible con software específico). <br>
           • <strong>Almacenamiento masivo</strong> – La cámara aparece como unidad externa (recomendado).
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=126"  class="text-blue-700 hover:underline">
+          <a data-pdf-page="126"
+             href="viewer.html?file=SonyA900_ES.pdf&page=126"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.11_5.ref">
             [Pág. 126 – Conexión USB]
           </a>
         </p>
@@ -113,13 +174,16 @@
 
       <!-- 11.6 Tarj.AlmMasivo -->
       <div>
-        <h2 class="font-bold text-lg">11.6 Tarj.AlmMasivo</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.11_6.title">11.6 Tarj.AlmMasivo</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.11_6.text">
           Configura el modo de la cámara para utilizarse como dispositivo de almacenamiento masivo USB.
           Permite copiar imágenes directamente sin software adicional.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=126"  class="text-blue-700 hover:underline">
+          <a data-pdf-page="126"
+             href="viewer.html?file=SonyA900_ES.pdf&page=126"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.11_6.ref">
             [Pág. 126 – Tarj.AlmMasivo]
           </a>
         </p>
@@ -129,5 +193,121 @@
 
   </div>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 – PDF manual",
+
+        "theme.label": "Dark mode",
+
+        "title": "11. Setup Menu 2",
+        "intro": "Management of memory cards, file numbering and folder organization, as well as USB connection settings for transfers to the computer.",
+
+        "sec.11_1.title": "11.1 Memory card",
+        "sec.11_1.text": "Selects which slot to use: CF (CompactFlash) or MS (Memory Stick Duo). You can work with two cards and switch quickly between them.",
+        "sec.11_1.ref": "[Pg. 124 – Memory card]",
+
+        "sec.11_2.title": "11.2 File number",
+        "sec.11_2.text": "Defines how files are numbered:\n• Continuous – The numbering continues even if you change or format the card.\n• Reset – Restarts numbering from 0001 when creating a new folder or formatting.",
+        "sec.11_2.ref": "[Pg. 125 – File number]",
+
+        "sec.11_3.title": "11.3 Folder name",
+        "sec.11_3.text": "Lets you choose the naming type for folders where images are stored:\n• Standard – DSCxxxx format.\n• Date – Creates folders based on date (e.g. 101MSDCF).",
+        "sec.11_3.ref": "[Pg. 125 – Folder name]",
+
+        "sec.11_4.title": "11.4 Select folder / New folder",
+        "sec.11_4.text": "Manages folders on the memory card:\n• Select folder – Choose the folder where new images will be stored.\n• Create new folder – Useful to separate sessions, trips or projects.",
+        "sec.11_4.ref": "[Pg. 125 – Select folder / New folder]",
+
+        "sec.11_5.title": "11.5 USB connection",
+        "sec.11_5.text": "Defines how the camera behaves when connected via USB to a computer:\n• PTP – Picture Transfer Protocol (for use with specific software).\n• Mass storage – The camera appears as an external drive (recommended).",
+        "sec.11_5.ref": "[Pg. 126 – USB connection]",
+
+        "sec.11_6.title": "11.6 USB mass storage",
+        "sec.11_6.text": "Configures the camera to operate as a USB mass storage device, allowing you to copy images directly without additional software.",
+        "sec.11_6.ref": "[Pg. 126 – USB mass storage]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.textContent;
+        }
+        if (lang === 'en') {
+          if (map[key]) {
+            el.textContent = "";
+            const parts = map[key].split("\n");
+            parts.forEach((part, idx) => {
+              if (idx > 0) el.appendChild(document.createElement("br"));
+              el.appendChild(document.createTextNode(part));
+            });
+          }
+        } else {
+          if (el.dataset.i18nEs) {
+            el.textContent = el.dataset.i18nEs;
+          }
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
