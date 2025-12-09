@@ -9,60 +9,113 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-[15px] leading-relaxed">
 
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <!-- Header fijo con botón volver + toggles -->
+  <header class="sticky top-0 z-20 bg-slate-100/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700">
+    <div class="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
+      </a>
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-     <a href="index.html" class="text-sm text-blue-700 hover:underline">
-  ← Volver al índice
-</a>
-      <span class="text-xs text-slate-500">Sony A900 – Manual PDF</span>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 · Menú Personalizado 2 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-5">
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
         6. Menú Personalizado 2
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Ajustes del botón AEL, comportamiento de los diales de control, bloqueo de diales,
         operación de botones, disparo sin tarjeta y rotación de la información de grabación.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
       <!-- 6.1 Botón AEL -->
       <div>
-        <h2 class="font-bold text-lg">6.1 Botón AEL</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.6_1.title">6.1 Botón AEL</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.6_1.text">
           Define cómo funciona el <strong>botón AEL</strong> (bloqueo de exposición):
           <br>
           • <strong>Retener AEL</strong> – La exposición se bloquea mientras mantienes pulsado el botón AEL. <br>
           • <strong>Alternar AEL</strong> – Pulsas una vez para bloquear la exposición y otra vez para liberarla. <br>
-          También puede configurarse para usar <strong>medición puntual temporal</strong> con el botón AEL. <br>
-          • <strong>Retener AEL</strong> – La exposición queda bloqueada <em>solo mientras</em> mantienes pulsado el botón AEL. <br> 
-          • <strong>Alternar AEL</strong> – Pulsas una vez para bloquear la exposición y vuelves a pulsar para liberarla. <br>
-        <br>
-    También puedes usar el botón AEL como <strong>medición puntual temporal</strong>, según configuración en el menú.
+          También puedes configurar el botón AEL para usar <strong>medición puntual temporal</strong>,
+          muy útil para exposiciones precisas en escenas con alto contraste.
         </p>
 
-  <!-- Nota del manual -->
-  <div class="mt-3 bg-slate-50 border border-slate-300 rounded-md p-3">
-    <p class="text-xs text-slate-700 leading-relaxed">
-      <strong>Notas:</strong><br>
-      • Mientras el valor de exposición está bloqueado, aparece en el monitor LCD y en el visor.  
-      &nbsp;&nbsp;Tenga cuidado de no reponer el ajuste accidentalmente.<br>
-      • Los ajustes “Retener” y “Alternar” afectan al <strong>cambio manual</strong> en el modo de exposición manual  
-      &nbsp;&nbsp;(véase <a href="viewer.html?file=SonyA900.pdf&page=49"  class="text-blue-700 underline">página 49</a>).
-    </p>
-  </div>
-        </p>
+        <!-- Nota del manual (solo ES, sin i18n para simplificar) -->
+        <div class="mt-3 bg-slate-50 dark:bg-slate-900/40 border border-slate-300 dark:border-slate-700 rounded-md p-3">
+          <p class="text-xs text-slate-700 dark:text-slate-200 leading-relaxed">
+            <strong>Notas:</strong><br>
+            • Mientras el valor de exposición está bloqueado, aparece en el monitor LCD y en el visor.
+            Ten cuidado de no reponer el ajuste accidentalmente.<br>
+            • Los ajustes “Retener” y “Alternar” también afectan al comportamiento en modo de exposición manual
+            (véase
+            <a href="viewer.html?file=SonyA900_ES.pdf&page=49"
+               class="text-blue-700 dark:text-blue-400 underline"
+               data-pdf-page="49">
+              página 49
+            </a>).
+          </p>
+        </div>
+
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=113"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="113"
+             href="viewer.html?file=SonyA900_ES.pdf&page=113"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.6_1.ref">
             [Pág. 113 – Botón AEL]
           </a>
         </p>
@@ -70,17 +123,20 @@
 
       <!-- 6.2 Ajust.dial ctrl -->
       <div>
-        <h2 class="font-bold text-lg">6.2 Ajust.dial ctrl</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.6_2.title">6.2 Ajust.dial ctrl</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.6_2.text">
           Intercambia las funciones de los diales de control delantero y trasero en los modos
-          <strong>P</strong> (programa), <strong>A</strong>, <strong>S</strong> y <strong>M</strong>:
+          <strong>P</strong>, <strong>A</strong>, <strong>S</strong> y <strong>M</strong>:
           <br>
           • <strong>VO F/núm.</strong> – Dial delantero controla el tiempo de exposición, dial trasero la abertura. <br>
           • <strong>F/núm. VO</strong> – Dial delantero controla la abertura, dial trasero el tiempo de exposición.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=113"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="113"
+             href="viewer.html?file=SonyA900_ES.pdf&page=113"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.6_2.ref">
             [Pág. 113 – Ajust.dial ctrl]
           </a>
         </p>
@@ -88,21 +144,23 @@
 
       <!-- 6.3 Comp.dial exp. -->
       <div>
-        <h2 class="font-bold text-lg">6.3 Comp.dial exp. (Compensación con dial)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.6_3.title">6.3 Comp.dial exp. (Compensación con dial)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.6_3.text">
           Permite decidir si puedes <strong>compensar la exposición</strong> usando los diales de control:
           <br>
           • <strong>Desactivar</strong> – No se puede compensar exposición con los diales. <br>
           • <strong>Dial frontal</strong> – Compensación de exposición con el dial delantero. <br>
           • <strong>Dial trasero</strong> – Compensación de exposición con el dial trasero.
-        </p>
-        <p class="text-sm text-slate-700 mt-1">
+          <br><br>
           La tabla del manual muestra cómo cambia la función de cada dial según el modo de
-          exposición (P, A, S, M) cuando esta opción está Activada o Desactivada.
+          exposición (P, A, S, M) cuando esta opción está activada o desactivada.
         </p>
         <p class="text-xs mt-1">
-         Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=114"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="114"
+             href="viewer.html?file=SonyA900_ES.pdf&page=114"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.6_3.ref">
             [Pág. 114 – Comp.dial exp.]
           </a>
         </p>
@@ -110,8 +168,8 @@
 
       <!-- 6.4 Bloq.dial ctrl -->
       <div>
-        <h2 class="font-bold text-lg">6.4 Bloq.dial ctrl (Bloqueo diales de control)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.6_4.title">6.4 Bloq.dial ctrl (Bloqueo diales de control)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.6_4.text">
           Bloquea o libera los diales de control delantero y trasero:
           <br>
           • <strong>Activar</strong> – Los diales solo funcionan cuando el tiempo de exposición o la abertura se
@@ -119,8 +177,11 @@
           • <strong>Desactivar</strong> – Los diales se pueden usar en todo momento.
         </p>
         <p class="text-xs mt-1">
-         Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=114"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="114"
+             href="viewer.html?file=SonyA900_ES.pdf&page=114"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.6_4.ref">
             [Pág. 114 – Bloq.dial ctrl]
           </a>
         </p>
@@ -128,8 +189,8 @@
 
       <!-- 6.5 Operación botón -->
       <div>
-        <h2 class="font-bold text-lg">6.5 Operación botón</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.6_5.title">6.5 Operación botón</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.6_5.text">
           Configura qué aparece en pantalla al pulsar los botones <strong>ISO</strong>, <strong>WB</strong>,
           <strong>DRIVE</strong>, <strong>📷</strong> y <strong>C</strong>:
           <br>
@@ -138,8 +199,11 @@
           sola vista (según la visualización actual).
         </p>
         <p class="text-xs mt-1">
-         Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=115"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="115"
+             href="viewer.html?file=SonyA900_ES.pdf&page=115"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.6_5.ref">
             [Pág. 115 – Operación botón]
           </a>
         </p>
@@ -147,16 +211,19 @@
 
       <!-- 6.6 Lib.sin tarjeta -->
       <div>
-        <h2 class="font-bold text-lg">6.6 Lib.sin tarjeta</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.6_6.title">6.6 Lib.sin tarjeta</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.6_6.text">
           Controla si la cámara puede disparar <strong>sin tarjeta de memoria</strong> insertada:
           <br>
           • <strong>Habilitar</strong> – El obturador puede liberarse sin tarjeta (útil para pruebas de flash, estudio, etc.).<br>
           • <strong>Inhabilitar</strong> – La cámara <strong>no dispara</strong> si no hay tarjeta (evita “disparos en falso” sin guardar).
         </p>
         <p class="text-xs mt-1">
-         Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=115"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="115"
+             href="viewer.html?file=SonyA900_ES.pdf&page=115"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.6_6.ref">
             [Pág. 115 – Lib.sin tarjeta]
           </a>
         </p>
@@ -164,16 +231,19 @@
 
       <!-- 6.7 Vis.infor.grab. -->
       <div>
-        <h2 class="font-bold text-lg">6.7 Vis.infor.grab. (Visualización info grabación)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.6_7.title">6.7 Vis.infor.grab. (Visualización info grabación)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.6_7.text">
           Decide cómo gira la información de grabación cuando giras la cámara a vertical:
           <br>
           • <strong>Girar automát.</strong> – La información gira automáticamente a orientación vertical. <br>
           • <strong>Horizontal</strong> – La visualización se mantiene siempre en horizontal.
         </p>
         <p class="text-xs mt-1">
-         Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=115"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="115"
+             href="viewer.html?file=SonyA900_ES.pdf&page=115"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.6_7.ref">
             [Pág. 115 – Vis.infor.grab.]
           </a>
         </p>
@@ -181,7 +251,129 @@
 
     </section>
 
-  </div>
+  </main>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 · Custom Menu 2 – PDF manual",
+
+        "theme.label": "Dark mode",
+        "ref.label": "Reference:",
+
+        "title": "6. Custom Menu 2",
+        "intro": "Settings for the AEL button, control dials behavior, dial lock, button operation, release without card and rotation of recording information.",
+
+        "sec.6_1.title": "6.1 AEL button",
+        "sec.6_1.text": "Defines how the AEL button (exposure lock) works:\n• AEL hold – Exposure is locked while you hold down the AEL button.\n• AEL toggle – Press once to lock exposure and press again to release it.\nYou can also configure the AEL button for temporary spot metering, very useful for precise exposures in high-contrast scenes.",
+        "sec.6_1.ref": "[Pg. 113 – AEL button]",
+
+        "sec.6_2.title": "6.2 Control dial setup",
+        "sec.6_2.text": "Swaps the functions of the front and rear control dials in P, A, S and M modes:\n• S/S F-no. – Front dial controls shutter speed, rear dial controls aperture.\n• F-no. S/S – Front dial controls aperture, rear dial controls shutter speed.",
+        "sec.6_2.ref": "[Pg. 113 – Control dial setup]",
+
+        "sec.6_3.title": "6.3 Exposure comp. dial",
+        "sec.6_3.text": "Decides whether you can use the control dials for exposure compensation:\n• Off – Exposure compensation cannot be set with the dials.\n• Front dial – Exposure compensation with the front dial.\n• Rear dial – Exposure compensation with the rear dial.\n\nThe manual’s table shows how each dial’s function changes by exposure mode (P, A, S, M) when this option is on or off.",
+        "sec.6_3.ref": "[Pg. 114 – Exposure comp. dial]",
+
+        "sec.6_4.title": "6.4 Control dial lock",
+        "sec.6_4.text": "Locks or unlocks the front and rear control dials:\n• On – Dials only work when shutter speed or aperture are shown on screen (helps avoid accidental changes).\n• Off – Dials are always active.",
+        "sec.6_4.ref": "[Pg. 114 – Control dial lock]",
+
+        "sec.6_5.title": "6.5 Button operation",
+        "sec.6_5.text": "Configures what appears on screen when pressing the ISO, WB, DRIVE, 📷 and C buttons:\n• Dedicated screen – Shows an exclusive screen for each mode.\n• Quick Navi – Opens the Quick Navi screen to change multiple settings from one view.",
+        "sec.6_5.ref": "[Pg. 115 – Button operation]",
+
+        "sec.6_6.title": "6.6 Release w/o card",
+        "sec.6_6.text": "Controls whether the camera can fire the shutter with no memory card inserted:\n• Enable – The shutter can be released without a card (useful for studio or flash tests).\n• Disable – The camera will not fire if there is no card (prevents “empty” shots).",
+        "sec.6_6.ref": "[Pg. 115 – Release w/o card]",
+
+        "sec.6_7.title": "6.7 Recording info display",
+        "sec.6_7.text": "Decides how the recording information rotates when turning the camera to vertical:\n• Auto rotate – The information automatically rotates to vertical orientation.\n• Horizontal – The display remains horizontal at all times.",
+        "sec.6_7.ref": "[Pg. 115 – Recording info display]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.innerHTML;
+        }
+
+        if (lang === 'en') {
+          if (!map[key]) return;
+          const raw = map[key];
+          const parts = raw.split("\n");
+          el.innerHTML = "";
+          parts.forEach((part, idx) => {
+            if (idx > 0) el.appendChild(document.createElement("br"));
+            el.appendChild(document.createTextNode(part));
+          });
+        } else {
+          el.innerHTML = el.dataset.i18nEs;
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
