@@ -4,388 +4,378 @@
   <meta charset="UTF-8" />
   <title>Sony A900 – Guía rápida de menús</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Tailwind -->
-  <script>
-    tailwind = {
-      darkMode: 'class'
-    }
-  </script>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Fuente -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Manifest PWA -->
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#020617">
-
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100 text-[15px] leading-relaxed">
+<body class="bg-slate-100 text-slate-900 text-[15px] leading-relaxed">
 
   <!-- NAV STICKY SUPERIOR -->
-  <header class="sticky top-0 z-20 bg-slate-100/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700">
+  <header class="sticky top-0 z-20 bg-slate-100/95 backdrop-blur border-b border-slate-200">
     <div class="max-w-5xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
       <div class="flex flex-col">
-        <span class="text-sm font-semibold">Sony A900 / SLT-A99V</span>
-        <span class="text-[11px] text-slate-500 dark:text-slate-400">Guía rápida de menús</span>
+        <span class="text-sm font-semibold" data-i18n="header.cameraLabel">Sony A900</span>
+        <span class="text-[11px] text-slate-500" data-i18n="header.cameraSubtitle">Guía rápida de menús</span>
       </div>
-      <div class="flex items-center gap-2 text-xs md:text-sm">
-        <button id="theme-toggle"
-                class="px-2 py-1 rounded-full border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800">
-          🌙/☀️
-        </button>
-        <nav class="hidden sm:flex items-center gap-2">
-          <a href="#menus" class="px-2 py-1 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800">Menús</a>
-          <a href="#presets" class="px-2 py-1 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800">Presets</a>
-          <a href="#tabla-lentes" class="px-2 py-1 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800">Lentes</a>
-        </nav>
-      </div>
+      <nav class="flex items-center gap-2 text-xs md:text-sm">
+        <a href="#menus" class="px-2 py-1 rounded-full hover:bg-slate-200" data-i18n="nav.menus">Menús</a>
+        <a href="#presets" class="px-2 py-1 rounded-full hover:bg-slate-200" data-i18n="nav.presets">Presets</a>
+        <a href="#tabla-lentes" class="px-2 py-1 rounded-full hover:bg-slate-200" data-i18n="nav.lenses">Lentes</a>
+
+        <!-- Toggle de idioma -->
+        <div class="flex items-center gap-1 ml-2">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 bg-slate-200 text-slate-800">
+            EN
+          </button>
+        </div>
+      </nav>
     </div>
   </header>
 
   <main class="max-w-5xl mx-auto px-4 py-5 space-y-8">
 
     <!-- INTRO -->
-    <section class="mt-2 space-y-3">
-      <h1 class="text-2xl md:text-3xl font-extrabold mb-1">
-        Guía rápida Sony A900 / A99V
+    <section class="mt-2">
+      <h1 class="text-2xl md:text-3xl font-extrabold mb-1" data-i18n="intro.title">
+        Guía rápida Sony A900
       </h1>
-      <p class="text-sm md:text-base text-slate-600 dark:text-slate-300">
-        Toca un bloque para abrir el menú correspondiente. Cada página incluye explicación en español
-        y ligas directas a los PDF originales.
+      <p class="text-sm md:text-base text-slate-600" data-i18n="intro.description">
+        Toca un bloque para ir a la página de ese menú. Cada menú tiene sus secciones numeradas
+        (1.1, 1.2, etc.) con explicación y ligas directas al PDF Sony A900.PDF.
       </p>
 
-      <!-- Botones PDF -->
-      <div class="flex flex-wrap gap-2">
-        <a href="SonyA900.pdf" target="_blank"
-           class="inline-flex items-center gap-1 px-3 py-2 text-xs md:text-sm rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow">
-          📄 Manual Sony A900 (PDF)
+      <!-- Botones para manuales completos (PDF) -->
+      <div class="mt-3 flex flex-wrap gap-2 text-xs">
+        <a id="link-a900-pdf"
+           href="pdf/SonyA900_ES.pdf"
+           target="_blank"
+           class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white shadow-sm border border-slate-200 hover:bg-slate-50">
+          <span class="font-semibold" data-i18n="pdf.a900">Manual completo Sony A900 (PDF)</span>
         </a>
-        <a href="SonySLTA99V.pdf" target="_blank"
-           class="inline-flex items-center gap-1 px-3 py-2 text-xs md:text-sm rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow">
-          📄 Manual Sony SLT-A99V (PDF)
-        </a>
-        <a href="SonySLTA99V.html"
-           class="inline-flex items-center gap-1 px-3 py-2 text-xs md:text-sm rounded-lg bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 shadow-sm">
-          📚 Hipertexto menús A99V
+        <a id="link-a99-pdf"
+           href="pdf/SonyA99V_ES.pdf"
+           target="_blank"
+           class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white shadow-sm border border-slate-200 hover:bg-slate-50">
+          <span class="font-semibold" data-i18n="pdf.a99">Manual completo Sony A99V (PDF)</span>
         </a>
       </div>
     </section>
 
     <!-- MENÚS -->
     <section id="menus">
-      <h2 class="text-lg md:text-xl font-bold mb-3 mt-4">Menús de la Sony A900</h2>
+      <h2 class="text-lg md:text-xl font-bold mb-3" data-i18n="menus.title">Menús de la cámara</h2>
       <div class="grid gap-3 md:grid-cols-2">
 
         <!-- Menús de Grabación -->
-        <a href="menu_grabacion_1.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">1. Menú Grabación 1</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
+        <a href="menus/menu_grabacion_1.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.rec1.title">1. Menú Grabación 1</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.rec1.desc">
             Tamaño imagen, proporción, calidad, estilo creativo, rango de color…
           </p>
         </a>
 
-        <a href="menu_grabacion_2.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">2. Menú Grabación 2</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
+        <a href="menus/menu_grabacion_2.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.rec2.title">2. Menú Grabación 2</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.rec2.desc">
             Modo flash, compensación, paso exposición, ISO Auto, ojos rojos, iluminador AF…
           </p>
         </a>
 
-        <a href="menu_grabacion_3.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">3. Menú Grabación 3</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
-            Ajustes AF-A, área AF, prioridad AF/disparo, RR exp. larga, RR ISO alta…
+        <a href="menus/menu_grabacion_3.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.rec3.title">3. Menú Grabación 3</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.rec3.desc">
+            Ajustes AF-A, área AF, prioridad AF/disparo, iluminador AF…
           </p>
         </a>
 
-        <a href="menu_grabacion_4.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">4. Menú Grabación 4</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
-            Memoria (1–3) y reponer modo de grabación.
+        <a href="menus/menu_grabacion_4.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.rec4.title">4. Menú Grabación 4</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.rec4.desc">
+            Memoria (1–3) y reponer modo de grabación (reset de parámetros de disparo).
           </p>
         </a>
 
         <!-- Menús Personalizados -->
-        <a href="menu_personalizado_1.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">5. Menú Personalizado 1</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
+        <a href="menus/menu_personalizado_1.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.cust1.title">5. Menú Personalizado 1</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.cust1.desc">
             Botón AF/MF, control AF/MF, velocidad AF, área AF local, prioridad AF-S/AF-C,
-            visualizar área AF, previsualización.
+            visualizar área AF.
           </p>
         </a>
 
-        <a href="menu_personalizado_2.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">6. Menú Personalizado 2</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
-            Botón AEL (Retener / Alternar), diales, compensación con dial, bloqueo de diales,
-            operación de botones, disparo sin tarjeta, info vertical.
+        <a href="menus/menu_personalizado_2.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.cust2.title">6. Menú Personalizado 2</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.cust2.desc">
+            Botón AEL, diales de control, compensación con dial, bloqueo de diales,
+            operación de botón, disparo sin tarjeta, info en vertical.
           </p>
         </a>
 
-        <a href="menu_personalizado_3.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">7. Menú Personalizado 3</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
-            Revisión automática, función previsualización, orden de bracketing, comp. exposición.
+        <a href="menus/menu_personalizado_3.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.cust3.title">7. Menú Personalizado 3</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.cust3.desc">
+            Revisión automática, función previsualización, ajuste comp. exposición,
+            orden de bracketing.
           </p>
         </a>
 
         <!-- Menús de Reproducción -->
-        <a href="menu_reproduccion_1.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">8. Menú Reproducción 1</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
-            Borrar, formatear, proteger, ajustar DPOF, imprimir fecha/índice,
-            visualización de reproducción.
+        <a href="menus/menu_reproduccion_1.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.play1.title">8. Menú Reproducción 1</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.play1.desc">
+            Visualizar imagen, índice, ampliación, rotar, proteger, borrar,
+            info/histograma en reproducción.
           </p>
         </a>
 
-        <a href="menu_reproduccion_2.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">9. Menú Reproducción 2</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
-            Pase de diapositivas (Diapositivas) e intervalo entre imágenes.
+        <a href="menus/menu_reproduccion_2.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.play2.title">9. Menú Reproducción 2</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.play2.desc">
+            Pase de diapositivas (slideshow) e intervalo entre imágenes.
           </p>
         </a>
 
         <!-- Menús de Configuración -->
-        <a href="menu_configuracion_1.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">10. Menú Configuración 1</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
-            Inicio menú, guía dial de modo, brillo LCD/visor, temperatura color del visor…
+        <a href="menus/menu_configuracion_1.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.set1.title">10. Menú Configuración 1</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.set1.desc">
+            Brillo LCD, tiempo info, ahorro energía, salida vídeo, HDMI, idioma,
+            fecha y hora.
           </p>
         </a>
 
-        <a href="menu_configuracion_2.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">11. Menú Configuración 2</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
-            Ajustes GPS (si aplica), ahorro energía, tiempo reposo, salida HDMI, control por HDMI…
+        <a href="menus/menu_configuracion_2.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.set2.title">11. Menú Configuración 2</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.set2.desc">
+            Tarjeta memoria, número de archivo, nombre y selección de carpetas,
+            conexión USB / almacenamiento masivo.
           </p>
         </a>
 
-        <a href="menu_configuracion_3.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">12. Menú Configuración 3</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
-            Ajustes de carga/Eye-Fi, conexión USB, LUN, señales de audio, PAL/NTSC,
-            captura APS-C, micro ajuste AF.
+        <a href="menus/menu_configuracion_3.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.set3.title">12. Menú Configuración 3</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.set3.desc">
+            Inicio menú, confirmación borrar, señales audio, modo limpieza, microajuste AF,
+            pantalla de enfoque.
           </p>
         </a>
 
-        <a href="menu_configuracion_4.html"
-           class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-          <h3 class="font-bold text-base mb-1">13. Menú Configuración 4</h3>
-          <p class="text-xs text-slate-600 dark:text-slate-300">
-            Versión, idioma, modo limpieza, modo demostración, inicializar ajustes.
+        <a href="menus/menu_configuracion_4.html"
+           class="block p-4 rounded-xl bg-white shadow-sm hover:shadow-md hover:bg-slate-50 transition">
+          <h3 class="font-bold text-base mb-1" data-i18n="menus.set4.title">13. Menú Configuración 4</h3>
+          <p class="text-xs text-slate-600" data-i18n="menus.set4.desc">
+            Tamaño captura APS-C y reposición general a valores predeterminados.
           </p>
         </a>
       </div>
     </section>
 
+    <li>
+      <a href="SonySLTA99V/SonySLTA99V.html" target="_blank">
+        Sony SLT-A99V — Menús en español
+      </a>
+    </li>
+
     <!-- PRESETS -->
-<section id="presets">
-  <h2 class="text-lg md:text-xl font-bold mb-3 mt-4">
-    Presets recomendados (recetas rápidas)
-  </h2>
-  <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">
-    Puntos de partida prácticos para la Sony A900. Ajusta según la luz, el objetivo y tu estilo.
-  </p>
+    <section id="presets">
+      <h2 class="text-lg md:text-xl font-bold mb-3 mt-4" data-i18n="presets.title">Presets recomendados (recetas rápidas)</h2>
+      <p class="text-sm text-slate-600 mb-3" data-i18n="presets.description">
+        Puntos de partida prácticos para la Sony A900. Ajusta según la luz, el objetivo y tu estilo.
+      </p>
 
-  <div class="grid gap-3 md:grid-cols-2">
+      <div class="grid gap-3 md:grid-cols-2">
 
-    <!-- Paisaje día -->
-    <div class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-      <h3 class="font-semibold text-base mb-1 text-slate-900 dark:text-slate-100">
-        Paisaje día (cielo azul / nubes)
-      </h3>
-      <ul class="text-xs text-slate-700 dark:text-slate-200 space-y-1">
-        <li><strong>Modo:</strong> A (Prioridad Apertura)</li>
-        <li><strong>Apertura:</strong> f/8 – f/11</li>
-        <li><strong>ISO:</strong> 100–200</li>
-        <li><strong>Estilo creativo:</strong> Paisaje (contraste +1, nitidez +1)</li>
-        <li><strong>DRO:</strong> Avanzado (2–3)</li>
-        <li><strong>AF:</strong> AF-S, Área = Ancho</li>
-        <li><strong>Drive:</strong> Disparo sencillo</li>
-      </ul>
-    </div>
+        <!-- Paisaje día -->
+        <div class="bg-white rounded-xl shadow-sm p-4">
+          <h3 class="font-semibold text-base mb-1" data-i18n="presets.landscapeDay.title">Paisaje de día (montañas, ciudad, nubes)</h3>
+          <ul class="text-xs text-slate-700 space-y-1">
+            <li><strong>Modo:</strong> A (Prioridad Apertura)</li>
+            <li><strong>Apertura:</strong> f/8 – f/11</li>
+            <li><strong>ISO:</strong> 100–200</li>
+            <li><strong>Estilo creativo:</strong> Paisaje (contraste +1, nitidez +1)</li>
+            <li><strong>DRO:</strong> Avanzado (2–3)</li>
+            <li><strong>AF:</strong> AF-S, Área = Ancho</li>
+            <li><strong>Drive:</strong> Disparo sencillo</li>
+          </ul>
+        </div>
 
-    <!-- Retrato exterior -->
-    <div class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-      <h3 class="font-semibold text-base mb-1 text-slate-900 dark:text-slate-100">
-        Retrato exterior (luz natural)
-      </h3>
-      <ul class="text-xs text-slate-700 dark:text-slate-200 space-y-1">
-        <li><strong>Modo:</strong> A</li>
-        <li><strong>Apertura:</strong> f/2 – f/2.8</li>
-        <li><strong>ISO:</strong> 100–400</li>
-        <li><strong>Estilo creativo:</strong> Retrato (contraste -1, nitidez -1, saturación +1)</li>
-        <li><strong>DRO:</strong> Auto o Nivel 1</li>
-        <li><strong>AF:</strong> AF-S, Área = Local (ojo)</li>
-        <li><strong>Drive:</strong> Cont. lento</li>
-      </ul>
-    </div>
+        <!-- Retrato exterior -->
+        <div class="bg-white rounded-xl shadow-sm p-4">
+          <h3 class="font-semibold text-base mb-1" data-i18n="presets.portraitOutdoor.title">Retrato exterior (luz natural)</h3>
+          <ul class="text-xs text-slate-700 space-y-1">
+            <li><strong>Modo:</strong> A</li>
+            <li><strong>Apertura:</strong> f/2 – f/2.8</li>
+            <li><strong>ISO:</strong> 100–400</li>
+            <li><strong>Estilo creativo:</strong> Retrato (contraste -1, nitidez -1, saturación +1)</li>
+            <li><strong>DRO:</strong> Auto o Nivel 1</li>
+            <li><strong>AF:</strong> AF-S, Área = Local (ojo)</li>
+            <li><strong>Drive:</strong> Cont. lento</li>
+          </ul>
+        </div>
 
-    <!-- Retrato interior / estudio -->
-    <div class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-      <h3 class="font-semibold text-base mb-1 text-slate-900 dark:text-slate-100">
-        Retrato interior / estudio (con flash)
-      </h3>
-      <ul class="text-xs text-slate-700 dark:text-slate-200 space-y-1">
-        <li><strong>Modo:</strong> M</li>
-        <li><strong>Velocidad:</strong> 1/125–1/160 s</li>
-        <li><strong>Apertura:</strong> f/5.6 – f/8</li>
-        <li><strong>ISO:</strong> 100</li>
-        <li><strong>Estilo creativo:</strong> Retrato o Neutro</li>
-        <li><strong>DRO:</strong> Desactivado</li>
-        <li><strong>Flash:</strong> Manual / TTL según esquema</li>
-      </ul>
-    </div>
+        <!-- Retrato interior / estudio -->
+        <div class="bg-white rounded-xl shadow-sm p-4">
+          <h3 class="font-semibold text-base mb-1" data-i18n="presets.portraitStudio.title">Retrato interior / estudio (con flash)</h3>
+          <ul class="text-xs text-slate-700 space-y-1">
+            <li><strong>Modo:</strong> M</li>
+            <li><strong>Velocidad:</strong> 1/125–1/160 s</li>
+            <li><strong>Apertura:</strong> f/5.6 – f/8</li>
+            <li><strong>ISO:</strong> 100</li>
+            <li><strong>Estilo creativo:</strong> Estándar o Neutro</li>
+            <li><strong>Flash:</strong> Externo/estudio, comp. 0 EV</li>
+            <li><strong>AF:</strong> AF-S, Área = Local</li>
+          </ul>
+        </div>
 
-    <!-- Paisaje nocturno urbano -->
-    <div class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-      <h3 class="font-semibold text-base mb-1 text-slate-900 dark:text-slate-100">
-        Paisaje nocturno urbano
-      </h3>
-      <ul class="text-xs text-slate-700 dark:text-slate-200 space-y-1">
-        <li><strong>Modo:</strong> M</li>
-        <li><strong>Velocidad:</strong> 1–10 s (trípode)</li>
-        <li><strong>Apertura:</strong> f/8</li>
-        <li><strong>ISO:</strong> 100–200</li>
-        <li><strong>Estilo creativo:</strong> Neutro o Paisaje</li>
-        <li><strong>DRO:</strong> Desactivado</li>
-        <li><strong>AF:</strong> MF o AF-S con punto central</li>
-      </ul>
-    </div>
+        <!-- Paisaje nocturno -->
+        <div class="bg-white rounded-xl shadow-sm p-4">
+          <h3 class="font-semibold text-base mb-1" data-i18n="presets.nightLandscape.title">Paisaje nocturno / ciudad (trípode)</h3>
+          <ul class="text-xs text-slate-700 space-y-1">
+            <li><strong>Modo:</strong> M o A</li>
+            <li><strong>Apertura:</strong> f/8</li>
+            <li><strong>Velocidad:</strong> 5–30 s</li>
+            <li><strong>ISO:</strong> 100–200</li>
+            <li><strong>DRO:</strong> Desactivado</li>
+            <li><strong>RR larga expos.:</strong> Activada</li>
+            <li><strong>Drive:</strong> Temporizador 2 s</li>
+          </ul>
+        </div>
 
-    <!-- Interior sin flash / luz ambiente -->
-    <div class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-      <h3 class="font-semibold text-base mb-1 text-slate-900 dark:text-slate-100">
-        Interior sin flash (luz ambiente)
-      </h3>
-      <ul class="text-xs text-slate-700 dark:text-slate-200 space-y-1">
-        <li><strong>Modo:</strong> A</li>
-        <li><strong>Apertura:</strong> f/1.4 – f/2.8</li>
-        <li><strong>ISO:</strong> 800–1600</li>
-        <li><strong>Estilo creativo:</strong> Neutro</li>
-        <li><strong>DRO:</strong> Auto o Nivel 2</li>
-        <li><strong>AF:</strong> AF-S, Área = Local</li>
-      </ul>
-    </div>
+        <!-- Acción / deporte -->
+        <div class="bg-white rounded-xl shadow-sm p-4">
+          <h3 class="font-semibold text-base mb-1" data-i18n="presets.actionSports.title">Acción / deporte</h3>
+          <ul class="text-xs text-slate-700 space-y-1">
+            <li><strong>Modo:</strong> S</li>
+            <li><strong>Velocidad:</strong> 1/500 – 1/1000 s</li>
+            <li><strong>ISO:</strong> Auto (200–1600)</li>
+            <li><strong>Estilo creativo:</strong> Estándar o Vivo</li>
+            <li><strong>DRO:</strong> Auto</li>
+            <li><strong>AF:</strong> AF-C, Área = Ancho</li>
+            <li><strong>Drive:</strong> Cont. alta</li>
+          </ul>
+        </div>
 
-    <!-- Acción / deporte -->
-    <div class="block p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-700 transition">
-      <h3 class="font-semibold text-base mb-1 text-slate-900 dark:text-slate-100">
-        Acción / deporte
-      </h3>
-      <ul class="text-xs text-slate-700 dark:text-slate-200 space-y-1">
-        <li><strong>Modo:</strong> S</li>
-        <li><strong>Velocidad:</strong> 1/500–1/1000 s</li>
-        <li><strong>Apertura:</strong> la máxima del objetivo</li>
-        <li><strong>ISO:</strong> 400–1600 (según luz)</li>
-        <li><strong>AF:</strong> AF-C, Área = Ancho</li>
-        <li><strong>Drive:</strong> Cont. Hi</li>
-      </ul>
-    </div>
+        <!-- Calle / documental -->
+        <div class="bg-white rounded-xl shadow-sm p-4">
+          <h3 class="font-semibold text-base mb-1" data-i18n="presets.street.title">Calle / documental ligero</h3>
+          <ul class="text-xs text-slate-700 space-y-1">
+            <li><strong>Modo:</strong> A o P</li>
+            <li><strong>Apertura:</strong> f/4 – f/5.6</li>
+            <li><strong>ISO:</strong> Auto (200–800)</li>
+            <li><strong>Estilo creativo:</strong> Estándar</li>
+            <li><strong>DRO:</strong> Auto</li>
+            <li><strong>AF:</strong> AF-S, Área = Ancho o Local</li>
+          </ul>
+        </div>
 
-  </div>
-</section>
+      </div>
+    </section>
 
-<!-- TABLA LENTES + PRESETS + PUNTO DULCE -->
-<section class="mb-8" id="tabla-lentes">
-  <h2 class="text-lg md:text-xl font-bold mb-3 mt-4">
-    Lentes Minolta – Punto dulce y presets recomendados
-  </h2>
-  <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">
-    Referencia rápida para combinar tus lentes con los presets de arriba. El punto dulce es
-    el rango de apertura donde el objetivo suele rendir mejor en nitidez general.
-  </p>
+    <!-- TABLA LENTES + PRESETS + PUNTO DULCE -->
+    <section class="mb-8" id="tabla-lentes">
+      <h2 class="text-lg md:text-xl font-bold mb-3 mt-4" data-i18n="lenses.title">Lentes Minolta – Punto dulce y presets recomendados</h2>
+      <p class="text-sm text-slate-600 mb-3" data-i18n="lenses.description">
+        Referencia rápida para combinar tus lentes con los presets de arriba. El punto dulce es
+        el rango de apertura donde el objetivo suele rendir mejor en nitidez general.
+      </p>
 
-  <div class="overflow-x-auto bg-white dark:bg-slate-900 rounded-xl shadow">
-    <table class="min-w-full text-sm text-left border-collapse">
-      <thead class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
-        <tr>
-          <th class="px-3 py-2 border-b border-slate-200 dark:border-slate-700">Lente</th>
-          <th class="px-3 py-2 border-b border-slate-200 dark:border-slate-700">Punto dulce aprox.</th>
-          <th class="px-3 py-2 border-b border-slate-200 dark:border-slate-700">Preset sugerido</th>
-          <th class="px-3 py-2 border-b border-slate-200 dark:border-slate-700">Uso recomendado</th>
-          <th class="px-3 py-2 border-b border-slate-200 dark:border-slate-700">Notas</th>
-        </tr>
-      </thead>
-      <tbody class="text-slate-800 dark:text-slate-100">
-        <!-- 20mm -->
-        <tr class="border-b border-slate-200 dark:border-slate-700 last:border-b-0">
-          <td class="px-3 py-2 font-medium">Minolta 20mm</td>
-          <td class="px-3 py-2">f/8 – f/11</td>
-          <td class="px-3 py-2">
-            Paisaje de día, Paisaje nocturno
-          </td>
-          <td class="px-3 py-2">
-            Paisaje amplio, arquitectura, interiores amplios
-          </td>
-          <td class="px-3 py-2">
-            Ideal para cielos, nubes y líneas fuertes; vigila distorsión en bordes.
-          </td>
-        </tr>
+      <div class="overflow-x-auto bg-white rounded-xl shadow">
+        <table class="min-w-full text-sm text-left border-collapse">
+          <thead class="bg-slate-100 text-slate-700">
+            <tr>
+              <th class="px-3 py-2 border-b" data-i18n="lenses.col.lens">Lente</th>
+              <th class="px-3 py-2 border-b" data-i18n="lenses.col.sweetspot">Punto dulce aprox.</th>
+              <th class="px-3 py-2 border-b" data-i18n="lenses.col.preset">Preset sugerido</th>
+              <th class="px-3 py-2 border-b" data-i18n="lenses.col.usage">Uso recomendado</th>
+              <th class="px-3 py-2 border-b" data-i18n="lenses.col.notes">Notas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 20mm -->
+            <tr class="border-b last:border-b-0">
+              <td class="px-3 py-2 font-medium">Minolta 20mm</td>
+              <td class="px-3 py-2">f/8 – f/11</td>
+              <td class="px-3 py-2">
+                Paisaje de día, Paisaje nocturno
+              </td>
+              <td class="px-3 py-2">
+                Paisaje amplio, arquitectura, interiores amplios
+              </td>
+              <td class="px-3 py-2">
+                Ideal para cielos, nubes y líneas fuertes; vigila distorsión en bordes.
+              </td>
+            </tr>
 
-        <!-- 24mm -->
-        <tr class="border-b border-slate-200 dark:border-slate-700 last:border-b-0 bg-slate-50/40 dark:bg-slate-800/60">
-          <td class="px-3 py-2 font-medium">Minolta 24mm</td>
-          <td class="px-3 py-2">f/5.6 – f/8</td>
-          <td class="px-3 py-2">
-            Paisaje de día, Calle / documental
-          </td>
-          <td class="px-3 py-2">
-            Paisaje, calle, grupos pequeños
-          </td>
-          <td class="px-3 py-2">
-            Menos extremo que el 20mm; muy versátil para viaje.
-          </td>
-        </tr>
+            <!-- 24mm -->
+            <tr class="border-b last:border-b-0 bg-slate-50/40">
+              <td class="px-3 py-2 font-medium">Minolta 24mm</td>
+              <td class="px-3 py-2">f/5.6 – f/8</td>
+              <td class="px-3 py-2">
+                Paisaje de día, Calle / documental
+              </td>
+              <td class="px-3 py-2">
+                Paisaje, calle, grupos pequeños
+              </td>
+              <td class="px-3 py-2">
+                Menos extremo que el 20mm; muy versátil para viaje.
+              </td>
+            </tr>
 
-        <!-- 50mm -->
-        <tr class="border-b border-slate-200 dark:border-slate-700 last:border-b-0">
-          <td class="px-3 py-2 font-medium">Minolta 50mm (f/1.4 o f/1.7)</td>
-          <td class="px-3 py-2">f/2.8 – f/4</td>
-          <td class="px-3 py-2">
-            Retrato exterior, Retrato interior, Calle / documental
-          </td>
-          <td class="px-3 py-2">
-            Retrato, detalle, uso general
-          </td>
-          <td class="px-3 py-2">
-            A máxima apertura da look más suave; en f/2.8–f/4 se vuelve muy nítido.
-          </td>
-        </tr>
+            <!-- 50mm -->
+            <tr class="border-b last:border-b-0">
+              <td class="px-3 py-2 font-medium">Minolta 50mm (f/1.4 o f/1.7)</td>
+              <td class="px-3 py-2">f/2.8 – f/4</td>
+              <td class="px-3 py-2">
+                Retrato exterior, Retrato interior, Calle / documental
+              </td>
+              <td class="px-3 py-2">
+                Retrato, detalle, uso general
+              </td>
+              <td class="px-3 py-2">
+                A máxima apertura da look más suave; en f/2.8–f/4 se vuelve muy nítido.
+              </td>
+            </tr>
 
-        <!-- 100mm macro -->
-        <tr class="border-b border-slate-200 dark:border-slate-700 last:border-b-0 bg-slate-50/40 dark:bg-slate-800/60">
-          <td class="px-3 py-2 font-medium">Minolta 100mm Macro</td>
-          <td class="px-3 py-2">f/5.6 – f/8</td>
-          <td class="px-3 py-2">
-            Retrato exterior, Macro detallado
-          </td>
-          <td class="px-3 py-2">
-            Macro, retrato cerrado, detalles de producto
-          </td>
-          <td class="px-3 py-2">
-            Usa trípode o buena velocidad; ojo con la profundidad de campo muy corta en macro.
-          </td>
-        </tr>
+            <!-- 100mm macro -->
+            <tr class="border-b last:border-b-0 bg-slate-50/40">
+              <td class="px-3 py-2 font-medium">Minolta 100mm Macro</td>
+              <td class="px-3 py-2">f/5.6 – f/8</td>
+              <td class="px-3 py-2">
+                Retrato exterior, Macro detallado
+              </td>
+              <td class="px-3 py-2">
+                Macro, retrato cerrado, detalles de producto
+              </td>
+              <td class="px-3 py-2">
+                Usa trípode o buena velocidad; ojo con la profundidad de campo muy corta en macro.
+              </td>
+            </tr>
 
-                    <!-- 70–210mm -->
+            <!-- 70–210mm -->
             <tr class="border-b last:border-b-0">
               <td class="px-3 py-2 font-medium">Minolta 70–210mm</td>
               <td class="px-3 py-2">f/5.6 – f/8 (sobre todo entre 100–150mm)</td>
@@ -402,7 +392,9 @@
 
             <!-- 80–200mm f/2.8 HS G -->
             <tr class="border-b last:border-b-0 bg-slate-50/40">
-              <td class="px-3 py-2 font-medium">Minolta 80–200mm f/2.8 HS G</td>
+              <td class="px-3 py-2 font-medium">
+                Minolta 80–200mm f/2.8 HS G
+              </td>
               <td class="px-3 py-2">f/3.2 – f/4 (sobre todo entre 135–200mm)</td>
               <td class="px-3 py-2">
                 Retrato exterior, Retrato interior, Acción / deporte
@@ -489,41 +481,164 @@
                 Muy sensible a vibraciones y atmósfera; usa velocidades altas y apoyo sólido.
               </td>
             </tr>
-      </tbody>
-    </table>
-  </div>
+          </tbody>
+        </table>
+      </div>
 
-  <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">
-    Los puntos dulces son orientativos; lo ideal es que confirmes con tus propias pruebas en cada objetivo
-    y condiciones de luz.
-  </p>
-</section>
+      <p class="text-xs text-slate-500 mt-2" data-i18n="lenses.note">
+        Los puntos dulces son orientativos; lo ideal es que confirmes con tus propias pruebas en cada objetivo
+        y condiciones de luz.
+      </p>
+    </section>
 
   </main>
 
-  <footer class="max-w-5xl mx-auto px-4 mt-4 pt-3 pb-5 border-t border-slate-200 dark:border-slate-700 text-[11px] text-slate-500 dark:text-slate-400">
+  <footer class="max-w-5xl mx-auto px-4 mt-4 pt-3 pb-5 border-t border-slate-200 text-[11px] text-slate-500" data-i18n="footer.text">
     Todos los valores son sugerencias de partida para la Sony A900. Ajusta según el objetivo,
     la luz y el efecto creativo que busques.
   </footer>
 
+  <!-- SISTEMA DE IDIOMAS -->
   <script>
-    // Dark mode: tomar preferencia guardada o sistema
-    const root = document.documentElement;
-    const storedTheme = localStorage.getItem('theme');
+    // Traducciones SOLO en inglés (el español se toma del HTML original)
+    const translations = {
+      en: {
+        "header.cameraLabel": "Sony A900",
+        "header.cameraSubtitle": "Quick menu guide",
+        "nav.menus": "Menus",
+        "nav.presets": "Presets",
+        "nav.lenses": "Lenses",
 
-    if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      root.classList.add('dark');
+        "intro.title": "Sony A900 Quick Guide",
+        "intro.description": "Tap a block to go to that menu page. Each menu has numbered sections (1.1, 1.2, etc.) with explanations and direct links to the Sony A900.PDF file.",
+
+        "pdf.a900": "Full Sony A900 manual (PDF)",
+        "pdf.a99": "Full Sony A99V manual (PDF)",
+
+        "menus.title": "Camera menus",
+
+        "menus.rec1.title": "1. Recording Menu 1",
+        "menus.rec1.desc": "Image size, aspect ratio, quality, creative style, color space…",
+
+        "menus.rec2.title": "2. Recording Menu 2",
+        "menus.rec2.desc": "Flash mode, flash compensation, exposure step, Auto ISO, red-eye reduction, AF illuminator…",
+
+        "menus.rec3.title": "3. Recording Menu 3",
+        "menus.rec3.desc": "AF-A settings, AF area, AF/shutter priority, AF illuminator…",
+
+        "menus.rec4.title": "4. Recording Menu 4",
+        "menus.rec4.desc": "Memory (1–3) and recall/clear recording modes (reset shooting parameters).",
+
+        "menus.cust1.title": "5. Custom Menu 1",
+        "menus.cust1.desc": "AF/MF button, AF/MF control, AF speed, local AF area, AF-S/AF-C priority, AF area display.",
+
+        "menus.cust2.title": "6. Custom Menu 2",
+        "menus.cust2.desc": "AEL button, control dials, exposure comp. with dial, dial lock, button operation, release without card, vertical display info.",
+
+        "menus.cust3.title": "7. Custom Menu 3",
+        "menus.cust3.desc": "Auto review, preview function, exposure comp. adjust, bracketing order.",
+
+        "menus.play1.title": "8. Playback Menu 1",
+        "menus.play1.desc": "Image display, index, magnification, rotate, protect, delete, info/histogram in playback.",
+
+        "menus.play2.title": "9. Playback Menu 2",
+        "menus.play2.desc": "Slide show and interval between images.",
+
+        "menus.set1.title": "10. Setup Menu 1",
+        "menus.set1.desc": "LCD brightness, info display time, power save, video out, HDMI, language, date and time.",
+
+        "menus.set2.title": "11. Setup Menu 2",
+        "menus.set2.desc": "Memory card, file number, folder name/selection, USB connection / mass storage.",
+
+        "menus.set3.title": "12. Setup Menu 3",
+        "menus.set3.desc": "Menu start, delete confirmation, audio signals, cleaning mode, AF micro adjustment, focusing screen.",
+
+        "menus.set4.title": "13. Setup Menu 4",
+        "menus.set4.desc": "APS-C capture size and full reset to default values.",
+
+        "presets.title": "Recommended presets (quick recipes)",
+        "presets.description": "Practical starting points for the Sony A900. Adjust according to light, lens and your style.",
+
+        "presets.landscapeDay.title": "Daytime landscape (mountains, city, clouds)",
+        "presets.portraitOutdoor.title": "Outdoor portrait (natural light)",
+        "presets.portraitStudio.title": "Indoor / studio portrait (with flash)",
+        "presets.nightLandscape.title": "Night landscape / city (tripod)",
+        "presets.actionSports.title": "Action / sports",
+        "presets.street.title": "Street / light documentary",
+
+        "lenses.title": "Minolta lenses – Sweet spot and suggested presets",
+        "lenses.description": "Quick reference to match your lenses with the presets above. The sweet spot is the aperture range where the lens usually delivers the best overall sharpness.",
+        "lenses.col.lens": "Lens",
+        "lenses.col.sweetspot": "Approx. sweet spot",
+        "lenses.col.preset": "Suggested preset",
+        "lenses.col.usage": "Recommended use",
+        "lenses.col.notes": "Notes",
+
+        "lenses.note": "Sweet spots are approximate; ideally you should confirm them with your own tests for each lens and lighting situation.",
+
+        "footer.text": "All values are suggested starting points for the Sony A900. Adjust according to the lens, the light and the creative effect you want."
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Estilos de botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+      });
+
+      // Textos
+      const map = translations[lang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        // Guardamos el texto original en español solo una vez
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.textContent;
+        }
+        if (lang === 'en') {
+          if (map[key]) {
+            el.textContent = map[key];
+          }
+        } else {
+          // Volver al español
+          if (el.dataset.i18nEs) {
+            el.textContent = el.dataset.i18nEs;
+          }
+        }
+      });
+
+      // PDFs según idioma (ajusta rutas/nombres a tus archivos)
+      const a900 = document.getElementById('link-a900-pdf');
+      const a99 = document.getElementById('link-a99-pdf');
+      if (a900) {
+        a900.href = (lang === 'en')
+          ? 'pdf/SonyA900_EN.pdf'
+          : 'pdf/SonyA900_ES.pdf';
+      }
+      if (a99) {
+        a99.href = (lang === 'en')
+          ? 'pdf/SonyA99V_EN.pdf'
+          : 'pdf/SonyA99V_ES.pdf';
+      }
+
+      localStorage.setItem('manualLang', lang);
     }
 
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      root.classList.toggle('dark');
-      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const stored = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(stored);
     });
-
-    // Registrar Service Worker (PWA)
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js').catch(console.error);
-    }
   </script>
 </body>
 </html>
