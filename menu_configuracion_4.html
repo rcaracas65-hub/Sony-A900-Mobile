@@ -9,51 +9,99 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
 
   <div class="max-w-4xl mx-auto px-4 py-8">
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-      <a href="index.html" class="text-sm text-blue-700 hover:underline">
-  ← Volver al índice
-</a>
+    <!-- Encabezado + regreso + toggles -->
+    <div class="mb-6 flex items-center justify-between gap-3">
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
+      </a>
 
-      <span class="text-xs text-slate-500">Sony A900 – Manual PDF</span>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="text-xs text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
         13. Menú Configuración 4
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Ajustes relacionados con el tamaño de captura APS-C y la reposición general
         de la cámara a los valores predeterminados.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
       <!-- 13.1 Tam.capt. APS-C -->
       <div>
-        <h2 class="font-bold text-lg">13.1 Tam.capt. APS-C</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.13_1.title">13.1 Tam.capt. APS-C</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.13_1.text">
           Permite capturar imágenes utilizando solo un área central del sensor equivalente
           al formato <strong>APS-C</strong> en lugar de usar todo el fotograma completo (full frame).
           En el visor se muestra un marco que indica el área APS-C.
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.13_1.modes">
           • <strong>Activar</strong> – La cámara toma la foto usando el área de tamaño APS-C (recorte).<br>
           • <strong>Desactivar</strong> – Se utiliza toda el área del sensor (tamaño normal de la A900).
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.13_1.tip">
           Esto puede ser útil si quieres “acercar” un poco más sin cambiar de objetivo, o para
           mantener coherencia con otras cámaras APS-C en tu flujo de trabajo.
         </p>
         <p class="text-xs mt-1">
-          Referencia manual:
-          <a href="viewer.html?file=SonyA900.pdf&page=130"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia manual:</span>
+          <a data-pdf-page="130"
+             href="viewer.html?file=SonyA900_ES.pdf&page=130"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.13_1.ref">
             [Pág. 130 – Tam.capt. APS-C]
           </a>
         </p>
@@ -61,16 +109,16 @@
 
       <!-- 13.2 Reponer predet. -->
       <div>
-        <h2 class="font-bold text-lg">13.2 Reponer predet. (Reset general)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.13_2.title">13.2 Reponer predet. (Reset general)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.13_2.text">
           Restaura una gran cantidad de ajustes de la cámara a sus valores
           <strong>predeterminados de fábrica</strong>. Afecta menús de grabación, reproducción y configuración.
         </p>
 
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.13_2.listIntro">
           Entre los elementos que se reponen están, por ejemplo:
         </p>
-        <ul class="list-disc pl-5 text-sm text-slate-700">
+        <ul class="list-disc pl-5 text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.13_2.list">
           <li><strong>Visualización de info de grabación</strong> → vista detallada estándar.</li>
           <li><strong>Compensación de exposición</strong> → ±0.0.</li>
           <li><strong>Modo de manejo (Drive)</strong> → Avance sencillo.</li>
@@ -99,16 +147,23 @@
           <li><strong>Tam.capt. APS-C</strong> → Desactivar.</li>
         </ul>
 
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.13_2.tip">
           Es una opción útil cuando has cambiado muchos parámetros y quieres regresar
           la cámara a una base consistente sin tener que ir opción por opción.
         </p>
 
         <p class="text-xs mt-1">
-          Referencia manual (lista completa de elementos que se reponen):
-          <a href="viewer.html?file=SonyA900.pdf&page=130"  class="text-blue-700 hover:underline">
-            [Pág. 130 – Reponer predet. (inicio)]</a>,
-          <a href="viewer.html?file=SonyA900.pdf&page=132"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia manual (lista completa de elementos que se reponen):</span>
+          <a data-pdf-page="130"
+             href="viewer.html?file=SonyA900_ES.pdf&page=130"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.13_2.ref1">
+            [Pág. 130 – Reponer predet. (inicio)]
+          </a>,
+          <a data-pdf-page="132"
+             href="viewer.html?file=SonyA900_ES.pdf&page=132"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.13_2.ref2">
             [Pág. 132 – Elementos reponer a ajuste predeterminado]
           </a>
         </p>
@@ -118,5 +173,115 @@
 
   </div>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 – PDF manual",
+
+        "theme.label": "Dark mode",
+
+        "title": "13. Setup Menu 4",
+        "intro": "Settings related to APS-C capture size and restoring the camera to its default factory values.",
+
+        "ref.label": "Manual reference:",
+
+        "sec.13_1.title": "13.1 APS-C capture size",
+        "sec.13_1.text": "Allows you to capture images using only a central area of the sensor equivalent to APS-C format instead of the full-frame area. A frame in the viewfinder shows the APS-C area.",
+        "sec.13_1.modes": "• On – The camera records using the APS-C-sized area (crop).\n• Off – The full sensor area is used (normal A900 full-frame size).",
+        "sec.13_1.tip": "Useful if you want a bit more “reach” without changing lenses, or to keep consistency with other APS-C cameras in your workflow.",
+        "sec.13_1.ref": "[Pg. 130 – APS-C capture size]",
+
+        "sec.13_2.title": "13.2 Reset default (General reset)",
+        "sec.13_2.text": "Restores many of the camera settings to their factory default values. It affects recording, playback and setup menus.",
+        "sec.13_2.listIntro": "Among the items that are reset are, for example:",
+        "sec.13_2.list": "• Recording info display → standard detailed view.\n• Exposure compensation → ±0.0.\n• Drive mode → Single-shot advance.\n• White balance → AWB, base around 5500K.\n• ISO → AUTO.\n• Playback display → single-image screen with data.\n• Image size → L: 24M.\n• Aspect ratio → 3:2.\n• Quality → JPEG Fine.\n• Dynamic range optimizer (DRO) → Off.\n• Custom button → Creative Style.\n• Creative Style → Standard.\n• Color space → sRGB.\n• Slide show – Interval → 3 s.\n• LCD brightness → 0.\n• Info display time → 5 s.\n• Power save → 3 min.\n• HDMI output → 1080i priority.\n• File number → Series.\n• Folder name → Standard.\n• USB connection → Mass storage.\n• Menu start → Main.\n• Delete confirmation → “Cancel” as default option.\n• Audio signals → On.\n• AF micro adjustment → Off.\n• APS-C capture size → Off.",
+        "sec.13_2.tip": "Very useful when you've changed many settings and want to return the camera to a consistent baseline without going option by option.",
+        "sec.13_2.ref1": "[Pg. 130 – Reset default (start)]",
+        "sec.13_2.ref2": "[Pg. 132 – Items restored to default]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.textContent;
+        }
+
+        if (lang === 'en') {
+          if (map[key]) {
+            // Para campos que contienen listas, respetamos saltos de línea
+            el.textContent = "";
+            const parts = map[key].split("\n");
+            parts.forEach((part, idx) => {
+              if (idx > 0) el.appendChild(document.createElement("br"));
+              el.appendChild(document.createTextNode(part));
+            });
+          }
+        } else {
+          if (el.dataset.i18nEs) {
+            el.textContent = el.dataset.i18nEs;
+          }
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
