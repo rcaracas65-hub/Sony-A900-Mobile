@@ -9,80 +9,241 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-[15px] leading-relaxed">
 
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <!-- Header fijo con botón volver + toggles -->
+  <header class="sticky top-0 z-20 bg-slate-100/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700">
+    <div class="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
+      </a>
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-     <a href="index.html" class="text-sm text-blue-700 hover:underline">
-  ← Volver al índice
-</a>
-      <span class="text-xs text-slate-500">Sony A900 – Manual PDF</span>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 · Menú Personalizado 3 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-5">
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
         7. Menú Personalizado 3
       </h1>
-      <p class="text-sm text-slate-600">
-        Ajustes finos de comportamiento al disparar: revisión automática, botón de previsualización,
-        forma en que se aplica la compensación de exposición y el orden de la variación (bracketing).
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
+        Ajustes finos de comportamiento al disparar: compensación de exposición con flash,
+        y orden de la variación (bracketing).
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
       <!-- 7.1 Ajust.comp.exp. -->
       <div>
-        <h2 class="font-bold text-lg">7.1 Ajust.comp.exp. </h2>
-        <p class="text-sm text-slate-700">
-          Se puede seleccionar un método de compensación de exposición cuando se
-utiliza un flash
+        <h2 class="font-bold text-lg" data-i18n="sec.7_1.title">7.1 Ajust.comp.exp.</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.7_1.text">
+          Permite seleccionar el método de <strong>compensación de exposición cuando se utiliza flash</strong>:
           <br>
-          • <strong>Amb.y flash</strong> – La compensación de exposición se realiza tanto en el rango
-de luz ambiental (el fondo al que no llega la luz del flash)
-como en el rango de luz del flash. <br>
-          • <strong>Sólo ambiente</strong> – Fijando la cantidad de luz de flash, puede limitar el efecto de
-la compensación de exposición al fondo que está iluminado
-solamente por luz ambiental (luz diferente a la del flash). <br>
-          • Con la compensación del flash, puede limitar la compensación al rango
-de luz del flash fijando la exposición del rango de luz ambiental que no
-alcanza la luz del flash <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=67"  class="text-blue-700 hover:underline">
-            [Pág. 67 – Ajuste de la cantidad de luz de flash.]
+          • <strong>Amb.y flash</strong> – La compensación de exposición afecta tanto a la luz ambiente
+          (fondo) como a la luz del flash.<br>
+          • <strong>Sólo ambiente</strong> – Fija la potencia del flash y limita la compensación
+          de exposición al fondo iluminado solo por luz ambiente.<br>
+          • Si además ajustas la <strong>compensación de flash</strong>, puedes limitar el efecto
+          al rango de luz del flash manteniendo la exposición del fondo más controlada.
+        </p>
+
+        <p class="text-xs mt-1">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="67"
+             href="viewer.html?file=SonyA900_ES.pdf&page=67"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.7_1.ref1">
+            [Pág. 67 – Ajuste de la cantidad de luz de flash]
           </a>
         </p>
-        </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=116"  class="text-blue-700 hover:underline">
-            [Pág. 116 – Ajust.comp.exp]
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="116"
+             href="viewer.html?file=SonyA900_ES.pdf&page=116"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.7_1.ref2">
+            [Pág. 116 – Ajust.comp.exp.]
           </a>
         </p>
       </div>
 
       <!-- 7.2 Orden var.exp. -->
       <div>
-        <h2 class="font-bold text-lg">7.2 Orden var.exp.</h2>
-        <p class="text-sm text-slate-700">
-          Se puede seleccionar el orden en la toma con variación (página 80). Esto no
-se aplica a la variación de exposición avanzada G-D.
+        <h2 class="font-bold text-lg" data-i18n="sec.7_2.title">7.2 Orden var.exp.</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.7_2.text">
+          Define el <strong>orden de la secuencia</strong> cuando utilizas <em>variación de exposición</em> (bracketing).
+          Esto no se aplica a la variación de exposición avanzada (G-D).
+          <br><br>
+          Ejemplo típico de orden:
           <br>
+          • <strong>0 &rarr; - &rarr; +</strong> o <strong>- &rarr; 0 &rarr; +</strong>, según configuración del menú.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=116"  class="text-blue-700 hover:underline">
-            [Pág. 1116 – Bracket order]
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="116"
+             href="viewer.html?file=SonyA900_ES.pdf&page=116"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.7_2.ref">
+            [Pág. 116 – Orden var.exp. / Bracket order]
           </a>
         </p>
       </div>
 
     </section>
 
-  </div>
+  </main>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 · Custom Menu 3 – PDF manual",
+
+        "theme.label": "Dark mode",
+        "ref.label": "Reference:",
+
+        "title": "7. Custom Menu 3",
+        "intro": "Fine-tuning behavior while shooting: exposure compensation method with flash and bracketing order.",
+
+        "sec.7_1.title": "7.1 Exposure comp. setting",
+        "sec.7_1.text": "Selects the method of exposure compensation when using flash:\n• Ambient&flash – Exposure compensation affects both ambient light (background) and flash light.\n• Ambient only – Fixes flash output and limits exposure compensation to the background lit only by ambient light.\nIf you also adjust flash compensation, you can limit the effect to the flash range while keeping the background exposure more controlled.",
+        "sec.7_1.ref1": "[Pg. 67 – Adjusting flash output]",
+        "sec.7_1.ref2": "[Pg. 116 – Exposure comp. setting]",
+
+        "sec.7_2.title": "7.2 Bracket order",
+        "sec.7_2.text": "Selects the order of frames when using exposure bracketing. This does not apply to advanced exposure bracketing (G-D).\n\nTypical examples:\n• 0 → - → +, or\n• - → 0 → +, depending on the menu setting.",
+        "sec.7_2.ref": "[Pg. 116 – Bracket order]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.innerHTML;
+        }
+
+        if (lang === 'en') {
+          if (!map[key]) return;
+          const raw = map[key];
+          const parts = raw.split("\n");
+          el.innerHTML = "";
+          parts.forEach((part, idx) => {
+            if (idx > 0) el.appendChild(document.createElement("br"));
+            el.appendChild(document.createTextNode(part));
+          });
+        } else {
+          el.innerHTML = el.dataset.i18nEs;
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
