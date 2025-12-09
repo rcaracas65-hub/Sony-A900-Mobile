@@ -9,41 +9,90 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
 
   <div class="max-w-4xl mx-auto px-4 py-8">
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-      <a href="index.html" class="text-sm text-blue-700 hover:underline">
-    ← Volver al índice
+    <!-- Encabezado + regreso + toggles -->
+    <div class="mb-6 flex items-center justify-between gap-3">
+      <a href="../index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
       </a>
-      <span class="text-xs text-slate-500">Sony A900 – Manual PDF</span>
+
+      <div class="flex items-center gap-2 text-xs">
+        <span class="text-xs text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
         10. Menú Configuración 1
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Ajustes básicos del sistema relacionados con la pantalla, el consumo de energía,
         salida de video, HDMI, idioma y fecha/hora.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
       <!-- 10.1 Brillo LCD -->
       <div>
-        <h2 class="font-bold text-lg">10.1 Brillo LCD</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.10_1.title">10.1 Brillo LCD</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.10_1.text">
           Ajusta el brillo de la pantalla LCD.  
           Opciones: <strong>-2, -1, 0, +1, +2</strong>.
           El valor "0" es el recomendado para uso general.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=122" class="text-blue-700 hover:underline">
+          <a data-pdf-page="122"
+             href="viewer.html?file=SonyA900_ES.pdf&page=122"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.10_1.ref">
             [Pág. 122 – Brillo LCD]
           </a>
         </p>
@@ -51,14 +100,17 @@
 
       <!-- 10.2 Tiem.visu.info -->
       <div>
-        <h2 class="font-bold text-lg">10.2 Tiem.visu.info. (Tiempo visualización info)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.10_2.title">10.2 Tiem.visu.info. (Tiempo visualización info)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.10_2.text">
           Define durante cuánto tiempo se muestra la información en pantalla después
           de un ajuste o acción.  
           Útil para mantener información crítica visible por más tiempo.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=122"  class="text-blue-700 hover:underline">
+          <a data-pdf-page="122"
+             href="viewer.html?file=SonyA900_ES.pdf&page=122"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.10_2.ref">
             [Pág. 122 – Tiem.visu.info.]
           </a>
         </p>
@@ -66,8 +118,8 @@
 
       <!-- 10.3 Ahorro energía -->
       <div>
-        <h2 class="font-bold text-lg">10.3 Ahorro energía</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.10_3.title">10.3 Ahorro energía</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.10_3.text">
           Controla el tiempo que debe pasar sin operar la cámara antes de que entre
           en modo de ahorro de energía:
           <br>
@@ -77,7 +129,10 @@
           • <strong>10 min</strong>
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=123" class="text-blue-700 hover:underline">
+          <a data-pdf-page="123"
+             href="viewer.html?file=SonyA900_ES.pdf&page=123"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.10_3.ref">
             [Pág. 123 – Ahorro energía]
           </a>
         </p>
@@ -85,15 +140,18 @@
 
       <!-- 10.4 Salida vídeo -->
       <div>
-        <h2 class="font-bold text-lg">10.4 Salida vídeo</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.10_4.title">10.4 Salida vídeo</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.10_4.text">
           Selecciona el sistema de video para reproducir imágenes en una TV:
           <br>
           • <strong>NTSC</strong> – Sistema usado en América. <br>
           • <strong>PAL</strong> – Sistema usado en Europa/Asia.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=123"  class="text-blue-700 hover:underline">
+          <a data-pdf-page="123"
+             href="viewer.html?file=SonyA900_ES.pdf&page=123"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.10_4.ref">
             [Pág. 123 – Salida vídeo]
           </a>
         </p>
@@ -101,8 +159,8 @@
 
       <!-- 10.5 Salida HDMI -->
       <div>
-        <h2 class="font-bold text-lg">10.5 Salida HDMI</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.10_5.title">10.5 Salida HDMI</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.10_5.text">
           Ajusta la resolución de salida al conectar la cámara por HDMI a una TV HD:
           <br>
           • <strong>Auto</strong> – La cámara detecta automáticamente la resolución.<br>
@@ -110,7 +168,10 @@
           • <strong>720p</strong> – Alternativa más ligera con excelente nitidez.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=123"  class="text-blue-700 hover:underline">
+          <a data-pdf-page="123"
+             href="viewer.html?file=SonyA900_ES.pdf&page=123"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.10_5.ref">
             [Pág. 123 – Salida HDMI]
           </a>
         </p>
@@ -118,13 +179,16 @@
 
       <!-- 10.6 Idioma -->
       <div>
-        <h2 class="font-bold text-lg">10.6 Idioma</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.10_6.title">10.6 Idioma</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.10_6.text">
           Selecciona el idioma del menú de la cámara.  
           Incluye opciones típicas: <strong>Español, Inglés, Francés, Alemán, Italiano, Japonés</strong>.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=123"  class="text-blue-700 hover:underline">
+          <a data-pdf-page="123"
+             href="viewer.html?file=SonyA900_ES.pdf&page=123"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.10_6.ref">
             [Pág. 123 – Idioma]
           </a>
         </p>
@@ -132,13 +196,16 @@
 
       <!-- 10.7 Ajuste fecha/hora -->
       <div>
-        <h2 class="font-bold text-lg">10.7 Ajuste fecha / hora</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.10_7.title">10.7 Ajuste fecha / hora</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.10_7.text">
           Configura la fecha, la hora y el formato (AAAA/MM/DD o DD/MM/AAAA).  
           También puedes ajustar la zona horaria para viajes.
         </p>
         <p class="text-xs mt-1">
-          <a href="viewer.html?file=SonyA900.pdf&page=123"  class="text-blue-700 hover:underline">
+          <a data-pdf-page="123"
+             href="viewer.html?file=SonyA900_ES.pdf&page=123"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.10_7.ref">
             [Pág. 123 – Ajuste fecha/hora]
           </a>
         </p>
@@ -148,5 +215,127 @@
 
   </div>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    // Traducciones SOLO en inglés (el español se toma del HTML original)
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 – PDF manual",
+
+        "theme.label": "Dark mode",
+
+        "title": "10. Setup Menu 1",
+        "intro": "Basic system settings related to the LCD, power save, video out, HDMI, language and date/time.",
+
+        "sec.10_1.title": "10.1 LCD Brightness",
+        "sec.10_1.text": "Adjusts the brightness of the LCD monitor. Options: -2, -1, 0, +1, +2. Value “0” is the recommended general setting.",
+        "sec.10_1.ref": "[Pg. 122 – LCD Brightness]",
+
+        "sec.10_2.title": "10.2 Info. display time",
+        "sec.10_2.text": "Defines how long information remains on screen after an adjustment or action. Useful to keep critical info visible for longer.",
+        "sec.10_2.ref": "[Pg. 122 – Info. display time]",
+
+        "sec.10_3.title": "10.3 Power save",
+        "sec.10_3.text": "Controls how long the camera can remain inactive before entering power save mode:\n• 1 min\n• 3 min\n• 5 min\n• 10 min",
+        "sec.10_3.ref": "[Pg. 123 – Power save]",
+
+        "sec.10_4.title": "10.4 Video out",
+        "sec.10_4.text": "Selects the video system to display images on a TV:\n• NTSC – System used in the Americas.\n• PAL – System used in Europe/Asia.",
+        "sec.10_4.ref": "[Pg. 123 – Video out]",
+
+        "sec.10_5.title": "10.5 HDMI output",
+        "sec.10_5.text": "Sets the output resolution when connecting the camera via HDMI to an HD TV:\n• Auto – The camera detects the resolution automatically.\n• 1080i – High-resolution interlaced output.\n• 720p – Lighter alternative with excellent sharpness.",
+        "sec.10_5.ref": "[Pg. 123 – HDMI output]",
+
+        "sec.10_6.title": "10.6 Language",
+        "sec.10_6.text": "Selects the language used for the camera menus. Typical options include: Spanish, English, French, German, Italian, Japanese.",
+        "sec.10_6.ref": "[Pg. 123 – Language]",
+
+        "sec.10_7.title": "10.7 Date / time setup",
+        "sec.10_7.text": "Sets the date, time and format (YYYY/MM/DD or DD/MM/YYYY). You can also adjust the time zone when traveling.",
+        "sec.10_7.ref": "[Pg. 123 – Date / time setup]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Estilos de botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.textContent;
+        }
+        if (lang === 'en') {
+          if (map[key]) {
+            // Soportar saltos de línea \n
+            el.textContent = "";
+            const parts = map[key].split("\n");
+            parts.forEach((part, idx) => {
+              if (idx > 0) el.appendChild(document.createElement("br"));
+              el.appendChild(document.createTextNode(part));
+            });
+          }
+        } else {
+          if (el.dataset.i18nEs) {
+            el.textContent = el.dataset.i18nEs;
+          }
+        }
+      });
+
+      // PDFs según idioma (ajusta nombres si cambian)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
