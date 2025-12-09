@@ -9,36 +9,82 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
-</head>
-<body class="bg-slate-100 text-slate-900 text-[15px] leading-relaxed">
 
-  <!-- Header fijo con botón volver -->
-  <header class="sticky top-0 z-20 bg-slate-100/95 backdrop-blur border-b border-slate-200">
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+</head>
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-[15px] leading-relaxed">
+
+  <!-- Header fijo con botón volver + toggles -->
+  <header class="sticky top-0 z-20 bg-slate-100/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700">
     <div class="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
-     <a href="index.html" class="text-sm text-blue-700 hover:underline">
-  ← Volver al índice
-</a>
-      <span class="text-[11px] text-slate-500">Sony A900 · Menú Grabación 1</span>
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
+      </a>
+
+      <div class="flex items-center gap-2 text-xs">
+        <span class="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 · Menú Grabación 1 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main class="max-w-4xl mx-auto px-4 py-5">
     <header class="mb-4">
-      <h1 class="text-xl md:text-2xl font-extrabold mb-1">
+      <h1 class="text-xl md:text-2xl font-extrabold mb-1" data-i18n="title">
         1. Menú Grabación 1
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Ajustes básicos de la calidad de imagen: tamaño, proporción, formato (RAW/JPEG),
         rango dinámico y estilo creativo.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow-sm p-4 space-y-5">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-4 space-y-5">
 
       <!-- 1.1 Tamaño imagen -->
       <div>
-        <h2 class="font-bold text-base">1.1 Tamaño imagen</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-base" data-i18n="sec.1_1.title">1.1 Tamaño imagen</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.1_1.text">
           Define la resolución del archivo JPEG:
           <br>
           • <strong>L (24M)</strong> – Máxima resolución de la A900 (full frame completo).<br>
@@ -46,8 +92,11 @@
           • <strong>S</strong> – Tamaño pequeño, útil para web o fotos de referencia.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=102"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="102"
+             href="viewer.html?file=SonyA900_ES.pdf&page=102"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.1_1.ref">
             [Pág. 102 – Tamaño imagen]
           </a>
         </p>
@@ -55,16 +104,19 @@
 
       <!-- 1.2 Propor.dim. -->
       <div>
-        <h2 class="font-bold text-base">1.2 Propor.dim. (Dimensión de la imagen)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-base" data-i18n="sec.1_2.title">1.2 Propor.dim. (Dimensión de la imagen)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.1_2.text">
           Ajusta la relación de aspecto de la foto:
           <br>
           • <strong>3:2</strong> – Formato nativo del sensor (recomendado para aprovechar todo el fotograma).<br>
           • <strong>16:9</strong> – Más panorámico, útil para video/TV o composiciones muy horizontales.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=102"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="102"
+             href="viewer.html?file=SonyA900_ES.pdf&page=102"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.1_2.ref">
             [Pág. 102 – Propor.dim.]
           </a>
         </p>
@@ -72,8 +124,8 @@
 
       <!-- 1.3 Calidad -->
       <div>
-        <h2 class="font-bold text-base">1.3 Calidad (Calidad de la imagen)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-base" data-i18n="sec.1_3.title">1.3 Calidad (Calidad de la imagen)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.1_3.text">
           Elige el tipo de archivo y compresión:
           <br>
           • <strong>RAW</strong> – Máxima información, ideal para edición seria (Lightroom, etc.).<br>
@@ -83,35 +135,44 @@
           • <strong>JPEG Estándar</strong> – Más compresión, archivos más ligeros.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=103"  class="text-blue-700 hover:underline">
-            [Pag. 103 – Calidad (RAW, cRAW, JPEG)]
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="103"
+             href="viewer.html?file=SonyA900_ES.pdf&page=103"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.1_3.ref">
+            [Pág. 103 – Calidad (RAW, cRAW, JPEG)]
           </a>
         </p>
       </div>
 
       <!-- 1.4 Optim.gama diná -->
       <div>
-        <h2 class="font-bold text-base">1.4 Optim.gama diná (D-Range Optimizer)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-base" data-i18n="sec.1_4.title">1.4 Optim.gama diná (D-Range Optimizer)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.1_4.text">
           Ajusta el tratamiento del rango dinámico en JPEG:
           <br>
           • <strong>Desactivar</strong> – Imagen tal cual sale del sensor (más “plana” en sombras y luces).<br>
           • <strong>Estándar</strong> – Levanta un poco sombras y recupera algo de altas luces.<br>
           • <strong>Avanzado / Niveles</strong> – Ajustes más agresivos para escenas de alto contraste.
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.1_4.tip">
           En RAW, la cámara guarda la info para algunos reveladores, pero el efecto es más visible en JPEG.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=103"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="103"
+             href="viewer.html?file=SonyA900_ES.pdf&page=103"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.1_4.ref1">
             [Pág. 103-104 – Optim.gama diná]
           </a>
         </p>
         <p class="text-xs mt-1">
-          Ver Detalle:
-          <a href="viewer.html?file=SonyA900.pdf&page=74"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.detail">Ver Detalle:</span>
+          <a data-pdf-page="74"
+             href="viewer.html?file=SonyA900_ES.pdf&page=74"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.1_4.ref2">
             [Pág. 74 – Optim.gama diná]
           </a>
         </p>
@@ -119,8 +180,8 @@
 
       <!-- 1.5 BotónPersonaliz. -->
       <div>
-        <h2 class="font-bold text-base">1.5 BotónPersonaliz. (Botón personalizable)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-base" data-i18n="sec.1_5.title">1.5 BotónPersonaliz. (Botón personalizable)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.1_5.text">
           Te permite asignar una función al botón <strong>C</strong> de la cámara
           (botón personalizable).  
           Ejemplos útiles:
@@ -130,8 +191,11 @@
           • <strong>Bloqueo de enfoque</strong> – AF/MF, etc. según tu flujo.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=104"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="104"
+             href="viewer.html?file=SonyA900_ES.pdf&page=104"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.1_5.ref">
             [Pág. 104 – Botón personalizable]
           </a>
         </p>
@@ -139,8 +203,8 @@
 
       <!-- 1.6 Estilo Creativo / DRO -->
       <div>
-        <h2 class="font-bold text-base">1.6 Estilo Creativo (Creative Style)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-base" data-i18n="sec.1_6.title">1.6 Estilo Creativo (Creative Style)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.1_6.text">
           Conjunto de presets de color/contraste/nitidez para JPEG:
           <br>
           • <strong>Estándar</strong> – Look general equilibrado.<br>
@@ -150,26 +214,32 @@
           • <strong>Neutro</strong> – Menos contraste y saturación (ideal para editar después).<br>
           • <strong>Monocromo</strong> – Blanco y negro directo en cámara.
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.1_6.tip">
           Dentro de cada estilo puedes ajustar <strong>Contraste, Saturación y Nitidez</strong> en pasos.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=104"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="104"
+             href="viewer.html?file=SonyA900_ES.pdf&page=104"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.1_6.ref1">
              [Pág. 104 – Estilo Creativo]
           </a>
         </p>
         <p class="text-xs mt-1">
-          Ver Detalle:
-          <a href="viewer.html?file=SonyA900.pdf&page=75"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.detail">Ver Detalle:</span>
+          <a data-pdf-page="75"
+             href="viewer.html?file=SonyA900_ES.pdf&page=75"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.1_6.ref2">
              [Pág. 75 – Estilo Creativo]
           </a>
         </p>
       </div>
 
       <div>
-        <h3 class="font-semibold text-sm mb-1">D-Range Optimizer (DRO)</h3>
-        <p class="text-sm text-slate-700">
+        <h3 class="font-semibold text-sm mb-1" data-i18n="sec.1_6_dro.title">D-Range Optimizer (DRO)</h3>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.1_6_dro.text">
           Aquí también puedes acceder al <strong>DRO</strong> para ajustar cómo se procesan sombras y luces.
           Muy útil para:
           <br>
@@ -177,8 +247,11 @@
           • Escenas interiores con ventanas muy luminosas.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=77"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="77"
+             href="viewer.html?file=SonyA900_ES.pdf&page=77"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.1_6_dro.ref">
             [Pág. 77 – D-Range Optimizer]
           </a>
         </p>
@@ -186,20 +259,23 @@
 
       <!-- 1.7 Rango color -->
       <div>
-        <h2 class="font-bold text-base">1.7 Rango color (Espacio de color)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-base" data-i18n="sec.1_7.title">1.7 Rango color (Espacio de color)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.1_7.text">
           Define el espacio de color para JPEG:
           <br>
           • <strong>sRGB</strong> – Estándar para web, pantallas y la mayoría de laboratorios. Recomendado por defecto.<br>
           • <strong>Adobe RGB</strong> – Gama más amplia, útil si trabajas un flujo totalmente gestionado
           en Photoshop y revelado avanzado.
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.1_7.tip">
           Si no estás seguro, deja <strong>sRGB</strong> para evitar problemas de color al subir a web o mandar a imprimir.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=104"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="104"
+             href="viewer.html?file=SonyA900_ES.pdf&page=104"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.1_7.ref">
            [Pág. 104 – Rango color]
           </a>
         </p>
@@ -208,5 +284,137 @@
     </section>
   </main>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 · Recording Menu 1 – PDF manual",
+
+        "theme.label": "Dark mode",
+
+        "title": "1. Recording Menu 1",
+        "intro": "Basic image quality settings: size, aspect ratio, format (RAW/JPEG), dynamic range and Creative Style.",
+
+        "ref.label": "Reference:",
+        "ref.detail": "See detail:",
+
+        "sec.1_1.title": "1.1 Image size",
+        "sec.1_1.text": "Defines the resolution for JPEG files:\n• L (24M) – Maximum resolution of the A900 (full-frame).\n• M – Medium size, lighter files.\n• S – Small size, useful for web or reference shots.",
+        "sec.1_1.ref": "[Pg. 102 – Image size]",
+
+        "sec.1_2.title": "1.2 Aspect ratio",
+        "sec.1_2.text": "Adjusts the photo aspect ratio:\n• 3:2 – Native sensor format (recommended to use the full frame).\n• 16:9 – More panoramic, useful for video/TV or very horizontal compositions.",
+        "sec.1_2.ref": "[Pg. 102 – Aspect ratio]",
+
+        "sec.1_3.title": "1.3 Quality",
+        "sec.1_3.text": "Selects file type and compression:\n• RAW – Maximum information, ideal for serious editing (Lightroom, etc.).\n• cRAW – Compressed RAW, smaller files with practically the same flexibility.\n• RAW + JPEG – Saves a RAW and a JPEG at the same time.\n• JPEG Fine – JPEG only with lower compression (better quality).\n• JPEG Standard – More compression, lighter files.",
+        "sec.1_3.ref": "[Pg. 103 – Quality (RAW, cRAW, JPEG)]",
+
+        "sec.1_4.title": "1.4 D-Range Optimizer",
+        "sec.1_4.text": "Controls how dynamic range is handled in JPEG:\n• Off – Image as it comes from the sensor (flatter shadows and highlights).\n• Standard – Slightly raises shadows and recovers some highlights.\n• Advanced / Levels – Stronger adjustments for high-contrast scenes.",
+        "sec.1_4.tip": "In RAW, the camera stores DRO info for some converters, but the effect is more visible in JPEG.",
+        "sec.1_4.ref1": "[Pg. 103-104 – D-Range Optimizer]",
+        "sec.1_4.ref2": "[Pg. 74 – D-Range Optimizer]",
+
+        "sec.1_5.title": "1.5 Custom button",
+        "sec.1_5.text": "Lets you assign a function to the camera’s C button (custom button). Useful examples:\n• Creative Style – Quickly change the color preset.\n• D-Range Optimizer – Turn DRO on/off in high-contrast scenes.\n• Focus lock – AF/MF etc., depending on your workflow.",
+        "sec.1_5.ref": "[Pg. 104 – Custom button]",
+
+        "sec.1_6.title": "1.6 Creative Style",
+        "sec.1_6.text": "Set of color/contrast/sharpness presets for JPEG:\n• Standard – General balanced look.\n• Vivid – Higher contrast and saturation (landscapes, city).\n• Portrait – Softer skin tones, lower contrast.\n• Landscape – More vivid and sharp greens/skies.\n• Neutral – Lower contrast and saturation (ideal for later editing).\n• Monochrome – Black & white in-camera.",
+        "sec.1_6.tip": "Within each style you can tweak Contrast, Saturation and Sharpness in steps.",
+        "sec.1_6.ref1": "[Pg. 104 – Creative Style]",
+        "sec.1_6.ref2": "[Pg. 75 – Creative Style]",
+
+        "sec.1_6_dro.title": "D-Range Optimizer (DRO)",
+        "sec.1_6_dro.text": "You can also access DRO here to fine-tune how shadows and highlights are processed. Very useful for:\n• Very bright skies with dark foregrounds.\n• Indoor scenes with bright windows.",
+        "sec.1_6_dro.ref": "[Pg. 77 – D-Range Optimizer]",
+
+        "sec.1_7.title": "1.7 Color space",
+        "sec.1_7.text": "Defines the color space for JPEG:\n• sRGB – Standard for web, screens and most labs. Recommended by default.\n• Adobe RGB – Wider gamut, useful if you work in a fully color-managed workflow in Photoshop and advanced processing.",
+        "sec.1_7.tip": "If you’re unsure, keep sRGB to avoid color issues when uploading to the web or sending to print.",
+        "sec.1_7.ref": "[Pg. 104 – Color space]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.textContent;
+        }
+        if (lang === 'en') {
+          if (map[key]) {
+            el.textContent = "";
+            const parts = map[key].split("\n");
+            parts.forEach((part, idx) => {
+              if (idx > 0) el.appendChild(document.createElement("br"));
+              el.appendChild(document.createTextNode(part));
+            });
+          }
+        } else {
+          if (el.dataset.i18nEs) {
+            el.textContent = el.dataset.i18nEs;
+          }
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
