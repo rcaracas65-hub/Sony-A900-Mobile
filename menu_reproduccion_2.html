@@ -9,35 +9,83 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-[15px] leading-relaxed">
 
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <!-- Header fijo con botón volver + toggles -->
+  <header class="sticky top-0 z-20 bg-slate-100/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700">
+    <div class="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
+      </a>
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-      <a href="index.html" class="text-sm text-blue-700 hover:underline">
-  ← Volver al índice
-</a>
-      <span class="text-xs text-slate-500">Sony A900 – Manual PDF</span>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 · Menú Reproducción 2 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-5">
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
-        8. Menú Reproducción 2
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
+        9. Menú Reproducción 2
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Opciones del Menú Reproducción 2: pase de diapositivas de las imágenes de la tarjeta
         de memoria y ajuste del intervalo entre cada foto durante la reproducción automática.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
-      <!-- 8.6 Diapositivas -->
+      <!-- 9.1 Diapositivas -->
       <div>
-        <h2 class="font-bold text-lg">8.6 Diapositivas</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.9_1.title">9.1 Diapositivas</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.9_1.text">
           Reproduce <strong>todas las imágenes de la tarjeta de memoria</strong> como un pase de diapositivas
           continuo.
           <br><br>
@@ -52,17 +100,20 @@
           seleccionada.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=121"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="121"
+             href="viewer.html?file=SonyA900_ES.pdf&page=121"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.9_1.ref">
             [Pág. 121 – Diapositivas]
           </a>
         </p>
       </div>
 
-      <!-- 8.7 Intervalo -->
+      <!-- 9.2 Intervalo -->
       <div>
-        <h2 class="font-bold text-lg">8.7 Intervalo</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.9_2.title">9.2 Intervalo</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.9_2.text">
           Define el <strong>tiempo que permanece cada imagen en pantalla</strong> durante el pase de diapositivas:
           <br><br>
           • <strong>30 s</strong><br>
@@ -74,8 +125,11 @@
           Este ajuste solo afecta al funcionamiento de la opción <strong>Diapositivas</strong>.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=121"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="121"
+             href="viewer.html?file=SonyA900_ES.pdf&page=121"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.9_2.ref">
             [Pág. 121 – Intervalo]
           </a>
         </p>
@@ -83,7 +137,109 @@
 
     </section>
 
-  </div>
+  </main>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 · Playback Menu 2 – PDF manual",
+
+        "theme.label": "Dark mode",
+        "ref.label": "Reference:",
+
+        "title": "9. Playback Menu 2",
+        "intro": "Options in Playback Menu 2: slideshow of images on the memory card and the interval between photos during automatic playback.",
+
+        "sec.9_1.title": "9.1 Slideshow",
+        "sec.9_1.text": "Plays back all images on the memory card as a continuous slideshow.\n\nDuring the slideshow you can:\n• View the previous/next image with b / B on the multi-selector.\n• Pause by pressing the center of the multi-selector.\n• Resume the slideshow by pressing the center again.\n• End the slideshow by pressing the MENU button.\n\nThe playback order depends on the folder and image order on the card.",
+        "sec.9_1.ref": "[Pg. 121 – Slideshow]",
+
+        "sec.9_2.title": "9.2 Interval",
+        "sec.9_2.text": "Sets how long each image is displayed during the slideshow:\n\n• 30 s\n• 10 s\n• 5 s\n• 3 s\n• 1 s\n\nThe image changes automatically according to the selected interval. This setting only affects the Slideshow function.",
+        "sec.9_2.ref": "[Pg. 121 – Interval]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.innerHTML;
+        }
+
+        if (lang === 'en') {
+          if (!map[key]) return;
+          const raw = map[key];
+          const parts = raw.split("\n");
+          el.innerHTML = "";
+          parts.forEach((part, idx) => {
+            if (idx > 0) el.appendChild(document.createElement("br"));
+            el.appendChild(document.createTextNode(part));
+          });
+        } else {
+          el.innerHTML = el.dataset.i18nEs;
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
