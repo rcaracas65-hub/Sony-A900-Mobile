@@ -9,36 +9,84 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-[15px] leading-relaxed">
 
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <!-- Header fijo con botón volver + toggles -->
+  <header class="sticky top-0 z-20 bg-slate-100/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700">
+    <div class="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
+      </a>
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-     <a href="index.html" class="text-sm text-blue-700 hover:underline">
-  ← Volver al índice
-</a>
-      <span class="text-xs text-slate-500">Sony A900 – Manual PDF</span>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 · Menú Reproducción 1 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-5">
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
         8. Menú Reproducción 1
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Opciones del Menú Reproducción 1: borrar imágenes, formatear la tarjeta,
         proteger archivos, preparar la impresión (DPOF) y definir la orientación
         de las imágenes durante la reproducción.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
       <!-- 8.1 Borrar -->
       <div>
-        <h2 class="font-bold text-lg">8.1 Borrar</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.8_1.title">8.1 Borrar</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.8_1.text">
           Permite borrar varias imágenes desde el menú. Una vez borradas,
           <strong>no se pueden recuperar</strong>, así que conviene revisar bien antes de confirmar:
           <br><br>
@@ -48,8 +96,11 @@
           <strong>Nota:</strong> las imágenes protegidas no se pueden borrar con esta función.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=118"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="118"
+             href="viewer.html?file=SonyA900_ES.pdf&page=118"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.8_1.ref">
             [Pág. 118 – Borrar]
           </a>
         </p>
@@ -57,8 +108,8 @@
 
       <!-- 8.2 Formatear -->
       <div>
-        <h2 class="font-bold text-lg">8.2 Formatear</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.8_2.title">8.2 Formatear</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.8_2.text">
           <strong>Formatea la tarjeta de memoria</strong> insertada en la cámara.  
           El formateo borra <strong>irrevocablemente todos los datos</strong>, incluidas las imágenes protegidas.
           <br><br>
@@ -69,8 +120,11 @@
           • Es recomendable formatear la tarjeta en la propia cámara para asegurar compatibilidad.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=118"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="118"
+             href="viewer.html?file=SonyA900_ES.pdf&page=118"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.8_2.ref">
             [Pág. 118 – Formatear]
           </a>
         </p>
@@ -78,8 +132,8 @@
 
       <!-- 8.3 Proteger -->
       <div>
-        <h2 class="font-bold text-lg">8.3 Proteger</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.8_3.title">8.3 Proteger</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.8_3.text">
           Protege imágenes contra el borrado accidental. La protección afecta al borrado normal,
           pero no impide el borrado al formatear:
           <br><br>
@@ -89,8 +143,11 @@
           Cuando confirmas con <strong>[Aceptar]</strong>, la cámara aplica o cancela la protección según la opción elegida.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=119"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="119"
+             href="viewer.html?file=SonyA900_ES.pdf&page=119"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.8_3.ref">
             [Pág. 119 – Proteger]
           </a>
         </p>
@@ -98,8 +155,8 @@
 
       <!-- 8.4 Ajustar DPOF -->
       <div>
-        <h2 class="font-bold text-lg">8.4 Ajustar DPOF</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.8_4.title">8.4 Ajustar DPOF</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.8_4.text">
           Permite especificar, desde la cámara, qué imágenes y cuántas copias se desean
           imprimir en un laboratorio o impresora compatible con <strong>DPOF</strong> (Digital Print Order Format).
           La información queda grabada en la tarjeta de memoria.
@@ -110,7 +167,7 @@
           • <strong>Todas imágenes</strong> – Asigna o cancela DPOF para todas las imágenes de la tarjeta.<br>
           • <strong>Cancelar todo</strong> – Borra todas las especificaciones DPOF de la tarjeta.
           <br><br>
-          Adicionalmente, el menú de impresión permite:
+          Opciones adicionales:
           <br>
           • <strong>Imprimir fecha</strong> – Activar/Desactivar la impresión de la fecha de captura.<br>
           • <strong>Impr.índice</strong> – Crear o cancelar una impresión de índice con miniaturas.
@@ -120,17 +177,20 @@
           • Algunas impresoras pueden no ser compatibles con todas las funciones (fecha, índice, etc.).
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=119"  class="text-blue-700 hover:underline">
-            [Pág. 119–120 – Ajustar DPOF, Imprimir fecha, Impr.índice]
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="119"
+             href="viewer.html?file=SonyA900_ES.pdf&page=119"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.8_4.ref">
+            [Pág. 119–120 – Ajustar DPOF / Imprimir fecha / Impr.índice]
           </a>
         </p>
       </div>
 
       <!-- 8.5 Visual.reprod. -->
       <div>
-        <h2 class="font-bold text-lg">8.5 Visual.reprod. (Visualización durante la reproducción)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.8_5.title">8.5 Visual.reprod. (Visualización durante la reproducción)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.8_5.text">
           Define cómo se muestran las imágenes <strong>grabadas en posición vertical</strong> durante la reproducción:
           <br><br>
           • <strong>Girar automát.</strong> – La cámara detecta la orientación y muestra las fotos verticales en la posición correcta.<br>
@@ -139,8 +199,11 @@
           Esta opción solamente afecta a la visualización en la cámara, no gira ni modifica el archivo original.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=120"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="120"
+             href="viewer.html?file=SonyA900_ES.pdf&page=120"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.8_5.ref">
             [Pág. 120 – Visual.reprod.]
           </a>
         </p>
@@ -148,7 +211,121 @@
 
     </section>
 
-  </div>
+  </main>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 · Playback Menu 1 – PDF manual",
+
+        "theme.label": "Dark mode",
+        "ref.label": "Reference:",
+
+        "title": "8. Playback Menu 1",
+        "intro": "Options in Playback Menu 1: delete images, format the card, protect files, prepare prints (DPOF) and define image orientation during playback.",
+
+        "sec.8_1.title": "8.1 Delete",
+        "sec.8_1.text": "Deletes multiple images from the menu. Once deleted, they cannot be recovered, so double-check before confirming:\n\n• Marked images – Deletes only the images you select with the multi-selector.\n• All images – Deletes all images on the memory card.\n\nNote: Protected images cannot be deleted with this function.",
+        "sec.8_1.ref": "[Pg. 118 – Delete]",
+
+        "sec.8_2.title": "8.2 Format",
+        "sec.8_2.text": "Formats the memory card inserted in the camera. Formatting irreversibly deletes all data, including protected images.\n\nWhen you select this option:\n• A confirmation message appears; choose [OK] with the multi-selector.\n• During formatting, the access lamp lights up—do not remove the card while it is lit.\n• It is recommended to format cards in the camera itself for best compatibility.",
+        "sec.8_2.ref": "[Pg. 118 – Format]",
+
+        "sec.8_3.title": "8.3 Protect",
+        "sec.8_3.text": "Protects images against accidental deletion. Protection affects normal delete operations but does not prevent deletion when formatting:\n\n• Marked images – Protects or unprotects only the images you select.\n• All images – Protects or unprotects all images on the card.\n\nWhen you confirm with [OK], the camera applies or cancels protection according to your selection.",
+        "sec.8_3.ref": "[Pg. 119 – Protect]",
+
+        "sec.8_4.title": "8.4 DPOF setup",
+        "sec.8_4.text": "Lets you specify, in-camera, which images and how many copies you want to print on a DPOF-compatible printer or lab (Digital Print Order Format). The information is stored on the memory card.\n\nMain options:\n• Marked images – Assigns or cancels DPOF image by image, setting the number of copies.\n• All images – Assigns or cancels DPOF for all images on the card.\n• Cancel all – Clears all DPOF settings on the card.\n\nAdditional options:\n• Print date – Turn printing of capture date on or off.\n• Index print – Create or cancel an index print with thumbnails.\n\nNotes:\n• DPOF cannot be specified for RAW files.\n• Some printers may not support all functions (date, index, etc.).",
+        "sec.8_4.ref": "[Pg. 119–120 – DPOF setup / Date print / Index print]",
+
+        "sec.8_5.title": "8.5 Playback display",
+        "sec.8_5.text": "Defines how images shot in vertical orientation are displayed during playback:\n\n• Auto rotate – The camera detects orientation and shows vertical photos upright.\n• Manual rotate – All images are shown horizontally; you can rotate them manually if needed.\n\nThis setting only affects camera playback and does not modify or rotate the original file.",
+        "sec.8_5.ref": "[Pg. 120 – Playback display]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+
+        if (!el.dataset.i18nEs) {
+          el.dataset.i18nEs = el.innerHTML;
+        }
+
+        if (lang === 'en') {
+          if (!map[key]) return;
+          const raw = map[key];
+          const parts = raw.split("\n");
+          el.innerHTML = "";
+          parts.forEach((part, idx) => {
+            if (idx > 0) el.appendChild(document.createElement("br"));
+            el.appendChild(document.createTextNode(part));
+          });
+        } else {
+          el.innerHTML = el.dataset.i18nEs;
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
