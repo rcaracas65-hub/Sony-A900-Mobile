@@ -9,57 +9,106 @@
   <style>
     body { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Prefiere tema guardado o sistema para evitar parpadeo -->
+  <script>
+    (function() {
+      const storedTheme = localStorage.getItem('theme');
+      const systemPrefersDark = window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 text-[15px] leading-relaxed">
 
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <!-- Header fijo con botón volver + toggles -->
+  <header class="sticky top-0 z-20 bg-slate-100/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-700">
+    <div class="max-w-4xl mx-auto px-4 py-2 flex items-center justify-between gap-3">
+      <a href="index.html"
+         class="text-sm text-blue-700 dark:text-blue-400 hover:underline"
+         data-i18n="header.back">
+        ← Volver al índice
+      </a>
 
-    <!-- Encabezado + regreso -->
-    <div class="mb-6 flex items-center justify-between">
-      <a href="index.html" class="text-sm text-blue-700 hover:underline">
-  ← Volver al índice
-</a>
-      <span class="text-xs text-slate-500">
-        Sony A900 – Manual PDF
-      </span>
+      <div class="flex items-center gap-2 text-xs">
+        <span class="hidden sm:inline text-[11px] text-slate-500 dark:text-slate-400" data-i18n="header.pdfLabel">
+          Sony A900 · Menú Grabación 4 – Manual PDF
+        </span>
+
+        <!-- Toggle idioma -->
+        <div class="flex items-center gap-1">
+          <button type="button"
+                  data-lang-active="es"
+                  onclick="setLanguage('es')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-900 text-white">
+            ES
+          </button>
+          <button type="button"
+                  data-lang-active="en"
+                  onclick="setLanguage('en')"
+                  class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100">
+            EN
+          </button>
+        </div>
+
+        <!-- Toggle modo oscuro -->
+        <button type="button"
+                onclick="toggleTheme()"
+                class="px-2 py-1 rounded-full text-[11px] border border-slate-300 dark:border-slate-600 flex items-center gap-1 hover:bg-slate-200 dark:hover:bg-slate-800">
+          <span class="inline-block" id="theme-icon" aria-hidden="true">🌙</span>
+          <span data-i18n="theme.label" class="hidden md:inline">Modo oscuro</span>
+        </button>
+      </div>
     </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-5">
 
     <header class="mb-6">
-      <h1 class="text-2xl md:text-3xl font-extrabold">
+      <h1 class="text-2xl md:text-3xl font-extrabold" data-i18n="title">
         4. Menú Grabación 4
       </h1>
-      <p class="text-sm text-slate-600">
+      <p class="text-sm text-slate-600 dark:text-slate-300" data-i18n="intro">
         Menú orientado a registrar tus propios ajustes en memoria y a
         reponer las funciones principales del modo de grabación a sus valores
         predeterminados.
       </p>
     </header>
 
-    <section class="bg-white rounded-xl shadow p-5 space-y-6">
+    <section class="bg-white dark:bg-slate-800 rounded-xl shadow p-5 space-y-6">
 
       <!-- 4.1 Memoria -->
       <div>
-        <h2 class="font-bold text-lg">4.1 Memoria</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.4_1.title">4.1 Memoria</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.4_1.text1">
           Permite <strong>registrar hasta tres combinaciones</strong> de ajustes de uso frecuente
           (modos de exposición, modo de manejo, ISO, balance de blancos, modos de enfoque,
           área AF local, etc.) y asignarlas a las posiciones 1, 2 y 3 del dial de modo.
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.4_1.text2">
           Flujo típico:
         </p>
-        <ul class="list-disc pl-5 text-sm text-slate-700">
+        <ul class="list-disc pl-5 text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.4_1.list">
           <li>Pones la cámara en la configuración que quieres guardar (P/A/S/M, ISO, WB, AF, etc.).</li>
           <li>Entras a <strong>[Memoria]</strong> en el Menú Grabación 4.</li>
           <li>Eliges el número (1, 2 o 3) y confirmas para registrar esos ajustes.</li>
         </ul>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.4_1.text3">
           Para recuperar los ajustes guardados, simplemente ajustas el <strong>dial de modo</strong>
           en 1, 2 o 3. La cámara se configura automáticamente con esa “escena personalizada”.
         </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=86"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="86"
+             href="viewer.html?file=SonyA900_ES.pdf&page=86"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.4_1.ref">
             [Pág. 86 – Registro de los propios ajustes / Memoria]
           </a>
         </p>
@@ -67,16 +116,16 @@
 
       <!-- 4.2 ReponerModoGrab -->
       <div>
-        <h2 class="font-bold text-lg">4.2 ReponerModoGrab (Reponer modo de grabación)</h2>
-        <p class="text-sm text-slate-700">
+        <h2 class="font-bold text-lg" data-i18n="sec.4_2.title">4.2 ReponerModoGrab (Reponer modo de grabación)</h2>
+        <p class="text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.4_2.text1">
           Restaura las <strong>funciones principales del modo de grabación</strong> a sus valores de fábrica
           cuando el dial de modo está en <strong>P, A, S o M</strong>. Es útil si has tocado muchos ajustes
           y quieres regresar a una base “limpia”.
         </p>
-        <p class="text-sm text-slate-700 mt-1">
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.4_2.text2">
           Algunos de los elementos que se reponen:
         </p>
-        <ul class="list-disc pl-5 text-sm text-slate-700">
+        <ul class="list-disc pl-5 text-sm text-slate-700 dark:text-slate-200" data-i18n="sec.4_2.list">
           <li><strong>Compensar exposición</strong> → ±0.0</li>
           <li><strong>Modo de manejo (Drive)</strong> → Avance sencillo</li>
           <li><strong>Balance de blancos (WB)</strong> → AWB / 5500K (según ajuste)</li>
@@ -98,9 +147,15 @@
           <li><strong>Ajust.prioridad</strong> → AF</li>
           <li><strong>Iluminador AF</strong> → Automático</li>
         </ul>
+        <p class="text-sm text-slate-700 dark:text-slate-200 mt-1" data-i18n="sec.4_2.text3">
+          Es una función muy útil cuando quieres “empezar de cero” sin revisar opción por opción.
+        </p>
         <p class="text-xs mt-1">
-          Referencia:
-          <a href="viewer.html?file=SonyA900.pdf&page=109"  class="text-blue-700 hover:underline">
+          <span data-i18n="ref.label">Referencia:</span>
+          <a data-pdf-page="109"
+             href="viewer.html?file=SonyA900_ES.pdf&page=109"
+             class="text-blue-700 dark:text-blue-400 hover:underline"
+             data-i18n="sec.4_2.ref">
             [Pág. 109 – Menú Grabación 4 / ReponerModoGrab]
           </a>
         </p>
@@ -108,7 +163,153 @@
 
     </section>
 
-  </div>
+  </main>
 
+  <!-- SISTEMA DE IDIOMAS + TEMA + PDFs -->
+  <script>
+    const translations = {
+      en: {
+        "header.back": "← Back to index",
+        "header.pdfLabel": "Sony A900 · Recording Menu 4 – PDF manual",
+
+        "theme.label": "Dark mode",
+        "ref.label": "Reference:",
+
+        "title": "4. Recording Menu 4",
+        "intro": "Menu focused on registering your own settings into memory and resetting the main recording functions to their default values.",
+
+        "sec.4_1.title": "4.1 Memory",
+        "sec.4_1.text1": "Lets you register up to three combinations of frequently used settings (exposure modes, drive mode, ISO, white balance, AF modes, local AF area, etc.) and assign them to positions 1, 2 and 3 on the mode dial.",
+        "sec.4_1.text2": "Typical workflow:",
+        "sec.4_1.list": "Set the camera to the configuration you want to save (P/A/S/M, ISO, WB, AF, etc.).\nGo to [Memory] in Recording Menu 4.\nChoose a number (1, 2 or 3) and confirm to register those settings.",
+        "sec.4_1.text3": "To recall your saved settings, simply turn the mode dial to 1, 2 or 3. The camera automatically applies that “custom scene”.",
+        "sec.4_1.ref": "[Pg. 86 – Registering your own settings / Memory]",
+
+        "sec.4_2.title": "4.2 Reset Recording Mode",
+        "sec.4_2.text1": "Restores the main recording functions to their factory defaults when the mode dial is set to P, A, S or M. Very useful if you have changed many options and want to return to a clean baseline.",
+        "sec.4_2.text2": "Some of the items that are reset:",
+        "sec.4_2.list": "Exposure compensation → ±0.0\nDrive mode → Single\nWhite balance (WB) → AWB / 5500K (depending on setting)\nISO → AUTO\nImage size → L: 24M\nAspect ratio → 3:2\nQuality → JPEG Fine\nDynamic range optimizer (DRO) → Off\nCustom button → Creative Style\nCreative Style → Standard\nColor space → sRGB\nFlash mode → Fill-flash\nFlash control → ADI\nFlash compensation → ±0.0\nExposure step → 0.3 EV\nAuto ISO range → 200–800\nAF-A settings → AF-A\nAF area → Wide\nPriority setup → AF\nAF illuminator → Auto",
+        "sec.4_2.text3": "This function is very useful when you want to “start from zero” without going through each option one by one.",
+        "sec.4_2.ref": "[Pg. 109 – Recording Menu 4 / Reset Recording Mode]"
+      }
+    };
+
+    function applyTranslations(lang) {
+      const root = document.documentElement;
+      root.lang = lang;
+
+      // Botones ES/EN
+      document.querySelectorAll('[data-lang-active]').forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang-active');
+        const isActive = (btnLang === lang);
+        btn.classList.toggle('bg-slate-900', isActive);
+        btn.classList.toggle('text-white', isActive);
+        btn.classList.toggle('bg-slate-200', !isActive);
+        btn.classList.toggle('dark:bg-slate-700', !isActive);
+        btn.classList.toggle('text-slate-800', !isActive);
+        btn.classList.toggle('dark:text-slate-100', !isActive);
+      });
+
+      const map = translations[lang] || {};
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+
+        // Guardar texto original ES la primera vez
+        if (!el.dataset.i18nEs) {
+          if (el.tagName === 'UL') {
+            // Guardar las líneas de la lista
+            const items = Array.from(el.querySelectorAll('li')).map(li => li.textContent.trim());
+            el.dataset.i18nEs = items.join("\n");
+          } else {
+            el.dataset.i18nEs = el.textContent;
+          }
+        }
+
+        if (lang === 'en') {
+          if (!map[key]) return;
+
+          if (el.tagName === 'UL') {
+            // Listas: regenerar <li> por cada línea
+            el.innerHTML = "";
+            const lines = map[key].split("\n");
+            lines.forEach(line => {
+              if (!line.trim()) return;
+              const li = document.createElement("li");
+              li.textContent = line;
+              el.appendChild(li);
+            });
+          } else {
+            el.textContent = "";
+            const parts = map[key].split("\n");
+            parts.forEach((part, idx) => {
+              if (idx > 0) el.appendChild(document.createElement("br"));
+              el.appendChild(document.createTextNode(part));
+            });
+          }
+        } else {
+          // Volver a español
+          if (!el.dataset.i18nEs) return;
+
+          if (el.tagName === 'UL') {
+            el.innerHTML = "";
+            const lines = el.dataset.i18nEs.split("\n");
+            lines.forEach(line => {
+              if (!line.trim()) return;
+              const li = document.createElement("li");
+              li.innerHTML = line;
+              el.appendChild(li);
+            });
+          } else {
+            el.textContent = "";
+            const parts = el.dataset.i18nEs.split("\n");
+            parts.forEach((part, idx) => {
+              if (idx > 0) el.appendChild(document.createElement("br"));
+              el.appendChild(document.createTextNode(part));
+            });
+          }
+        }
+      });
+
+      // PDFs según idioma (viewer.html en raíz)
+      const pdfFile = (lang === 'en') ? 'SonyA900_EN.pdf' : 'SonyA900_ES.pdf';
+      document.querySelectorAll('a[data-pdf-page]').forEach(a => {
+        const page = a.getAttribute('data-pdf-page');
+        a.href = `viewer.html?file=${pdfFile}&page=${page}`;
+      });
+
+      localStorage.setItem('manualLang', lang);
+    }
+
+    function setLanguage(lang) {
+      applyTranslations(lang);
+    }
+
+    function updateThemeIcon() {
+      const icon = document.getElementById('theme-icon');
+      if (!icon) return;
+      const isDark = document.documentElement.classList.contains('dark');
+      icon.textContent = isDark ? '☀️' : '🌙';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isDark = root.classList.contains('dark');
+      if (isDark) {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateThemeIcon();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const storedLang = localStorage.getItem('manualLang') || 'es';
+      applyTranslations(storedLang);
+      updateThemeIcon();
+    });
+  </script>
 </body>
 </html>
