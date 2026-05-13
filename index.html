@@ -102,7 +102,7 @@
           <span class="font-semibold" data-i18n="pdf.a99">Manual completo Sony A99V (PDF)</span>
         </a>
         <a id="link-a99II-pdf"
-           href="pdf/SonyILCA-99M2-SP.pdf"
+           href="pdf/SonyILCA-99M2-ALL.pdf"
            target="_blank"
            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700">
           <span class="font-semibold" data-i18n="pdf.a99II">Manual completo Sony ILCA-99M2 (PDF)</span>
@@ -688,8 +688,8 @@
       }
       if (a99II) {
         a99II.href = (lang === 'en')
-          ? 'SonyILCA-99M2-Eng.pdf'
-          : 'SonyILCA-99M2-SP.pdf';
+          ? 'SonyILCA-99M2-ALL.pdf'
+          : 'SonyILCA-99M2-ALL.pdf'; // Si no tienes versión específica, puedes usar el mismo PDF para ambos idiomas
       }
 
       localStorage.setItem('manualLang', lang);
