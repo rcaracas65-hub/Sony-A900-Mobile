@@ -697,7 +697,11 @@
           : 'SonyA99V_ES.pdf';
       }
       if (a99II) {
-        a99II.href = 'pdf/SonyILCA-99M2-ALL.pdf';
+
+        a99II.href = (lang === 'en')
+          ? 'pdf/SonyILCA-99M2-ALL.pdf'
+          : 'pdf/SonyILCA-99M2-ALL.pdf';
+        
       }
 
       localStorage.setItem('manualLang', lang);
