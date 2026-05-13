@@ -107,6 +107,15 @@
            class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 shadow-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700">
           <span class="font-semibold" data-i18n="pdf.a99II">Manual completo Sony ILCA-99M2 (PDF)</span>
         </a>
+        <a id="link-a99II-online"
+          href="https://helpguide.sony.net/ilc/1630/v1/en/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-blue-700 text-white shadow-sm border border-blue-700 hover:bg-blue-800">
+          <span class="font-semibold" data-i18n="pdf.a99IIonline">
+            Guía online Sony A99II
+          </span>
+        </a>
       </div>
     </section>
 
@@ -573,6 +582,7 @@
         "pdf.a900": "Full Sony A900 manual (PDF)",
         "pdf.a99": "Full Sony A99V manual (PDF)",
         "pdf.a99II": "Full Sony ILCA-99M2 manual (PDF)",
+        "pdf.a99IIonline": "Sony A99II online help guide",
 
         "menus.title": "Camera menus",
 
@@ -687,9 +697,7 @@
           : 'SonyA99V_ES.pdf';
       }
       if (a99II) {
-        a99II.href = (lang === 'en')
-          ? 'SonyILCA-99M2-ALL.pdf'
-          : 'SonyILCA-99M2-ALL.pdf'; // Si no tienes versión específica, puedes usar el mismo PDF para ambos idiomas
+        a99II.href = 'pdf/SonyILCA-99M2-ALL.pdf';
       }
 
       localStorage.setItem('manualLang', lang);
